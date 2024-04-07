@@ -10,12 +10,17 @@ import java.util.Scanner;
 
 
 public class App {
-    Scanner sc = new Scanner(System.in);
 
     public void start() {
 
         // 시작화면은 앱에서 제작해야함.
+        Scanner sc = new Scanner(System.in);
 
+//        MemberController memberController = new MemberController(sc);
+//        ArticleController articleController = new ArticleController(sc);
+//
+//
+//        articleController.makeTestData();
         
         // 메인 로고
         System.out.println("\u001B[38m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -65,6 +70,10 @@ public class App {
             if (cmd.equals("앱종료")) {
                 break;
             }
+
+
         }
+        sc.close();
+        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("       앱 종료       "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
     }
 }
