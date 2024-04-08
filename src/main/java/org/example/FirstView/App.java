@@ -78,6 +78,14 @@ public class App {
                 memberController.doJoin();
             }
 
+            else if (cmd.equals("로그인")) {
+                memberController.doLogin();
+            }
+
+            else if (cmd.equals("로그아웃")) {
+                memberController.doLogOut();
+            }
+
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
             else {
                 System.out.printf("\u001B[31m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
@@ -91,21 +99,20 @@ public class App {
                 case "글 수정":
                 case "글 삭제":
                     if (Controller.isLogined() == false) {
-                        System.out.println("\u001B[31m ▌ 권한이 없습니다.\n\u001B[31m ▌ 로그인 후 이용해주세요.");
+                        System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
                         continue;
                     }
                     break;
-                }
-            switch (cmd) {
                 case "로그인":
                 case "회원가입":
                     if (Controller.isLogined()) {
-                        System.out.println("\u001B[31m ▌ 권한이 없습니다.\n\u001B[31m ▌ 로그아웃 후 이용해주세요.");
+                        System.out.println("\u001B[31m ▌ 로그아웃 후 이용해주세요.");
                         continue;
                     }
                     break;
             }
 
+            Controller.doAction(cmd);
         }
 
         // 앱 종료
