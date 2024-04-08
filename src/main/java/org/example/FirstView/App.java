@@ -1,25 +1,27 @@
 package org.example.FirstView;
 
-import org.example.Controller;
-import org.example.Controller.ArticleController;
-import org.example.Controller.MemberController;
+import org.example.dto.Member;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
 
 public class App {
+    private List<Member> members;
+
+    public App() {
+        members = new ArrayList<>();
+    }
+
 
     public void start() {
 
         // 시작화면은 앱에서 제작해야함.
         Scanner sc = new Scanner(System.in);
+        int lastMemberId = members.size();
 
-        MemberController memberController = new MemberController(sc);
-        ArticleController articleController = new ArticleController(sc);
-
-
-        articleController.makeTestData();
         
         // 메인 로고
         System.out.println("\u001B[38m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -34,7 +36,7 @@ public class App {
         mainLogo[7] = "        ▐░█▀▀▀▀▀▀▀▀▀ ▐░▌       ▐░▌▐░▌   ▀   ▐░▌      ▐░▌          ▐░▌          ▐░▌       ▐░▌          ▐░▌";
         mainLogo[8] = "        ▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌      ▐░█▄▄▄▄▄▄▄▄▄ ▐░▌          ▐░█▄▄▄▄▄▄▄█░▌ ▄▄▄▄▄▄▄▄▄█░▌";
         mainLogo[9] = "        ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░▌       ▐░▌      ▐░░░░░░░░░░░▌▐░▌          ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌";
-        mainLogo[10] = "        ▐░░░░░░░░░░░▌▐░░░░░░░░░░▌ ▐░▌       ▐░▌      ▀▀▀▀▀▀▀▀▀▀▀  ▀            ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀ ";
+        mainLogo[10] = "        ▐░░░░░░░░░░░▌▐░░░░░░░░░░▌ ▐░▌       ▐░▌       ▀▀▀▀▀▀▀▀▀▀▀  ▀            ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀ ";
         mainLogo[11] = "         ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀   ▀         ▀";
 
         for(int i = 0; i < mainLogo.length; i++) {
@@ -55,12 +57,14 @@ public class App {
 
 
 
+
         //명령어 입력란(맨 마지막 줄에 출력)
         while (true) {
             System.out.println("\u001B[38m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
             System.out.print("\u001B[38m ▌ 명령어 입력 : ");
             String cmd = sc.nextLine();
             cmd = cmd.trim();
+
 
 
             if (cmd.length() == 0) {
@@ -70,50 +74,67 @@ public class App {
                 break;
             }
 
-            // 글 작성, 삭제, 수정, 검색/ 단어 자르기
-            String[] cmdBits = cmd.split(" ");
-            String controllerName = cmdBits[0];  // '게시물' 만 읽어들임 => cmdBits[0] = '게시물'
-            Controller controller = null;
-
-            if (controllerName.equals("글")) {
-                controller = articleController;
-            } else {
-                System.out.println("\u001B[38m ▌ 존재하지 않는 명령어 입니다.");
-                continue;
-            }
 
             if (cmd.equals("회원가입")) {
-                memberController.memberJoin();
-            }
+                int id = members.size() + 1;
+                String loginId = null;
+                while (true) {
+                    System.out.print("\u001B[38m ▌ 아이디 : ");
+                    loginId = sc.nextLine();
 
-            else if (cmd.equals("자유게시판")) {
-                articleController.freeList();
-            }
+                    if (isJoinableLoginId(loginId)) {
+                        System.out.printf("\u001B[38m ▌ %s(은)는 이미 사용중인 아이디입니다.\n", loginId);
+                        continue;
+                    }
+                    break;
+                }
+                String loginPw = null;
+                String loginPwConfirm = null;
+                while (true) {
+                    System.out.print("\u001B[38m ▌ 패스워드 : ");
+                    loginPw = sc.nextLine();
+                    System.out.print("\u001B[38m ▌ 패스워드 확인 : ");
+                    loginPwConfirm = sc.nextLine();
+                    if (loginPw.equals(loginPwConfirm) == false) {
+                        System.out.println("\u001B[38m ▌ 비밀번호가 일치하지 않습니다.\n재입력해주세요.");
+                        continue;
+                    }
+                    break;
+                }
 
-            else if (cmd.equals("공지사항")) {
-                articleController.announcement();
-            }
+                String memberName = null;
+                while (true) {
+                    System.out.print("\u001B[38m ▌ 활동 이름 : ");
+                    memberName= sc.nextLine();
 
-            else if (cmd.equals("글 작성")) {
-                articleController.doWrite();
-            }
+                    if (isJoinableMemberName(memberName)) {
+                        System.out.printf("\u001B[38m ▌ %s(은)는 이미 사용중인 활동 이름입니다.\n", memberName);
+                        continue;
+                    }
+                    break;
+                }
 
-            else if (cmd.equals("글 검색")) {
-                articleController.doSearch();
-            }
+                String memberEmail = null;
+                while (true) {
+                    System.out.print("\u001B[38m ▌ 이메일 : ");
+                    memberEmail = sc.nextLine();
 
-            else if (cmd.equals("글 보기")) {
-                articleController.doShow();
-            }
 
-            else if (cmd.equals("글 삭제")) {
-                articleController.doDelete();
-            }
+                    if (isJoinableMemberEmail(memberEmail)) {
+                        System.out.printf("\u001B[38m ▌ %s(은)는 이미 사용중인 이메일입니다.\n", memberEmail);
+                        continue;
+                    }
+                    break;
+                }
 
-            else if (cmd.equals("글 수정")) {
-                articleController.doModify();
+                
+                // 회원가입 완료시 저장 및 출력
+                Member member = new Member(id, loginId, loginPw, loginPwConfirm, memberName, memberEmail);
+                members.add(member);
+                System.out.printf("\u001B[38m ▌ 회원가입이 완료되었습니다.\n\u001B[38m ▌ %s님 환영합니다.\n", memberName);
             }
-
+            
+            // 메인 화면에서 존재하지 않는 명령어 입력시 출력
             else {
                 System.out.printf("\u001B[38m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
             }
@@ -124,4 +145,67 @@ public class App {
         sc.close();
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("       앱 종료       "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
     }
+
+
+    // 회원가입시 아이디 중복 여부 체크
+    private boolean isJoinableLoginId(String loginId) {
+        int index = getMemberIndexByLoginId(loginId);
+        if (index != -1) {
+            return true;
+        }
+        return false;
+    }
+
+    private int getMemberIndexByLoginId(String loginId) {
+        int i = 0;
+        for ( Member member : members ) {
+            if ( member.loginId.equals(loginId)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    // 회원가입시 활동 이름 중복 여부 체크
+    private boolean isJoinableMemberName(String memberName) {
+        int index = getMemberIndexByMemberName(memberName);
+        if (index != -1) {
+            return true;
+        }
+        return false;
+    }
+
+    private int getMemberIndexByMemberName(String memberName) {
+        int i = 0;
+        for ( Member member : members ) {
+            if ( member.memberName.equals(memberName)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    // 회원가입시 이메일 중복 여부 체크
+    private boolean isJoinableMemberEmail(String memberEmail) {
+        int index = getMemberIndexByMemberEmail(memberEmail);
+        if (index != -1) {
+            return true;
+        }
+        return false;
+    }
+
+    private int getMemberIndexByMemberEmail(String memberEmail) {
+        int i = 0;
+        for ( Member member : members ) {
+            if ( member.memberEmail.equals(memberEmail)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+
 }

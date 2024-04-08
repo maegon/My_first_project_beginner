@@ -6,11 +6,13 @@ public class Member extends Dto {
     public String LoginPw;
     public String loginPwConfirm;
     public String memberName;
-    public Member(int id, String loginId, String loginPw, String loginPwConfirm) {
+    public String memberEmail;
+    public Member(int id, String loginId, String loginPw, String loginPwConfirm, String memberName, String memberEmail) {
         this.id = id;
         this.loginId = loginId;
         this.LoginPw = loginPw;
         this.loginPwConfirm = loginPwConfirm;
         this.memberName = memberName;
+        this.memberEmail = memberEmail;
     }
 }
