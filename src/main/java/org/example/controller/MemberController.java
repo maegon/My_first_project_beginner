@@ -23,24 +23,7 @@ public class MemberController extends Controller {
         members = new ArrayList<>();
     }
 
-    public static void doAction(String cmd) {
-        switch (cmd) {
-            case "회원가입":
-                doJoin();
-                break;
-            case "로그인":
-                doLogin();
-                break;
-            case "로그아웃":
-                doLogOut();
-                break;
-            default:
-                System.out.println("\u001B[31m ▌ 존재하지 않는 명령어 입니다.");
-                break;
-        }
-    }
-
-    public static void doJoin() {
+    public void doJoin() {
         int id = members.size() + 1;
         String loginId = null;
         while (true) {
@@ -98,7 +81,7 @@ public class MemberController extends Controller {
         System.out.printf("\u001B[38m ▌ 회원가입이 완료되었습니다.\n\u001B[38m ▌ %s님 환영합니다.\n", memberName);
     }
 
-    public static void doLogin() {
+    public void doLogin() {
         System.out.print("\u001B[38m ▌ 아이디 : ");
         String loginId = sc.nextLine();
         System.out.print("\u001B[38m ▌ 패스워드 : ");
@@ -109,7 +92,7 @@ public class MemberController extends Controller {
             System.out.println("\u001B[31m ▌ 아이디가 일치하지 않습니다.");
             return;
         }
-        if (member.LoginPw.equals(loginPw) == false) {
+        if (member.loginPw.equals(loginPw) == false) {
             System.out.println("\u001B[31m ▌ 비밀번호가 일치하지 않습니다.");
             return;
         }
@@ -118,7 +101,7 @@ public class MemberController extends Controller {
         System.out.printf("\u001B[38m ▌ 로그인되었습니다.\n\u001B[38m ▌ %s님 환영합니다.\n", loginedMember.memberName);
     }
 
-    public static void doLogOut() {
+    public void doLogOut() {
         if(Controller.isLogined() == true) {
             loginedMember = null;
             System.out.println("\u001B[38m ▌ 로그아웃 되었습니다.");

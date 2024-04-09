@@ -1,8 +1,8 @@
 package org.example.FirstView;
 
 import org.example.container.Container;
-import org.example.controller.Controller;
-import org.example.controller.MemberController;
+import org.example.controller.*;
+import org.example.dto.ImportNewMusic;
 import org.example.dto.Member;
 
 import java.util.ArrayList;
@@ -20,7 +20,9 @@ public class App {
 
     public void start() {
         MemberController memberController = new MemberController();
-
+        ImportNewMusicController importNewMusicController = new ImportNewMusicController();
+        GenreController genreController = new GenreController();
+        TechnoGenreController technoGenreController = new TechnoGenreController();
         // 시작화면은 앱에서 제작해야함.
         // 메인 로고
         System.out.println("\u001B[38m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -59,8 +61,7 @@ public class App {
 
         //명령어 입력란(맨 마지막 줄에 출력)
         while (true) {
-            System.out.println("\u001B[38m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-            System.out.print("\u001B[38m ▌ 명령어 입력 : ");
+            System.out.print("\u001B[38m ▌ 입력 >> ");
             String cmd = Container.getSc().nextLine();
             cmd = cmd.trim();
 
@@ -84,6 +85,14 @@ public class App {
 
             else if (cmd.equals("로그아웃")) {
                 memberController.doLogOut();
+            }
+
+            else if (cmd.equals("장르별")) {
+                genreController.genreList();
+            }
+
+            else if (cmd.equals("테크노")) {
+                technoGenreController.technoShowList();
             }
 
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
@@ -111,8 +120,6 @@ public class App {
                     }
                     break;
             }
-
-            Controller.doAction(cmd);
         }
 
         // 앱 종료
