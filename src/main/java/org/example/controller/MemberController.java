@@ -65,6 +65,18 @@ public class MemberController extends Controller {
             break;
         }
 
+        String memberEmail = null;
+        while (true) {
+            System.out.print("\u001B[38m ▌ 이메일 : ");
+            memberEmail= sc.nextLine();
+
+            if (isJoinableMemberEmail(memberEmail)) {
+                System.out.printf("\u001B[31m ▌ %s(은)는 이미 사용중인 활동 이름입니다.\n", memberEmail);
+                continue;
+            }
+            break;
+        }
+
 
         // 회원가입 완료시 저장 및 출력
         memberService.join(loginId, loginPw, memberName, memberEmail);
