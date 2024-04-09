@@ -27,6 +27,7 @@ public class MemberDao extends Dao {
         return dbConnection.insert(sb.toString());
     }
 
+
     public Member getMemberByLoginId(String loginId) {
         StringBuilder sb = new StringBuilder();
 

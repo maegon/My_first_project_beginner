@@ -28,7 +28,6 @@ public class MemberController extends Controller {
     }
 
     public void doJoin() {
-        int id = members.size() + 1;
         String loginId = null;
         while (true) {
             System.out.print("\u001B[38m ▌ 아이디 : ");

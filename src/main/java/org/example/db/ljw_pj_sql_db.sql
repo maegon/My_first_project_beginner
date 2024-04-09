@@ -36,9 +36,9 @@ CREATE TABLE `member` (
 /*Data for the table `member` */
 
 insert  into `member`(`id`,`regDate`,`updateDate`,`loginId`,`loginPw`,`memberName`,`memberEmail`) values 
-(1,'2024-04-09 17:30:40','2024-04-09 17:30:40','admin99104sbs','admin99104sbsjw','관리자','99gorhs@gmail.com'),
-(2,'2024-04-09 17:30:40','2024-04-09 17:30:40','user1','user1','user1','user1@user1.com'),
-(3,'2024-04-09 17:30:40','2024-04-09 17:30:40','user2','user2','user2','user2@user2.com');
+(1,'2024-04-09 18:07:10','2024-04-09 18:07:10','admin99104sbs','admin99104sbsjw','관리자','99gorhs@gmail.com'),
+(2,'2024-04-09 18:07:10','2024-04-09 18:07:10','user1','user1','user1','user1@user1.com'),
+(3,'2024-04-09 18:07:10','2024-04-09 18:07:10','user2','user2','user2','user2@user2.com');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

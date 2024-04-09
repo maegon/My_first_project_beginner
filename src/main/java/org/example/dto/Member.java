@@ -6,17 +6,14 @@ import lombok.Setter;
 
 import java.util.Map;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
-
 public class Member extends Dto {
     public String loginId;
     public String loginPw;
     public String memberName;
     public String memberEmail;
-
     public Member(Map<String, Object> row) {
         super(row);
         this.loginId = (String) row.get("loginId");
@@ -24,5 +21,4 @@ public class Member extends Dto {
         this.memberName = (String) row.get("memberName");
         this.memberEmail = (String) row.get("memberEmail");
     }
-
 }
