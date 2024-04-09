@@ -6,7 +6,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class Genre extends Dto {
     public int id;
     public String technoGenre;

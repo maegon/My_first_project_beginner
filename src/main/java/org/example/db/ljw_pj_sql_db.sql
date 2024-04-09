@@ -27,18 +27,16 @@ CREATE TABLE `member` (
   `loginId` char(100) NOT NULL,
   `loginPw` char(100) NOT NULL,
   `memberName` char(100) NOT NULL,
-  `memberEmail` char(100) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `loginId` (`loginId`),
-  UNIQUE KEY `memberEmail` (`memberEmail`)
+  UNIQUE KEY `loginId` (`loginId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `member` */
 
-insert  into `member`(`id`,`regDate`,`updateDate`,`loginId`,`loginPw`,`memberName`,`memberEmail`) values 
-(1,'2024-04-09 18:07:10','2024-04-09 18:07:10','admin99104sbs','admin99104sbsjw','관리자','99gorhs@gmail.com'),
-(2,'2024-04-09 18:07:10','2024-04-09 18:07:10','user1','user1','user1','user1@user1.com'),
-(3,'2024-04-09 18:07:10','2024-04-09 18:07:10','user2','user2','user2','user2@user2.com');
+insert  into `member`(`id`,`regDate`,`updateDate`,`loginId`,`loginPw`,`memberName`) values 
+(1,'2024-04-09 18:44:27','2024-04-09 18:44:27','admin99104sbs','admin99104sbsjw','관리자'),
+(2,'2024-04-09 18:44:27','2024-04-09 18:44:27','user1','user1','user1'),
+(3,'2024-04-09 18:44:27','2024-04-09 18:44:27','user2','user2','user2');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

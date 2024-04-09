@@ -10,6 +10,7 @@ import java.util.Map;
 @Getter
 @Setter
 @AllArgsConstructor
+
 public class Dto {
     public int id;
     public String regDate;

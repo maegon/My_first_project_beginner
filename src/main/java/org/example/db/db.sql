@@ -104,7 +104,7 @@ updateDate = NOW(),
 `loginId` = 'user1',
 `loginPw` = 'user1',
 `memberName` = 'user1',
-`memberEmail` = 'user1@user1.com';
+`memberEmail` = 'user1@gmail.com';
 
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -112,7 +112,7 @@ updateDate = NOW(),
 `loginId` = 'user2',
 `loginPw` = 'user2',
 `memberName` = 'user2',
-`memberEmail` = 'user2@user2.com';
+`memberEmail` = 'user2@gmail.com';
 
 SELECT * FROM `member`
 

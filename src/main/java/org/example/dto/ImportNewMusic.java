@@ -8,7 +8,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class ImportNewMusic extends Dto {
     public int id;
     public String musicTitle;
