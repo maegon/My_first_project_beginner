@@ -2,6 +2,7 @@ package org.example.FirstView;
 
 import org.example.container.Container;
 import org.example.controller.*;
+import org.example.db.DBConnection;
 import org.example.dto.ImportNewMusic;
 import org.example.dto.Member;
 
@@ -14,7 +15,12 @@ public class App {
 //    private List<Member> members;
 
     public App() {
-//        members = new ArrayList<>();
+        DBConnection.DB_NAME = "sbs_proj";
+        DBConnection.DB_USER = "sbsst";
+        DBConnection.DB_PASSWORD = "sbs123414";
+        DBConnection.DB_PORT = 3306;
+
+        Container.getDBConnection().connect();
     }
 
 
@@ -95,6 +101,7 @@ public class App {
                 technoGenreController.technoShowList();
             }
 
+
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
             else {
                 System.out.printf("\u001B[31m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
@@ -107,14 +114,13 @@ public class App {
                 case "글 작성":
                 case "글 수정":
                 case "글 삭제":
-                    if (Controller.isLogined() == false) {
-                        System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
-                        continue;
+                    if ( Container.getSession().isLogined() == false ) {
+                        System.out.println("로그인 후 이용해주세요.");
                     }
                     break;
                 case "로그인":
                 case "회원가입":
-                    if (Controller.isLogined()) {
+                    if (Container.getSession().isLogined()) {
                         System.out.println("\u001B[31m ▌ 로그아웃 후 이용해주세요.");
                         continue;
                     }

@@ -1,11 +1,12 @@
 package org.example.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-
+@AllArgsConstructor
 public class Techno {
     public int id;
     public String musicTitle;

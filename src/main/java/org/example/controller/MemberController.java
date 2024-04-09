@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.container.Container;
 import org.example.dto.Member;
+import org.example.service.MemberService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +17,13 @@ public class MemberController extends Controller {
     int lastMemberId;
     public static Scanner sc;
     private static List<Member> members;
-    private String cmd;
+    private Session session;
+    private MemberService memberService;
 
     public MemberController() {
         sc = Container.getSc();
+
+        memberService = new MemberService();
         members = new ArrayList<>();
     }
 
@@ -76,8 +80,7 @@ public class MemberController extends Controller {
         }
 
         // 회원가입 완료시 저장 및 출력
-        Member member = new Member(id, loginId, loginPw, loginPwConfirm, memberName, memberEmail);
-        members.add(member);
+        memberService.join(loginId, loginPw, memberName, memberEmail);
         System.out.printf("\u001B[38m ▌ 회원가입이 완료되었습니다.\n\u001B[38m ▌ %s님 환영합니다.\n", memberName);
     }
 
@@ -97,15 +100,14 @@ public class MemberController extends Controller {
             return;
         }
 
-        loginedMember = member;
+        session.setLoginedMember(member);
+        Member loginedMember = session.getLoginedMember();
         System.out.printf("\u001B[38m ▌ 로그인되었습니다.\n\u001B[38m ▌ %s님 환영합니다.\n", loginedMember.memberName);
     }
 
     public void doLogOut() {
-        if(Controller.isLogined() == true) {
-            loginedMember = null;
-            System.out.println("\u001B[38m ▌ 로그아웃 되었습니다.");
-        }
+        session.setLoginedMember(null);
+        System.out.println("\u001B[38m ▌ 로그아웃 되었습니다.");
     }
 
 
