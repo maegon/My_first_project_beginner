@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.container.Container;
 import org.example.dto.Member;
-import org.example.service.MemberService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +16,32 @@ public class MemberController extends Controller {
     int lastMemberId;
     public static Scanner sc;
     private static List<Member> members;
-    private Session session;
-    private MemberService memberService;
+    private String cmd;
 
     public MemberController() {
         sc = Container.getSc();
-
-        memberService = new MemberService();
         members = new ArrayList<>();
     }
 
-    public void doJoin() {
+    public static void doAction(String cmd) {
+        switch (cmd) {
+            case "회원가입":
+                doJoin();
+                break;
+            case "로그인":
+                doLogin();
+                break;
+            case "로그아웃":
+                doLogOut();
+                break;
+            default:
+                System.out.println("\u001B[31m ▌ 존재하지 않는 명령어 입니다.");
+                break;
+        }
+    }
+
+    public static void doJoin() {
+        int id = members.size() + 1;
         String loginId = null;
         while (true) {
             System.out.print("\u001B[38m ▌ 아이디 : ");
@@ -68,22 +82,23 @@ public class MemberController extends Controller {
         String memberEmail = null;
         while (true) {
             System.out.print("\u001B[38m ▌ 이메일 : ");
-            memberEmail= sc.nextLine();
+            memberEmail = sc.nextLine();
+
 
             if (isJoinableMemberEmail(memberEmail)) {
-                System.out.printf("\u001B[31m ▌ %s(은)는 이미 사용중인 활동 이름입니다.\n", memberEmail);
+                System.out.printf("\u001B[31m ▌ %s(은)는 이미 사용중인 이메일입니다.\n", memberEmail);
                 continue;
             }
             break;
         }
 
-
         // 회원가입 완료시 저장 및 출력
-        memberService.join(loginId, loginPw, memberName, memberEmail);
+        Member member = new Member(id, loginId, loginPw, loginPwConfirm, memberName, memberEmail);
+        members.add(member);
         System.out.printf("\u001B[38m ▌ 회원가입이 완료되었습니다.\n\u001B[38m ▌ %s님 환영합니다.\n", memberName);
     }
 
-    public void doLogin() {
+    public static void doLogin() {
         System.out.print("\u001B[38m ▌ 아이디 : ");
         String loginId = sc.nextLine();
         System.out.print("\u001B[38m ▌ 패스워드 : ");
@@ -94,19 +109,20 @@ public class MemberController extends Controller {
             System.out.println("\u001B[31m ▌ 아이디가 일치하지 않습니다.");
             return;
         }
-        if (member.loginPw.equals(loginPw) == false) {
+        if (member.LoginPw.equals(loginPw) == false) {
             System.out.println("\u001B[31m ▌ 비밀번호가 일치하지 않습니다.");
             return;
         }
 
-        session.setLoginedMember(member);
-        Member loginedMember = session.getLoginedMember();
+        loginedMember = member;
         System.out.printf("\u001B[38m ▌ 로그인되었습니다.\n\u001B[38m ▌ %s님 환영합니다.\n", loginedMember.memberName);
     }
 
-    public void doLogOut() {
-        session.setLoginedMember(null);
-        System.out.println("\u001B[38m ▌ 로그아웃 되었습니다.");
+    public static void doLogOut() {
+        if(Controller.isLogined() == true) {
+            loginedMember = null;
+            System.out.println("\u001B[38m ▌ 로그아웃 되었습니다.");
+        }
     }
 
 

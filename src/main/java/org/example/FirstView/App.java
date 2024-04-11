@@ -1,9 +1,8 @@
 package org.example.FirstView;
 
 import org.example.container.Container;
-import org.example.controller.*;
-import org.example.db.DBConnection;
-import org.example.dto.ImportNewMusic;
+import org.example.controller.Controller;
+import org.example.controller.MemberController;
 import org.example.dto.Member;
 
 import java.util.ArrayList;
@@ -15,20 +14,13 @@ public class App {
 //    private List<Member> members;
 
     public App() {
-        DBConnection.DB_NAME = "sbs_proj";
-        DBConnection.DB_USER = "sbsst";
-        DBConnection.DB_PASSWORD = "sbs123414";
-        DBConnection.DB_PORT = 3306;
-
-        Container.getDBConnection().connect();
+//        members = new ArrayList<>();
     }
 
 
     public void start() {
         MemberController memberController = new MemberController();
-        ImportNewMusicController importNewMusicController = new ImportNewMusicController();
-        GenreController genreController = new GenreController();
-        TechnoGenreController technoGenreController = new TechnoGenreController();
+
         // 시작화면은 앱에서 제작해야함.
         // 메인 로고
         System.out.println("\u001B[38m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -67,7 +59,8 @@ public class App {
 
         //명령어 입력란(맨 마지막 줄에 출력)
         while (true) {
-            System.out.print("\u001B[38m ▌ 입력 >> ");
+            System.out.println("\u001B[38m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            System.out.print("\u001B[38m ▌ 명령어 입력 : ");
             String cmd = Container.getSc().nextLine();
             cmd = cmd.trim();
 
@@ -93,19 +86,12 @@ public class App {
                 memberController.doLogOut();
             }
 
-            else if (cmd.equals("장르별")) {
-                genreController.genreList();
-            }
-
-            else if (cmd.equals("테크노")) {
-                technoGenreController.technoShowList();
-            }
-
-
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
             else {
                 System.out.printf("\u001B[31m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
             }
+
+
 
             switch (cmd) {
                 case "로그아웃":
@@ -114,13 +100,14 @@ public class App {
                 case "글 작성":
                 case "글 수정":
                 case "글 삭제":
-                    if ( Container.getSession().isLogined() == false ) {
-                        System.out.println("로그인 후 이용해주세요.");
+                    if (Controller.isLogined() == false) {
+                        System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
+                        continue;
                     }
                     break;
                 case "로그인":
                 case "회원가입":
-                    if (Container.getSession().isLogined()) {
+                    if (Controller.isLogined()) {
                         System.out.println("\u001B[31m ▌ 로그아웃 후 이용해주세요.");
                         continue;
                     }
