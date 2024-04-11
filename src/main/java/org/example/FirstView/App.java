@@ -1,6 +1,7 @@
 package org.example.FirstView;
 
 import org.example.container.Container;
+import org.example.controller.ArticleController;
 import org.example.controller.Controller;
 import org.example.controller.MemberController;
 import org.example.dto.Member;
@@ -21,6 +22,7 @@ public class App {
 
     public void start() {
         MemberController memberController = new MemberController();
+        ArticleController articleController = new ArticleController();
 
         // 시작화면은 앱에서 제작해야함.
         // 메인 로고
@@ -87,13 +89,24 @@ public class App {
                 memberController.doLogOut();
             }
 
-//            else if (cmd.equals("공지사항")) {
-//                articleController.doAction();
-//            }
-//
-//            else if (cmd.equals("자유게시판")) {
-//                articleController.doAction();
-//            }
+            else if (cmd.equals("글목록")) {
+                articleController.showList();
+            }
+            else if (cmd.equals("글검색")) {
+                articleController.doSearch();
+            }
+            else if (cmd.equals("글작성")) {
+                articleController.doWrite();
+            }
+            else if (cmd.equals("글수정")) {
+                articleController.doModify();
+            }
+            else if (cmd.equals("글삭제")) {
+                articleController.doDelete();
+            }
+            else if (cmd.equals("글보기")) {
+                articleController.showDetail();
+            }
 
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
             else {
@@ -102,10 +115,13 @@ public class App {
 
         }
 
+
+
         // 앱 종료
         Container.getSc().close();
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("       앱 종료       "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
     }
+
 
 
 

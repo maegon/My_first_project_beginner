@@ -26,23 +26,6 @@ public class MemberController extends Controller {
         members = new ArrayList<>();
     }
 
-    public static void doAction(String cmd) {
-        switch (cmd) {
-            case "회원가입":
-                doJoin();
-                break;
-            case "로그인":
-                doLogin();
-                break;
-            case "로그아웃":
-                doLogOut();
-                break;
-            default:
-                System.out.println("\u001B[31m ▌ 존재하지 않는 명령어 입니다.");
-                break;
-        }
-    }
-
     public void makeTestData() {
         members.add(new Member(1, "admin", "admin", "관리자"));
     }
@@ -102,12 +85,12 @@ public class MemberController extends Controller {
         // 회원가입 완료시 저장 및 출력
         Member member = new Member(id, loginId, loginPw, loginPwConfirm, memberName, memberEmail);
         members.add(member);
-        System.out.printf("\u001B[38m ▌ 회원가입이 완료되었습니다.\n\u001B[38m ▌ %s님 환영합니다.\n", memberName);
+        System.out.printf("\u001B[35m ▌ 회원가입이 완료되었습니다.\n\u001B[35m ▌ %s님 환영합니다.\n", memberName);
     }
 
     public static void doLogin() {
         if (isLogined() == true ) {
-            System.out.println("\u001B[38m ▌ 로그아웃 상태가 아닙니다.");
+            System.out.println("\u001B[31m ▌ 로그아웃 상태가 아닙니다.");
             return;
         }
         System.out.print("\u001B[38m ▌ 아이디 : ");
@@ -126,17 +109,19 @@ public class MemberController extends Controller {
         }
 
         loginedMember = member;
-        System.out.printf("\u001B[38m ▌ 로그인되었습니다.\n\u001B[38m ▌ %s님 환영합니다.\n", loginedMember.memberName);
+        System.out.printf("\u001B[35m ▌ 로그인되었습니다.\n\u001B[35m ▌ %s님 환영합니다.\n", loginedMember.memberName);
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("  회원 전용 명령어 목록  "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.print("\u001B[33m ▌ "); System.out.print("회원 전용 명령어 : [공지사항] [자유게시판] [음악순위] [음악검색] [장르별] [회원가입] [로그인] [앱종료]         "); System.out.print("\u001B[33m▌ \n");
+        System.out.print("\u001B[33m ▌ "); System.out.print("음악 관련 명령어 : [음악순위] [음악검색] [장르별]                                             "); System.out.print("\u001B[33m▌ \n");
+        System.out.print("\u001B[33m ▌ "); System.out.print("게시물 관련 명령어 : [글목록] [글검색] [글보기] [글작성] [글수정] [글삭제]                    "); System.out.print("\u001B[33m▌ \n");
+        System.out.print("\u001B[33m ▌ "); System.out.print("회원 관련 명령어 : [회원가입] [로그인] [앱종료]                                               "); System.out.print("\u001B[33m▌ \n");
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
 
 
     public static void doLogOut() {
         if (isLogined() == false ) {
-            System.out.println("\u001B[38m ▌ 로그인 상태가 아닙니다.");
+            System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
             return;
         }
         if(isLogined() == true) {
