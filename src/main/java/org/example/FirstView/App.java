@@ -3,6 +3,7 @@ package org.example.FirstView;
 import org.example.container.Container;
 import org.example.controller.ArticleController;
 import org.example.controller.Controller;
+import org.example.controller.GenreController;
 import org.example.controller.MemberController;
 import org.example.dto.Member;
 
@@ -51,7 +52,7 @@ public class App {
         //명령어 코멘트 로고 밑에 출력
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("  메인 화면 명령어 목록  "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.print("\u001B[33m ▌ "); System.out.print("비회원이 사용할 수 있는 명령어 : [장르별] [회원가입] [로그인] [앱종료]                                         "); System.out.print("\u001B[33m▌ \n");
+        System.out.print("\u001B[33m ▌ "); System.out.print("비회원이 사용할 수 있는 명령어 : [회원가입] [로그인] [앱종료]                                         "); System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ "); System.out.print("회원이면 사용할 수 있는 명령어가 많아집니다.                                                                   "); System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ "); System.out.print("계정이 없다면 명령어 입력 란에 [회원가입]을 입력하여 계정을 생성해주세요.                                      "); System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ "); System.out.print("계정이 있으면 명령어 입력 란에 [로그인]을 입력하여 로그인을 해주세요.                                          "); System.out.print("\u001B[33m▌ \n");
@@ -106,6 +107,10 @@ public class App {
             }
             else if (cmd.equals("글보기")) {
                 articleController.showDetail();
+            }
+
+            else if (cmd.equals("장르별")) {
+                GenreController.showGenreList();
             }
 
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력

@@ -8,4 +8,6 @@ public abstract class Controller {
     public static boolean isLogined() {
         return loginedMember != null;
     }
+
+
 }
