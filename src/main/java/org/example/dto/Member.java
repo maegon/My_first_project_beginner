@@ -15,4 +15,11 @@ public class Member extends Dto {
         this.memberName = memberName;
         this.memberEmail = memberEmail;
     }
+
+    public Member(int id, String loginId, String loginPw, String memberName) {
+        this.id = id;
+        this.loginId = loginId;
+        this.LoginPw = loginPw;
+        this.memberName = memberName;
+    }
 }

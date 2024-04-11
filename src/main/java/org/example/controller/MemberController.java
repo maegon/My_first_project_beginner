@@ -4,10 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.container.Container;
 import org.example.dto.Member;
+import org.example.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+
 
 @Getter
 @Setter
@@ -38,6 +41,10 @@ public class MemberController extends Controller {
                 System.out.println("\u001B[31m ▌ 존재하지 않는 명령어 입니다.");
                 break;
         }
+    }
+
+    public void makeTestData() {
+        members.add(new Member(1, "admin", "admin", "관리자"));
     }
 
     public static void doJoin() {
@@ -99,6 +106,10 @@ public class MemberController extends Controller {
     }
 
     public static void doLogin() {
+        if (isLogined() == true ) {
+            System.out.println("\u001B[38m ▌ 로그아웃 상태가 아닙니다.");
+            return;
+        }
         System.out.print("\u001B[38m ▌ 아이디 : ");
         String loginId = sc.nextLine();
         System.out.print("\u001B[38m ▌ 패스워드 : ");
@@ -116,10 +127,19 @@ public class MemberController extends Controller {
 
         loginedMember = member;
         System.out.printf("\u001B[38m ▌ 로그인되었습니다.\n\u001B[38m ▌ %s님 환영합니다.\n", loginedMember.memberName);
+        System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("  회원 전용 명령어 목록  "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+        System.out.print("\u001B[33m ▌ "); System.out.print("회원 전용 명령어 : [공지사항] [자유게시판] [음악순위] [음악검색] [장르별] [회원가입] [로그인] [앱종료]         "); System.out.print("\u001B[33m▌ \n");
+        System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
 
+
     public static void doLogOut() {
-        if(Controller.isLogined() == true) {
+        if (isLogined() == false ) {
+            System.out.println("\u001B[38m ▌ 로그인 상태가 아닙니다.");
+            return;
+        }
+        if(isLogined() == true) {
             loginedMember = null;
             System.out.println("\u001B[38m ▌ 로그아웃 되었습니다.");
         }

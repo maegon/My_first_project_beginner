@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 @Getter
 @Setter
-public class GenreController extends Controller {
+public abstract class GenreController extends Controller {
     public static Scanner sc;
     private static List<Genre> genres;
     private String cmd;

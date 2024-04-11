@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TechnoGenreController extends Controller {
+public abstract class TechnoGenreController extends Controller {
     public static Scanner sc;
     private static List<Techno> technos;
     private String cmd;

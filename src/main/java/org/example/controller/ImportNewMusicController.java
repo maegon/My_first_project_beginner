@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 
 
-public class ImportNewMusicController extends Controller {
+public abstract class ImportNewMusicController extends Controller {
     String regDate = Util.getNowDateStr();
 
     int lastImportNewMusicsId;
