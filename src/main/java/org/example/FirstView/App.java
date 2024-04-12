@@ -1,10 +1,7 @@
 package org.example.FirstView;
 
 import org.example.container.Container;
-import org.example.controller.ArticleController;
-import org.example.controller.Controller;
-import org.example.controller.GenreController;
-import org.example.controller.MemberController;
+import org.example.controller.*;
 import org.example.dto.Member;
 
 import java.util.ArrayList;
@@ -109,8 +106,8 @@ public class App {
                 articleController.showDetail();
             }
 
-            else if (cmd.equals("장르별")) {
-                GenreController.showGenreList();
+            else if (cmd.equals("음악검색")) {
+                MusicController.doSearchMusic();
             }
 
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
