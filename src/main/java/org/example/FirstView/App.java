@@ -115,7 +115,9 @@ public class App {
             else if (cmd.equals("음악재생")) {
                 MusicController.doPlayMusic();
             }
-
+            else if (cmd.equals("음악목록추가")) {
+                MusicController.doImportMusicList();
+            }
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
             else {
                 System.out.printf("\u001B[31m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);

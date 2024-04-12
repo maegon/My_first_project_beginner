@@ -113,6 +113,10 @@ public class MemberController extends Controller {
         System.out.print("\u001B[33m ▌ "); System.out.print("음악 관련 명령어 : [아티스트검색] [음악검색]                                                                      "); System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ "); System.out.print("게시물 관련 명령어 : [글목록] [글검색] [글보기] [글작성] [글수정] [글삭제]                                     "); System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ "); System.out.print("회원 관련 명령어 : [로그아웃] [앱종료]                                                                         "); System.out.print("\u001B[33m▌ \n");
+        if(member.adminId.equals("SBS12341499JW") == true) {
+            System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("  관리자 전용 명령어 목록  "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+            System.out.print("\u001B[33m ▌ "); System.out.print("음악 관련 명령어 : [음악목록추가]                                                                     "); System.out.print("\u001B[33m▌ \n");
+        }
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
 
