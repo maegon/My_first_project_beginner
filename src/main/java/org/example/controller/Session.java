@@ -26,15 +26,10 @@ public class Session {
         this.loginedMember = loginedMember;
     }
 
-    public Board getCurrentBoard() {
-        return currentBoard;
-    }
-
-    public void setCurrentBoard(Board currentBoard) {
-        this.currentBoard = currentBoard;
-    }
 
     public boolean isLogined() {
         return loginedMember != null;
     }
+
+
 }

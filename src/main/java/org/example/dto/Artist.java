@@ -1,6 +1,10 @@
 package org.example.dto;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Artist extends Dto {
     public String artistName;
     Music musicTitle;
@@ -26,5 +30,9 @@ public class Artist extends Dto {
 
     public void increaseHit() {
         hit++;
+    }
+
+    public String getArtistName() {
+        return this.artistName;
     }
 }

@@ -52,6 +52,8 @@ public class ArtistController extends Controller {
                 String searchKeyword = sc.nextLine();
                 searchKeyword.trim();
 
+                List<Artist> forListArtist = artists;
+
                 if (searchKeyword.length() > 0) {
                     forListArtists = new ArrayList<>();
                     for (Artist artist : artists) {

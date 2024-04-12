@@ -1,6 +1,6 @@
 package org.example.dao;
 
-public class Sample extends Dao {
+public class Sample {
     private short[] buffer;
     private int size;
 

@@ -8,12 +8,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class MyPlay extends Dao {
+public class MyPlayer {
     public static final int BUFFER_SIZE = 44100000;
     private Decoder decoder;
     private AudioDevice out;
     private ArrayList<Sample> samples;
     private short[][] musicbuffers;
+
+    private short[][] GetMusicBuffers() {
+        return new short[0][];
+    }
+
     private int size;
 
     public MyPlayer(String path) {
@@ -40,6 +45,8 @@ public class MyPlay extends Dao {
         }
         return true;
     }
+
+
 
     public void Close() {
         if((out != null) && !out.isOpen())
@@ -82,8 +89,8 @@ public class MyPlay extends Dao {
             return;
         try {
             for(int i=0; i < size; i++) {
-                short[] buffers = musicbuffers[i];
-                out.write(buffers, 0, samples.get(i).GetSize());
+                short[] buffers = samples.get(i).GetBuffer();
+                out.write(samples.get(i).GetBuffer(), 0, samples.get(i).GetSize());
             }
             out.flush();
         } catch(JavaLayerException e) { }

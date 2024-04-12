@@ -112,6 +112,9 @@ public class App {
             else if (cmd.equals("아티스트검색")) {
                 ArtistController.doSearchArtist();
             }
+            else if (cmd.equals("음악재생")) {
+                MusicController.doPlayMusic();
+            }
 
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
             else {

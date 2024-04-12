@@ -1,9 +1,11 @@
 package org.example.dto;
 
 
-import org.example.util.Util;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.ArrayList;
+@Getter
+@Setter
 
 public class Music extends Dto {
     public String musicTitle;
@@ -37,4 +39,7 @@ public class Music extends Dto {
         hit++;
     }
 
+    public String getMusicTitle() {
+        return this.musicTitle;
+    }
 }
