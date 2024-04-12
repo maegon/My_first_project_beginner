@@ -1,11 +1,16 @@
 package org.example.dto;
 
 
+import org.example.util.Util;
+
+import java.util.ArrayList;
+
 public class Music extends Dto {
     public String musicTitle;
     Artist artistName;
     public int hit;
     public String memberName;
+
 
     public Music(int id, String regDate, String artistName, String musicTitle, int hit, String memberName) {
         this.id = id;

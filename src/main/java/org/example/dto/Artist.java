@@ -1,5 +1,6 @@
 package org.example.dto;
 
+
 public class Artist extends Dto {
     public String artistName;
     Music musicTitle;
@@ -15,6 +16,13 @@ public class Artist extends Dto {
     public Artist(String artistName) {
         this.artistName = artistName;
     }
+
+    public Artist(int id, String regDate, String artistName) {
+        this.id = id;
+        this.regDate = regDate;
+        this.artistName = artistName;
+    }
+
 
     public void increaseHit() {
         hit++;

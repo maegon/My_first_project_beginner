@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.container.Container;
 import org.example.dto.Article;
 import org.example.dto.Artist;
+import org.example.dto.Member;
 import org.example.dto.Music;
 import org.example.util.Util;
 
@@ -20,6 +21,8 @@ public abstract class MusicController extends Controller {
     private static List<Artist> artists;
     private String cmd;
 
+
+
     public MusicController() {
         sc = Container.getSc();
         musics = new ArrayList<>();
@@ -28,49 +31,41 @@ public abstract class MusicController extends Controller {
         lastartistId = artists.size();
     }
 
-
+    public void makeTestData() {
+        musics.add(new Music(1, "2024-04-12", "jnathyn", "Dioma", 10, "관리자"));
+    }
 
 
     public static void doSearchMusic() {
         try {
+
             if (isLogined() == false) {
                 System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
                 return;
             }
-            if (musics.size() == 0) {
-                System.out.println("\u001B[35m ▌ 음악이 없습니다.");
-                return;
-            }
+
             if (isLogined() == true) {
+
+                List<Music> forListMusics = musics;
+                List<Artist> forListArtists = artists;
                 System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
                 System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
                 System.out.print("  음악 검색 명령어 가이드  ");
                 System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
                 System.out.print("\u001B[33m ▌ ");
-                System.out.print("음악제목으로 검색 : '음악제목' 형식으로 '소문자'로 작성 (예시: hope)                                                    ");
-                System.out.print("\u001B[33m▌ \n");
-                System.out.print("\u001B[33m ▌ ");
-                System.out.print("아티스트명으로 검색 : '아티스트명' 형식으로 '소문자'로 작성 (예시: todu)                                                       ");
+                System.out.print("검색어 : '음악제목' 형식으로 '소문자'로 작성 (예시: hope)                                                    ");
                 System.out.print("\u001B[33m▌ \n");
                 System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
                 System.out.print("\u001B[38m ▌ 검색어 : ");
                 String searchKeyword = sc.nextLine();
-
-                List<Music> forListMusics = musics;
-                List<Artist> forListArtists = artists;
+                searchKeyword.trim();
 
                 if (searchKeyword.length() > 0) {
                     forListMusics = new ArrayList<>();
-                    forListArtists = new ArrayList<>();
                     for (Music music : musics) {
                         if (music.musicTitle.contains(searchKeyword)) {
                             forListMusics.add(music);
-                        }
-                    }
-                    for (Artist artist : artists) {
-                        if (artist.artistName.contains(searchKeyword)) {
-                            forListArtists.add(artist);
                         }
                     }
                     if (forListMusics.size() == 0) {
@@ -93,10 +88,12 @@ public abstract class MusicController extends Controller {
                     }
                 }
                 System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+
             }
         } catch (NullPointerException e) {
-            System.out.print("\u001B[31m ▌ 음악이 없습니다.\n");
+            System.out.print("\n\u001B[31m ▌ 음악이 없습니다.\n");
         }
+
     }
 
 
