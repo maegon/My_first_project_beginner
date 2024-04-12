@@ -1,6 +1,5 @@
 package org.example.dto;
 
-import org.example.dto.Artist;
 
 public class Music extends Dto {
     public String musicTitle;

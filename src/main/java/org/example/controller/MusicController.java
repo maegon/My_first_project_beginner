@@ -1,10 +1,13 @@
 package org.example.controller;
 
 import org.example.container.Container;
+import org.example.dto.Article;
 import org.example.dto.Artist;
 import org.example.dto.Music;
+import org.example.util.Util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,6 +26,33 @@ public abstract class MusicController extends Controller {
         lastMusicId = musics.size();
         lastartistId = artists.size();
     }
+
+//    public void ImportMusic() {
+//        if (isLogined() == false ) {
+//            System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
+//            return;
+//        }
+//        if(loginedMember.memberName != "관리자") {
+//            System.out.println("\u001B[31m ▌ 권한이 없습니다.");
+//            return;
+//        }
+//        else {
+//            Artist artistName;
+//            int id = musics.size() + 1;
+//            String regDate = Util.getNowDateStr();
+//            System.out.print("\u001B[38m ▌ 아티스트명 : ");
+//            artistName = sc.nextLine();
+//            System.out.print("\u001B[38m ▌ 음악 제목 : ");
+//            String musicTitle = sc.nextLine();
+//
+//            Music music = new Article(id, regDate, artistName, musicTitle);
+//            musics.add(music);
+//
+//            System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
+//        }
+//    }
+
+
     public static void doSearchMusic() {
         if (isLogined() == false ) {
             System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
@@ -67,11 +97,16 @@ public abstract class MusicController extends Controller {
             System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("검색된 음악 목록"); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
             System.out.print("\u001B[33m ▌ "); System.out.print(" 번호  ░  아티스트명  ░  조회수  ░  제목                                                                           "); System.out.print("\u001B[33m ▌ \n");
             for (int i = forListMusics.size() - 1; i >= 0; i--) {
-                Music music = forListMusics.get(i);
-                System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", music.id, artist.artistName, music.hit, music.musicTitle);
+                for(int j = forListArtists.size() - 1; j >=0; j--) {
+                    Music music = forListMusics.get(i);
+                    Artist artist = forListArtists.get(j);
+                    System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", music.id, artist.artistName, music.hit, music.musicTitle);
+                }
             }
             System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+
         }
+
     }
 
 //    public static void main(String[] args) {

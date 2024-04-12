@@ -27,7 +27,7 @@ public class MemberController extends Controller {
     }
 
     public void makeTestData() {
-        members.add(new Member(1, "admin", "admin", "관리자"));
+        members.add(new Member(1, "admin", "admin", "관리자", "SBS12341499JW"));
     }
 
     public static void doJoin() {
@@ -69,21 +69,8 @@ public class MemberController extends Controller {
             break;
         }
 
-        String memberEmail = null;
-        while (true) {
-            System.out.print("\u001B[38m ▌ 이메일 : ");
-            memberEmail = sc.nextLine();
-
-
-            if (isJoinableMemberEmail(memberEmail)) {
-                System.out.printf("\u001B[31m ▌ %s(은)는 이미 사용중인 이메일입니다.\n", memberEmail);
-                continue;
-            }
-            break;
-        }
-
         // 회원가입 완료시 저장 및 출력
-        Member member = new Member(id, loginId, loginPw, loginPwConfirm, memberName, memberEmail);
+        Member member = new Member(id, loginId, loginPw, loginPwConfirm, memberName);
         members.add(member);
         System.out.printf("\u001B[35m ▌ 회원가입이 완료되었습니다.\n\u001B[35m ▌ %s님 환영합니다.\n", memberName);
     }
@@ -108,13 +95,22 @@ public class MemberController extends Controller {
             return;
         }
 
+        if (member.id == 1) {
+            System.out.print("\u001B[38m ▌ 관리자번호 : ");
+            String adminId = sc.nextLine();
+            if(adminId.equals("SBS12341499JW") != true) {
+                System.out.println("\u001B[31m ▌ 관리자번호가 일치하지 않습니다.");
+                return;
+            }
+        }
+
         loginedMember = member;
         System.out.printf("\u001B[35m ▌ 로그인되었습니다.\n\u001B[35m ▌ %s님 환영합니다.\n", loginedMember.memberName);
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("  회원 전용 명령어 목록  "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.print("\u001B[33m ▌ "); System.out.print("음악 관련 명령어 : [음악순위] [음악검색] [장르별]                                                              "); System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ "); System.out.print("게시물 관련 명령어 : [글목록] [글검색] [글보기] [글작성] [글수정] [글삭제]                                     "); System.out.print("\u001B[33m▌ \n");
-        System.out.print("\u001B[33m ▌ "); System.out.print("회원 관련 명령어 : [로그아웃] [앱종료]                                                                "); System.out.print("\u001B[33m▌ \n");
+        System.out.print("\u001B[33m ▌ "); System.out.print("회원 관련 명령어 : [로그아웃] [앱종료]                                                                         "); System.out.print("\u001B[33m▌ \n");
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
 
@@ -183,23 +179,4 @@ public class MemberController extends Controller {
         return -1;
     }
 
-    // 회원가입시 이메일 중복 여부 체크
-    private static boolean isJoinableMemberEmail(String memberEmail) {
-        int index = getMemberIndexByMemberEmail(memberEmail);
-        if (index != -1) {
-            return true;
-        }
-        return false;
-    }
-
-    private static int getMemberIndexByMemberEmail(String memberEmail) {
-        int i = 0;
-        for ( Member member : members ) {
-            if ( member.memberEmail.equals(memberEmail)) {
-                return i;
-            }
-            i++;
-        }
-        return -1;
-    }
 }
