@@ -1,16 +1,17 @@
-//package org.example.dao;
-//
-//import org.example.container.Container;
-//import org.example.db.DBConnection;
-//import org.example.dto.Article;
-//import org.example.dto.ArticleReply;
-//import org.example.dto.Board;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.Map;
-//
+package org.example.dao;
+
+import org.example.container.Container;
+import org.example.db.DBConnection;
+import org.example.dto.Article;
+import org.example.dto.ArticleReply;
+import org.example.dto.Board;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 //public class ArticleDao extends Dao {
+
 //    private DBConnection dbConnection;
 //
 //    public ArticleDao() {
@@ -175,5 +176,7 @@
 //
 //        return articleReplies;
 //    }
+
+
 //}
 

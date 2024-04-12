@@ -93,6 +93,7 @@ public class ArticleController extends Controller{
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
 
+
     public void showDetail() {
         if (articles.size() != 0) {
             System.out.println("\u001B[35m ▌ 몇번 게시물을 보시겠습니까?");
@@ -118,11 +119,30 @@ public class ArticleController extends Controller{
             System.out.printf("\u001B[33m ▌ 제목 : %s\n", foundArticle.title);
             System.out.printf("\u001B[33m ▌ 내용 : %s\n", foundArticle.body);
             System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+
+            
+//            댓글 작성 기능 db연결되면 구현할 것
+//            System.out.println("\u001B[35m ▌ 댓글을 작성하시겠습니까?");
+//            System.out.println("\u001B[35m ▌ (네/아니오))");
+//            System.out.printf("\u001B[38m ▌ 입력 : ");
+//            String replyCheck = sc.nextLine();
+//            if(replyCheck.equals("네")) {
+//                if (isLogined() == false) {
+//                    System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
+//                    return;
+//                }
+//                System.out.println("\u001B[38m ▌ 댓글 입력 : ");
+//                String replyBody = sc.nextLine();
+//                ArticleService.replyWrite(id, memberName, replyBody);
+//                System.out.println("\u001B[35m ▌ 댓글이 작성되었습니다.");
+//            }
         }
         else {
             System.out.println("\u001B[35m ▌ 게시물이 없습니다.");
         }
     }
+
+
 
     public void doModify() {
         if (isLogined() == false ) {

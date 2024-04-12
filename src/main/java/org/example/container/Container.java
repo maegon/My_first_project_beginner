@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class Container {
     public static Scanner sc;
+//    public static ArticleDao articleDao;
 
     public static Scanner getSc() {
         if ( sc == null ) {
