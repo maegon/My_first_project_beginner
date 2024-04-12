@@ -19,6 +19,8 @@ public class Article extends Dto {
         this(id, regDate, memberName, title, body, 0);
     }
 
+
+
     public void increaseHit() {
         hit++;
     }

@@ -14,6 +14,7 @@ import java.util.Scanner;
 public abstract class MusicController extends Controller {
     int lastMusicId;
     int lastartistId;
+    Artist artistName;
     public static Scanner sc;
     private static List<Music> musics;
     private static List<Artist> artists;
@@ -27,30 +28,7 @@ public abstract class MusicController extends Controller {
         lastartistId = artists.size();
     }
 
-//    public void ImportMusic() {
-//        if (isLogined() == false ) {
-//            System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
-//            return;
-//        }
-//        if(loginedMember.memberName != "관리자") {
-//            System.out.println("\u001B[31m ▌ 권한이 없습니다.");
-//            return;
-//        }
-//        else {
-//            Artist artistName;
-//            int id = musics.size() + 1;
-//            String regDate = Util.getNowDateStr();
-//            System.out.print("\u001B[38m ▌ 아티스트명 : ");
-//            artistName = sc.nextLine();
-//            System.out.print("\u001B[38m ▌ 음악 제목 : ");
-//            String musicTitle = sc.nextLine();
-//
-//            Music music = new Article(id, regDate, artistName, musicTitle);
-//            musics.add(music);
-//
-//            System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
-//        }
-//    }
+
 
 
     public static void doSearchMusic() {

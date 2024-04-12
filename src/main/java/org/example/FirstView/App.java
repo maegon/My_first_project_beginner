@@ -110,6 +110,7 @@ public class App {
                 MusicController.doSearchMusic();
             }
 
+
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
             else {
                 System.out.printf("\u001B[31m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
