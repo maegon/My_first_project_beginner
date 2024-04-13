@@ -14,15 +14,16 @@ public class ArticleController extends Controller{
     private static List<Article> articles;
     private String cmd;
 
-    public ArticleController() {
-        sc = Container.getSc();
-        articles = new ArrayList<>();
-        lastArticleId = articles.size();
-    }
-
     public void makeTestData() {
         articles.add(new Article(1, Util.getNowDateStr(), "관리자", "테스트 제목", "테스트 내용", 12));
     }
+
+    public ArticleController() {
+        sc = Container.getSc();
+        articles = new ArrayList<>();
+    }
+
+
 
 
     public void doWrite() {

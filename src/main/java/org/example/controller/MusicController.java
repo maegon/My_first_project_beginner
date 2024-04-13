@@ -14,11 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public abstract class MusicController extends Controller {
+public class MusicController extends Controller {
 //    private static JInternalFrame music; // 음악이 재생도중 새로운 음악프레임이 열리면 기존에 재생되던 음악 종료 -> 고민 좀 해봐야 할듯
     int lastMusicId;
     int lastartistId;
-    Artist artistName;
     public static Scanner sc;
     private static List<Music> musics;
     private static List<Artist> artists;
@@ -26,16 +25,14 @@ public abstract class MusicController extends Controller {
     private Music selectedMusic;
 
 
+
     public MusicController() {
         sc = Container.getSc();
         musics = new ArrayList<>();
         artists = new ArrayList<>();
-        lastMusicId = musics.size();
-        lastartistId = artists.size();
     }
-
     public void makeTestData() {
-        musics.add(new Music(1, "2024-04-12", "jnathyn", "Dioma", 10, "관리자"));
+        musics.add(new Music(1, "2024-04-12", "jnathyn", "dioma", 10, "관리자"));
     }
 
 
@@ -97,36 +94,42 @@ public abstract class MusicController extends Controller {
             System.out.print("\n\u001B[31m ▌ 음악이 없습니다.\n");
         }
     }
+
     public static void doImportMusicList() {
-        if (isLogined() == false) {
-            System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
-            return;
+        try {
+            if (isLogined() == false) {
+                System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
+                return;
+            }
+            if (loginedMember.adminId.equals("SBS12341499JW") != true ) {
+                System.out.println("\u001B[31m ▌ 권한이 없습니다.");
+                return;
+            }
+            else {
+                System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+                System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
+                System.out.print("  음악 목록 추가 양식  ");
+                System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+                System.out.print("\u001B[33m ▌ ");
+                System.out.print("입력 : '아티스트명' '음악제목' 형식으로 '소문자'로 작성 (예시: tobu hope)                                                    ");
+                System.out.print("\u001B[33m ▌ \n");
+                System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+
+                int id = musics.size() + 1;
+                int hit = 0;
+                String regDate = Util.getNowDateStr();
+                System.out.printf("\u001B[38m ▌ 아티스트명 : ");
+                String artistN = sc.nextLine();
+                System.out.printf("\u001B[38m ▌ 음악제목 : ");
+                String musicT = sc.nextLine();
+
+                Music music = new Music(id, regDate, artistN, musicT, hit, loginedMember.memberName);
+                musics.add(music);
+
+                System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
+            }
         }
-        if (loginedMember.adminId.equals("SBS12341499JW") != true ) {
-            System.out.println("\u001B[31m ▌ 권한이 없습니다.");
-            return;
-        }
-        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
-        System.out.print("  음악 목록 추가 양식  ");
-        System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.print("\u001B[33m ▌ ");
-        System.out.print("입력 : '아티스트명' '음악제목' 형식으로 '소문자'로 작성 (예시: tobu hope)                                                    ");
-        System.out.print("\u001B[33m ▌ \n");
-        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-
-        int id = musics.size() + 1;
-        int hit = 0;
-        String regDate = Util.getNowDateStr();
-        System.out.printf("\u001B[38m ▌ 아티스트명 : ");
-        String artistN = sc.nextLine();
-        System.out.printf("\u001B[38m ▌ 음악제목 : ");
-        String musicT = sc.nextLine();
-
-        Music music = new Music(id, regDate, artistN, musicT, hit, loginedMember.memberName);
-        musics.add(music);
-
-        System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
+        catch (NullPointerException e) {}
     }
 
 
