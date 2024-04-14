@@ -1,7 +1,7 @@
 package org.example.FirstView;
 
 import org.example.container.Container;
-import org.example.controller.*;
+//import org.example.controller.*;
 import org.example.dto.Member;
 
 import java.util.ArrayList;
@@ -15,13 +15,17 @@ public class App {
 
     public App() {
 //        members = new ArrayList<>();
+
+        Music introMusic = new Music("Jim Yosef & Shiah Maisel - Just Getting Started [NCS Release].mp3", true); // 테스트를 위한 음악 재생
+        introMusic.start();
+        System.out.println("현재 재생중인 음악 : introMusic 테스트 음악");
     }
 
 
     public void start() {
-        MemberController memberController = new MemberController();
-        ArticleController articleController = new ArticleController();
-
+//        MemberController memberController = new MemberController();
+//        ArticleController articleController = new ArticleController();
+//
         // 시작화면은 앱에서 제작해야함.
         // 메인 로고
         System.out.println("\u001B[38m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -55,85 +59,85 @@ public class App {
         System.out.print("\u001B[33m ▌ "); System.out.print("계정이 있으면 명령어 입력 란에 [로그인]을 입력하여 로그인을 해주세요.                                          "); System.out.print("\u001B[33m▌ \n");
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
-
-        memberController.makeTestData();
-
+//
+//        memberController.makeTestData();
+//
         //명령어 입력란(맨 마지막 줄에 출력)
         while (true) {
             System.out.println("\u001B[38m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
             System.out.print("\u001B[38m ▌ 명령어 입력 : ");
             String cmd = Container.getSc().nextLine();
             cmd = cmd.trim();
-
-
-
-            if (cmd.length() == 0) {
-                continue;
-            }
-            if (cmd.equals("앱종료")) {
-                break;
-            }
-
-
-            if (cmd.equals("회원가입")) {
-                memberController.doJoin();
-            }
-
-            else if (cmd.equals("로그인")) {
-                memberController.doLogin();
-            }
-
-            else if (cmd.equals("로그아웃")) {
-                memberController.doLogOut();
-            }
-
-            else if (cmd.equals("글목록")) {
-                articleController.showList();
-            }
-            else if (cmd.equals("글검색")) {
-                articleController.doSearch();
-            }
-            else if (cmd.equals("글작성")) {
-                articleController.doWrite();
-            }
-            else if (cmd.equals("글수정")) {
-                articleController.doModify();
-            }
-            else if (cmd.equals("글삭제")) {
-                articleController.doDelete();
-            }
-            else if (cmd.equals("글보기")) {
-                articleController.showDetail();
-            }
-
-            else if (cmd.equals("음악검색")) {
-                MusicController.doSearchMusic();
-            }
-            else if (cmd.equals("아티스트검색")) {
-                ArtistController.doSearchArtist();
-            }
-            else if (cmd.equals("음악재생")) {
-                MusicController.doPlayMusic();
-            }
-            else if (cmd.equals("음악목록추가")) {
-                MusicController.doImportMusicList();
-            }
-            // 메인 화면에서 존재하지 않는 명령어 입력시 출력
-            else {
-                System.out.printf("\u001B[31m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
-            }
-
+//
+//
+//
+//            if (cmd.length() == 0) {
+//                continue;
+//            }
+//            if (cmd.equals("앱종료")) {
+//                break;
+//            }
+//
+//
+//            if (cmd.equals("회원가입")) {
+//                memberController.doJoin();
+//            }
+//
+//            else if (cmd.equals("로그인")) {
+//                memberController.doLogin();
+//            }
+//
+//            else if (cmd.equals("로그아웃")) {
+//                memberController.doLogOut();
+//            }
+//
+//            else if (cmd.equals("글목록")) {
+//                articleController.showList();
+//            }
+//            else if (cmd.equals("글검색")) {
+//                articleController.doSearch();
+//            }
+//            else if (cmd.equals("글작성")) {
+//                articleController.doWrite();
+//            }
+//            else if (cmd.equals("글수정")) {
+//                articleController.doModify();
+//            }
+//            else if (cmd.equals("글삭제")) {
+//                articleController.doDelete();
+//            }
+//            else if (cmd.equals("글보기")) {
+//                articleController.showDetail();
+//            }
+//
+//            else if (cmd.equals("음악검색")) {
+//                MusicController.doSearchMusic();
+//            }
+//            else if (cmd.equals("아티스트검색")) {
+//                ArtistController.doSearchArtist();
+//            }
+//            else if (cmd.equals("음악재생")) {
+//                MusicController.doPlayMusic();
+//            }
+//            else if (cmd.equals("음악목록추가")) {
+//                MusicController.doImportMusicList();
+//            }
+//            // 메인 화면에서 존재하지 않는 명령어 입력시 출력
+//            else {
+//                System.out.printf("\u001B[31m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
+//            }
+//
         }
-
-
-
-        // 앱 종료
-        Container.getSc().close();
-        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("       앱 종료       "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+//
+//
+//
+//        // 앱 종료
+//        Container.getSc().close();
+//        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("       앱 종료       "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
     }
-
-
-
-
-
+//
+//
+//
+//
+//
 }
