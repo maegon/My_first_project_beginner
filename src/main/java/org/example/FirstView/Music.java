@@ -18,9 +18,7 @@ public class Music extends Thread {
     public Music(String name, boolean isLoop) {
         try {
             this.isLoop = isLoop;
-//            file = new File(Main.class.getResource("C:\\Users\\user\\IdeaProjects\\My_first_project_beginner\\src\\main\\java\\org\\example\\music\\")+ name);
-//            file = new File(Main.class.getResource("src/main/java/org/example/music")+ name);
-            file = new File("./music/" + name);
+            file = new File("C:/Users/user/IdeaProjects/My_first_project_beginner/src/main/java/org/example/music/" + name); // 파일 경로를 내 문서에서 노래가 저장된 경로를 그대로 복사해서 역슬래쉬만 그냥 슬래쉬로 변경하면 됨. 하... 노래 재생시키는 것만 총 8일 걸린거 같다.
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis); // 음악의 저장경로를 버퍼에 담아서 읽어올 수 있도록 함
             player = new Player(bis);
