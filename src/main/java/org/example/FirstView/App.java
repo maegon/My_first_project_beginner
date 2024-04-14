@@ -15,10 +15,6 @@ public class App {
 
     public App() {
 //        members = new ArrayList<>();
-
-        Music introMusic = new Music("Jim Yosef & Shiah Maisel - Just Getting Started [NCS Release].mp3", true); // 테스트를 위한 음악 재생
-        introMusic.start();
-        System.out.println("현재 재생중인 음악 : introMusic 테스트 음악");
     }
 
 
@@ -47,6 +43,14 @@ public class App {
             System.out.println("\u001B[36m"+mainLogo[i]);
         }
 
+
+        // 메인 화면 배경음악 출력
+        Music introMusic = new Music("Jim Yosef & Shiah Maisel - Just Getting Started [NCS Release] - BGM.mp3", true); // 테스트를 위한 음악 재생
+        introMusic.start();
+        System.out.println("\u001B[36m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+        System.out.print("\u001B[36m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("  메인 화면 배경 음악  "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+        System.out.print("\u001B[36m ▌ "); System.out.println("현재 재생중인 음악 ▶ Jim Yosef & Shiah Maisel - Just Getting Started [NCS Release] - BGM");
+        System.out.println("\u001B[36m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
         // 메인 메뉴 출력(공지사항 자유게시판, 장르별 추천 표지, 검색어 입력란, 로그인 접속, 앱 종료)
 
