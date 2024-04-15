@@ -1,19 +1,29 @@
 package org.example.controller;
 
 import org.example.FirstView.Music;
+import org.example.dto.Member;
+import org.example.dto.Track;
 import org.example.container.Container;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class MusicController extends Controller {
+    int lastTrackId;
     public static Scanner sc;
-    private static List<Music> musics;
+    private static List<Track> tracks;
+    private Image playMusicTitle;
+    private int nowSelected;
+
+    private Music selectedMusic;
+
 
     public MusicController() {
         sc = Container.getSc();
-        musics = new ArrayList<>();
+        tracks = new ArrayList<>();
         }
     public static void doSearchMusic() {
         try {
@@ -25,7 +35,7 @@ public class MusicController extends Controller {
 
             if (isLogined() == true) {
 
-                List<Music> forListMusics = musics;
+                List<Track> forListMusics = tracks;
                 System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
                 System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
                 System.out.print("  음악 검색 명령어 가이드  ");
@@ -62,7 +72,7 @@ public class MusicController extends Controller {
 //                    Music music = forListMusics.get(i);
 //                    System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", music.id, artist.artistName, music.hit, music.musicTitle);
 //                }
-                
+
                 System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
                 System.out.println();
 
@@ -76,6 +86,51 @@ public class MusicController extends Controller {
 
         } catch (NullPointerException e) {
             System.out.print("\n\u001B[35m ▌ 음악이 없습니다.\n");
+        }
+    }
+
+    public void selectedTrack(int nowSelected) { // 사용자가 곡을 선택했을때 해당 곡의 번호를 정수형태로 받음
+        if(selectedMusic != null) { // 만약 곡을 선택했는데 이미 재생중인 곡이 있다면 재생중이던 곡을 종료시킴
+            selectedMusic.close();
+        }
+        // 비회원은 초반 15초만 미리듣기
+        // 회원은 풀버전으로 듣기
+        playMusicTitle = new ImageIcon("C:/work/My_first_project_beginner/src/main/java/org/example/image/" + tracks.get(nowSelected).getPlayMusicTitle()).getImage();
+
+        selectedMusic = new Music(tracks.get(nowSelected).getStartMusic(), false);
+        selectedMusic.start();
+
+    }
+
+    public void importMusic() {
+        int id = tracks.size() + 1;
+        String regdate;
+        if (isLogined() == false) {
+            System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
+            return;
+        }
+        if (loginedMember.adminId.equals("SBS12341499JW") != true ) {
+            System.out.println("\u001B[31m ▌ 권한이 없습니다.");
+            return;
+        }
+        else {
+            System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
+            System.out.print("  음악 추가 양식  ");
+            System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+            System.out.print("\u001B[33m ▌ 음악 파일명 입력 : 음악(mp3) 파일명 (예시 : jnathyn - Clockwork.mp3)                                                 ");
+            System.out.print("\u001B[33m ▌ \n");
+            System.out.print("\u001B[33m ▌ 음악 표지명 입력 : 음악(jpg) 표지명 (예시 : jnathyn - Dioma img.jpg)                                                 ");
+            System.out.print("\u001B[33m ▌ \n");
+            System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+
+            System.out.printf("\u001B[38m ▌ 음악 파일명 입력 : ");
+            String importMusicFile = sc.nextLine();
+            System.out.printf("\u001B[38m ▌ 음악 표지명 입력 : ");
+            String importMusicTitle = sc.nextLine();
+
+            tracks.add(new Track(id, importMusicFile, importMusicTitle));
+            System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
         }
     }
 }

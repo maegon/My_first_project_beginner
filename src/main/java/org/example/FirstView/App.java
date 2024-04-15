@@ -6,7 +6,9 @@ import org.example.controller.ArticleController;
 import org.example.controller.MainScreenController;
 import org.example.controller.MemberController;
 import org.example.controller.MusicController;
-import org.example.util.Main;
+import org.example.dto.Track;
+
+import java.util.ArrayList;
 
 
 public class App {
@@ -14,6 +16,8 @@ public class App {
 
     public App() {
 //        members = new ArrayList<>();
+
+        ArrayList<Track> trackList = new ArrayList<>();
     }
 
 
@@ -21,6 +25,7 @@ public class App {
         MemberController memberController = new MemberController();
         ArticleController articleController = new ArticleController();
         MusicController musicController = new MusicController();
+        MainScreenController mainScreenController = new MainScreenController();
 
         // 시작화면은 앱에서 제작해야함.
         // 메인 로고
@@ -86,6 +91,8 @@ public class App {
             if (cmd.length() == 0) {
                 continue;
             }
+
+            // 공통 명령어
             if (cmd.equals("앱종료")) {
                 introMusic.close();
                 break;
@@ -107,14 +114,12 @@ public class App {
 
             else if (cmd.equals("메인화면")) {
                 introMusic.close();
-                MainScreenController.mainScreen();
+                mainScreenController.mainScreen();
             }
 
+            // 회원, 관리자 명령어
             else if (cmd.equals("글목록")) {
                 articleController.showList();
-            }
-            else if (cmd.equals("글검색")) {
-                articleController.doSearch();
             }
             else if (cmd.equals("글작성")) {
                 articleController.doWrite();
@@ -128,14 +133,19 @@ public class App {
             else if (cmd.equals("글보기")) {
                 articleController.showDetail();
             }
+            else if (cmd.equals("글검색")) {
+                articleController.doSearch();
+            }
 
+            // 공통 명령어
             else if (cmd.equals("음악검색")) {
                 MusicController.doSearchMusic();
             }
 
-//            else if (cmd.equals("아티스트검색")) {
-//                ArtistController.doSearchArtist();
-//            }
+            // 관리자 명령어
+            else if (cmd.equals("음악추가")) {
+                musicController.importMusic();
+            }
 
 
             // 사용자가 원하는 음악을 선택해 실행하면 메인화면의 인트로 음악 재생 종료됨.
