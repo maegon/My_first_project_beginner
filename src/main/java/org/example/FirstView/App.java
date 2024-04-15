@@ -3,14 +3,10 @@ package org.example.FirstView;
 import org.example.container.Container;
 //import org.example.controller.*;
 import org.example.controller.ArticleController;
+import org.example.controller.MainScreenController;
 import org.example.controller.MemberController;
-//import org.example.controller.MusicController;
-import org.example.dto.Member;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
+import org.example.controller.MusicController;
+import org.example.util.Main;
 
 
 public class App {
@@ -24,6 +20,7 @@ public class App {
     public void start() {
         MemberController memberController = new MemberController();
         ArticleController articleController = new ArticleController();
+        MusicController musicController = new MusicController();
 
         // 시작화면은 앱에서 제작해야함.
         // 메인 로고
@@ -68,7 +65,7 @@ public class App {
         // 장르별 추천음악은 나중에 추가
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("  메인 화면 명령어 목록  "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.print("\u001B[33m ▌ "); System.out.print("비회원이 사용할 수 있는 명령어 : [회원가입] [로그인] [앱종료]                                                  "); System.out.print("\u001B[33m▌ \n");
+        System.out.print("\u001B[33m ▌ "); System.out.print("비회원이 사용할 수 있는 명령어 : [메인화면] [회원가입] [로그인] [앱종료]                                                  "); System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ "); System.out.print("회원이면 사용할 수 있는 명령어가 많아집니다.                                                                   "); System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ "); System.out.print("계정이 없다면 명령어 입력 란에 [회원가입]을 입력하여 계정을 생성해주세요.                                      "); System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ "); System.out.print("계정이 있으면 명령어 입력 란에 [로그인]을 입력하여 로그인을 해주세요.                                          "); System.out.print("\u001B[33m▌ \n");
@@ -104,7 +101,13 @@ public class App {
             }
 
             else if (cmd.equals("로그아웃")) {
+                introMusic.close();
                 memberController.doLogOut();
+            }
+
+            else if (cmd.equals("메인화면")) {
+                introMusic.close();
+                MainScreenController.mainScreen();
             }
 
             else if (cmd.equals("글목록")) {
@@ -126,9 +129,9 @@ public class App {
                 articleController.showDetail();
             }
 
-//            else if (cmd.equals("음악검색")) {
-//                MusicController.doSearchMusic();
-//            }
+            else if (cmd.equals("음악검색")) {
+                MusicController.doSearchMusic();
+            }
 
 //            else if (cmd.equals("아티스트검색")) {
 //                ArtistController.doSearchArtist();
