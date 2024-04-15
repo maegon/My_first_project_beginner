@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.FirstView.Music;
-import org.example.dto.Article;
 import org.example.dto.Member;
 import org.example.dto.Track;
 import org.example.container.Container;
@@ -147,8 +146,16 @@ public class MusicController extends Controller {
             System.out.print("\u001B[33m ▌ \n");
             System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
-            System.out.printf("\u001B[38m ▌ 음악 파일명 입력 : ");
-            String importMusicFile = sc.nextLine();
+            String importMusicFile;
+            while (true) {
+                System.out.printf("\u001B[38m ▌ 음악 파일명 입력 : ");
+                importMusicFile = sc.nextLine();
+                if (isImportMusicFile(importMusicFile)) {
+                    System.out.printf("\u001B[38m ▌ %s 곡은 이미 존재합니다.\n", importMusicFile);
+                    continue;
+                }
+                break;
+            }
             System.out.printf("\u001B[38m ▌ 음악 표지명 입력 : ");
             String importMusicTitle = sc.nextLine();
 
@@ -156,6 +163,31 @@ public class MusicController extends Controller {
             System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
         }
     }
+
+
+    // 음악 추가시 동일한 파일명이 존재하는지 여부 확인
+    private static boolean isImportMusicFile(String importMusicFile) {
+        int index = getTrackIndexByImportMusicFile(importMusicFile);
+        if (index != -1) {
+            return true;
+        }
+        return false;
+    }
+
+    private static int getTrackIndexByImportMusicFile(String importMusicFile) {
+        int i = 0;
+        for ( Track track : tracks ) {
+            if ( track.importMusicFile.equals(importMusicFile)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+
+
+    // 검색한 음악이 존재하는지 여부 확인
     private int getTrackIndexById(int id) {
         int i = 0;
 
