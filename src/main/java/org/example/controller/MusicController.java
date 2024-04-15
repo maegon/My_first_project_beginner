@@ -1,11 +1,11 @@
 //package org.example.controller;
 //
+//import org.example.FirstView.Music;
 //import org.example.container.Container;
-//import org.example.dao.MyPlayer;
 //import org.example.dto.Article;
 //import org.example.dto.Artist;
 //import org.example.dto.Member;
-//import org.example.dto.Music;
+//import org.example.dto.MusicDto;
 //import org.example.util.Util;
 //
 //import javax.swing.*;
@@ -20,7 +20,7 @@
 //    int lastartistId;
 //    public static Scanner sc;
 //    private static List<Music> musics;
-//    private static List<Artist> artists;
+////    private static List<Artist> artists;
 //    private String cmd;
 //    private Music selectedMusic;
 //
@@ -29,7 +29,7 @@
 //    public MusicController() {
 //        sc = Container.getSc();
 //        musics = new ArrayList<>();
-//        artists = new ArrayList<>();
+////        artists = new ArrayList<>();
 //    }
 //    public void makeTestData() {
 //        musics.add(new Music(1, "2024-04-12", "jnathyn", "dioma", 10, "관리자"));

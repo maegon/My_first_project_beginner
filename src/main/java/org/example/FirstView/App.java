@@ -2,6 +2,9 @@ package org.example.FirstView;
 
 import org.example.container.Container;
 //import org.example.controller.*;
+import org.example.controller.ArticleController;
+import org.example.controller.MemberController;
+//import org.example.controller.MusicController;
 import org.example.dto.Member;
 
 import java.util.ArrayList;
@@ -19,9 +22,9 @@ public class App {
 
 
     public void start() {
-//        MemberController memberController = new MemberController();
-//        ArticleController articleController = new ArticleController();
-//
+        MemberController memberController = new MemberController();
+        ArticleController articleController = new ArticleController();
+
         // 시작화면은 앱에서 제작해야함.
         // 메인 로고
         System.out.println("\u001B[38m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -71,9 +74,9 @@ public class App {
         System.out.print("\u001B[33m ▌ "); System.out.print("계정이 있으면 명령어 입력 란에 [로그인]을 입력하여 로그인을 해주세요.                                          "); System.out.print("\u001B[33m▌ \n");
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
-//
-//        memberController.makeTestData();
-//
+
+        memberController.makeTestData();
+
         //명령어 입력란(맨 마지막 줄에 출력)
         while (true) {
             System.out.println("\u001B[38m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -90,54 +93,52 @@ public class App {
                 introMusic.close();
                 break;
             }
-//
-//
-//            if (cmd.equals("회원가입")) {
-//                memberController.doJoin();
-//            }
-//
-//            else if (cmd.equals("로그인")) {
-//                memberController.doLogin();
-//            }
-//
-//            else if (cmd.equals("로그아웃")) {
-//                memberController.doLogOut();
-//            }
-//
-//            else if (cmd.equals("글목록")) {
-//                articleController.showList();
-//            }
-//            else if (cmd.equals("글검색")) {
-//                articleController.doSearch();
-//            }
-//            else if (cmd.equals("글작성")) {
-//                articleController.doWrite();
-//            }
-//            else if (cmd.equals("글수정")) {
-//                articleController.doModify();
-//            }
-//            else if (cmd.equals("글삭제")) {
-//                articleController.doDelete();
-//            }
-//            else if (cmd.equals("글보기")) {
-//                articleController.showDetail();
-//            }
-//
+
+
+            if (cmd.equals("회원가입")) {
+                memberController.doJoin();
+            }
+
+            else if (cmd.equals("로그인")) {
+                memberController.doLogin();
+            }
+
+            else if (cmd.equals("로그아웃")) {
+                memberController.doLogOut();
+            }
+
+            else if (cmd.equals("글목록")) {
+                articleController.showList();
+            }
+            else if (cmd.equals("글검색")) {
+                articleController.doSearch();
+            }
+            else if (cmd.equals("글작성")) {
+                articleController.doWrite();
+            }
+            else if (cmd.equals("글수정")) {
+                articleController.doModify();
+            }
+            else if (cmd.equals("글삭제")) {
+                articleController.doDelete();
+            }
+            else if (cmd.equals("글보기")) {
+                articleController.showDetail();
+            }
+
 //            else if (cmd.equals("음악검색")) {
 //                MusicController.doSearchMusic();
 //            }
+
 //            else if (cmd.equals("아티스트검색")) {
 //                ArtistController.doSearchArtist();
 //            }
-//            else if (cmd.equals("음악재생")) {
-//                MusicController.doPlayMusic();
-//            }
-//            else if (cmd.equals("음악목록추가")) {
-//                MusicController.doImportMusicList();
-//            }
+
 
             // 사용자가 원하는 음악을 선택해 실행하면 메인화면의 인트로 음악 재생 종료됨.
             // 사용자가 원하는 음악이 끝나면 3초있다가 다시 메인화면 인트로 음악 재생됨.
+
+            // db에 음악 파일을 그대로 저장하지말고 음악파일이 저장되어있는 경로와 정보들만 저장함.
 
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
             else {

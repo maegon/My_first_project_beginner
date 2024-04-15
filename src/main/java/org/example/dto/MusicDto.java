@@ -7,7 +7,7 @@
 //@Getter
 //@Setter
 //
-//public class Music extends Dto {
+//public class MusicDto extends Dto {
 //    public String musicTitle;
 //    Artist artistName;
 //    public int hit;

@@ -1,8 +1,9 @@
 //package org.example.controller;
 //
+//import org.example.FirstView.Music;
 //import org.example.container.Container;
 //import org.example.dto.Artist;
-//import org.example.dto.Music;
+//import org.example.dto.MusicDto;
 //
 //import java.util.ArrayList;
 //import java.util.List;
