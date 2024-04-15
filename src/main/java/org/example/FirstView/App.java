@@ -139,7 +139,7 @@ public class App {
 
             // 공통 명령어
             else if (cmd.equals("음악검색")) {
-                MusicController.doSearchMusic();
+                musicController.doSearchMusic();
             }
 
             // 관리자 명령어

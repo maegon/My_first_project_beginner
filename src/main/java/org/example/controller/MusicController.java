@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.FirstView.Music;
+import org.example.dto.Article;
 import org.example.dto.Member;
 import org.example.dto.Track;
 import org.example.container.Container;
@@ -25,7 +26,7 @@ public class MusicController extends Controller {
         sc = Container.getSc();
         tracks = new ArrayList<>();
         }
-    public static void doSearchMusic() {
+    public void doSearchMusic() {
         try {
 
             if (isLogined() == false) {
@@ -49,42 +50,64 @@ public class MusicController extends Controller {
                 String searchKeyword = sc.nextLine();
                 searchKeyword.trim();
 
-//                if (searchKeyword.length() > 0) {
-//                    forListMusics = new ArrayList<>();
-//                    for (Music music : musics) {
-//                        if (music.musicTitle.contains(searchKeyword)) {
-//                            forListMusics.add(music);
-//                        }
-//                    }
-//                    if (forListMusics.size() == 0) {
-//                        System.out.println("\u001B[35m ▌ 검색 결과가 존재하지 않습니다.");
-//                        return;
-//                    }
-//                }
-//                System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-//                System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
-//                System.out.print("검색된 음악 목록");
-//                System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-//                System.out.print("\u001B[33m ▌ ");
-//                System.out.print(" 번호  ░  아티스트명  ░  조회수  ░  제목                                                                           ");
-//                System.out.print("\u001B[33m ▌ \n");
-//                for (int i = forListMusics.size() - 1; i >= 0; i--) {
-//                    Music music = forListMusics.get(i);
-//                    System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", music.id, artist.artistName, music.hit, music.musicTitle);
-//                }
+                if (searchKeyword.length() > 0) {
+                    forListMusics = new ArrayList<>();
+                    for (Track track : tracks) {
+                        if (track.getPlayMusicTitle().contains(searchKeyword)) {
+                            forListMusics.add(track);
+                        }
+                    }
+                    if (forListMusics.size() == 0) {
+                        System.out.println("\u001B[35m ▌ 검색 결과가 존재하지 않습니다.");
+                        return;
+                    }
+                }
+                System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+                System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
+                System.out.print("검색된 음악 목록");
+                System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+                System.out.print("\u001B[33m ▌ ");
+                System.out.print(" 번호  ░  조회수  ░  아티스트명 - 음악제목                                                                           ");
+                System.out.print("\u001B[33m ▌ \n");
+                for (int i = forListMusics.size() - 1; i >= 0; i--) {
+                    Track track = forListMusics.get(i);
+                    System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", track.id, track.hit, track.getPlayMusicTitle());
+                }
 
                 System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
                 System.out.println();
 
-                System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-                System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("  음악 듣기 가이드  "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-                System.out.print("\u001B[33m ▌ "); System.out.print("위 검색된 음악 목록에서 듣고 싶은 음악의 번호를 입력해주세요. "); System.out.print("\u001B[33m▌ \n");
-                System.out.print("\u001B[33m ▌ "); System.out.print("듣고 싶은 음악이 없어 돌아가고 싶으시다면 메인화면을 입력해주세요. "); System.out.print("\u001B[33m▌ \n");
-                System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-                System.out.println("\u001B[35m ▌ 몇번째 항목의 음악을 들으시겠습니까?\n\u001B[38m ▌ 명령어 입력 : ");
-            }
+                System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+                System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
+                System.out.print("  음악 듣기 가이드  ");
+                System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+                System.out.print("\u001B[33m ▌ ");
+                System.out.print("위 검색된 음악 목록에서 듣고 싶은 음악의 번호를 입력해주세요. ");
+                System.out.print("\u001B[33m▌ \n");
+                System.out.print("\u001B[33m ▌ ");
+                System.out.print("듣고 싶은 음악이 없어 돌아가고 싶으시다면 메인화면을 입력해주세요. ");
+                System.out.print("\u001B[33m▌ \n");
+                System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
-        } catch (NullPointerException e) {
+                // 사용자가 원하는 음악 번호 선택
+                if (tracks.size() != 0) {
+                    System.out.println("\u001B[35m ▌ 몇번째 음악을 들으시겠습니까?");
+                    System.out.print("\u001B[38m ▌ 명령어 입력 : ");
+                    int listenNum = sc.nextInt();
+                    sc.nextLine();
+                    int id = listenNum;
+
+                    Track foundTrack = getTrackById(id);
+                    if (foundTrack == null) {
+                        System.out.printf("\u001B[35m ▌ %d번 음악은 존재하지 않습니다.\n", listenNum);
+                        return;
+                    }
+                    foundTrack.increaseHit();
+                }
+
+            }
+        }
+        catch (NullPointerException e) {
             System.out.print("\n\u001B[35m ▌ 음악이 없습니다.\n");
         }
     }
@@ -133,5 +156,28 @@ public class MusicController extends Controller {
             System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
         }
     }
+    private int getTrackIndexById(int id) {
+        int i = 0;
+
+        for ( Track track : tracks ) {
+            if ( track.id == id ) {
+                return i;
+            }
+            i++;
+        }
+
+        return -1;
+    }
+
+    private Track getTrackById(int id) {
+        int index = getTrackIndexById(id);
+
+        if (index != -1) {
+            return tracks.get(index);
+        }
+
+        return null;
+    }
 }
+
 
