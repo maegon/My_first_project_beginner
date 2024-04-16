@@ -195,6 +195,7 @@ public class MusicController extends Controller {
             }
             System.out.printf("\u001B[35m ▌ 수정할 음악파일 번호 입력 : ");
             int modifyFileId = sc.nextInt();
+            sc.nextLine();
 
             Track foundTrack = null;
             for (int i = 0; i < tracks.size(); i++) {
@@ -213,10 +214,12 @@ public class MusicController extends Controller {
             System.out.printf("\u001B[35m ▌ 선택된 수정할 음악 파일명 : %s\n", foundTrack.importMusicFile);
 
 
-            String modifyNewMusicFile = null;
             System.out.printf("\u001B[38m ▌ 수정될 음악 파일명 입력 : ");
-            modifyNewMusicFile = sc.nextLine();
+
+            String modifyNewMusicFile = sc.nextLine();
             foundTrack.importMusicFile = modifyNewMusicFile;
+
+            System.out.printf("\u001B[35m ▌ %d번 파일이 수정되었습니다.\n", modifyFileId);
         } catch (InputMismatchException ie) {}
     }
 
