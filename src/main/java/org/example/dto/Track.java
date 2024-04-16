@@ -17,6 +17,9 @@ public class Track extends Dto {
         this.importMusicFile = importMusicFile;
         this.hit = hit;
     }
+    public Track(String importMusicFile) {
+        this.importMusicFile = importMusicFile;
+    }
 
     public Track(int id, String regDate, String importMusicFile, int hit) {
         super();

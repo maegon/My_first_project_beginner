@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 
 public class App {
+    public Music selectedMusic;
 //    private List<Member> members;
 
     public App() {
@@ -112,6 +113,7 @@ public class App {
             }
 
             else if (cmd.equals("메인화면")) {
+                selectedMusic.close();
                 introMusic.close();
                 mainScreenController.mainScreen();
             }
@@ -149,6 +151,9 @@ public class App {
             else if (cmd.equals("음악추가")) {
                 musicController.importMusic();
             }
+            else if (cmd.equals("음악수정")) {
+                musicController.modifyMusicFile();
+            }
 
 
 
@@ -159,7 +164,7 @@ public class App {
 
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
             else {
-                System.out.printf("\u001B[31m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
+                System.out.printf("\n\u001B[31m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
             }
 
         }

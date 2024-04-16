@@ -19,9 +19,10 @@ public class MusicController extends Controller {
     private static List<Track> tracks;
     int lastTrackId;
     private Image playMusicTitle;
-    private int nowSelected;
+    public int nowSelected;
 
-    private Music selectedMusic;
+    public Music selectedMusic;
+    public Music introMusic;
 
 
     public MusicController() {
@@ -111,7 +112,9 @@ public class MusicController extends Controller {
             }
             foundTrack.increaseHit();
 
+            introMusic.close();
             selectedTrack(id);
+
         }
     }
 
@@ -123,6 +126,7 @@ public class MusicController extends Controller {
         // 회원은 풀버전으로 듣기
         selectedMusic = new Music(tracks.get(nowSelected).getStartMusic(), false);
         selectedMusic.start();
+        System.out.printf("\u001B[36m ▌ 현재 재생 음악  ▶  %s\n", tracks.get(nowSelected).getStartMusic());
     }
 
     public void showMusicList() {
@@ -179,6 +183,43 @@ public class MusicController extends Controller {
         System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
     }
 
+    public void modifyMusicFile() {
+        try {
+            if (isLogined() == false) {
+                System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
+                return;
+            }
+            if (loginedMember.adminId.equals("SBS12341499JW") != true) {
+                System.out.println("\u001B[31m ▌ 권한이 없습니다.");
+                return;
+            }
+            System.out.printf("\u001B[35m ▌ 수정할 음악파일 번호 입력 : ");
+            int modifyFileId = sc.nextInt();
+
+            Track foundTrack = null;
+            for (int i = 0; i < tracks.size(); i++) {
+                Track track = tracks.get(i);
+
+                if (track.id == modifyFileId) {
+                    foundTrack = track;
+                    break;
+                }
+            }
+
+            if (foundTrack == null) {
+                System.out.printf("\u001B[31m ▌ %d번 파일은 존재하지 않습니다.\n", modifyFileId);
+                return;
+            }
+            System.out.printf("\u001B[35m ▌ 선택된 수정할 음악 파일명 : %s\n", foundTrack.importMusicFile);
+
+
+            String modifyNewMusicFile = null;
+            System.out.printf("\u001B[38m ▌ 수정될 음악 파일명 입력 : ");
+            modifyNewMusicFile = sc.nextLine();
+            foundTrack.importMusicFile = modifyNewMusicFile;
+        } catch (InputMismatchException ie) {}
+    }
+
     private int getTrackIndexById(int id) {
         int i = 0;
         for (Track track : tracks) {
@@ -197,6 +238,7 @@ public class MusicController extends Controller {
         }
         return null;
     }
+
 
 }
 
