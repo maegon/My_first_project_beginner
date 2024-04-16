@@ -28,6 +28,42 @@ public class MusicController extends Controller {
     }
 
 
+
+    public void importMusic() {
+        int id = 0;
+
+        if (isLogined() == false) {
+            System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
+            return;
+        }
+        if (loginedMember.adminId.equals("SBS12341499JW") != true) {
+            System.out.println("\u001B[31m ▌ 권한이 없습니다.");
+            return;
+        }
+        id = tracks.size() + 1;
+
+        String regdate = Util.getNowDateStr();
+
+        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
+        System.out.print("  음악 추가 양식  ");
+        System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+        System.out.print("\u001B[33m ▌ 음악 파일명 입력 : 음악(mp3) 파일명 (예시 : Jnathyn - Clockwork.mp3)                                          ");
+        System.out.print("\u001B[33m ▌ \n");
+        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+
+        String importMusicFile = null;
+
+        System.out.printf("\u001B[38m ▌ 음악 파일명 입력 : ");
+        importMusicFile = sc.nextLine();
+        String[] splitMusicTitle = importMusicFile.split("\\.");
+
+        String musicTitle = splitMusicTitle[0];
+        tracks.add(new Track(id, importMusicFile, musicTitle));
+        System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
+    }
+
+
     // 음악 검색 기능(대문자는 소문자로 자동 변환 되어 검색됨
     public void doSearchMusic() {
         if (isLogined() == false) {
@@ -170,40 +206,6 @@ public class MusicController extends Controller {
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
 
-
-    public void importMusic() {
-        int id = 0;
-
-        if (isLogined() == false) {
-            System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
-            return;
-        }
-        if (loginedMember.adminId.equals("SBS12341499JW") != true) {
-            System.out.println("\u001B[31m ▌ 권한이 없습니다.");
-            return;
-        }
-        id = tracks.size() + 1;
-
-        String regdate = Util.getNowDateStr();
-
-        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
-        System.out.print("  음악 추가 양식  ");
-        System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.print("\u001B[33m ▌ 음악 파일명 입력 : 음악(mp3) 파일명 (예시 : Jnathyn - Clockwork.mp3)                                          ");
-        System.out.print("\u001B[33m ▌ \n");
-        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-
-        String importMusicFile = null;
-
-        System.out.printf("\u001B[38m ▌ 음악 파일명 입력 : ");
-        importMusicFile = sc.nextLine();
-        String[] splitMusicTitle = importMusicFile.split("\\.");
-
-        String musicTitle = splitMusicTitle[0];
-        tracks.add(new Track(id, importMusicFile, musicTitle));
-        System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
-    }
 
     public void stopSelectedMusic() {
         if(selectedMusic != null) {
