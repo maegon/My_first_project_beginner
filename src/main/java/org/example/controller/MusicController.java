@@ -18,6 +18,7 @@ public class MusicController extends Controller {
     int lastTrackId;
     ArrayList<Track> tracks = new ArrayList<>();
     private Music selectedMusic;
+    private boolean loopBoolean;
     private int nowSelected;
 
     public MusicController() {
@@ -40,13 +41,13 @@ public class MusicController extends Controller {
         System.out.print("  음악 검색 명령어 가이드  ");
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print("검색어 : 음악 제목 또는 아티스트명으로 작성하여 검색                                                          ");
+        System.out.print("검색어 : 음악 제목 또는 아티스트명으로 작성하여 검색                                                           ");
         System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print("음악 제목으로 검색할 경우엔 음악 제목의 첫자는 대문자로 작성   ");
+        System.out.print("음악 제목으로 검색할 경우엔 음악 제목의 첫자는 대문자로 작성                                                   ");
         System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print("아티스트명으로 검색할 경우에도 아티스트명의 첫자는 대문자로 작성  ");
+        System.out.print("아티스트명으로 검색할 경우에도 아티스트명의 첫자는 대문자로 작성                                               ");
         System.out.print("\u001B[33m▌ \n");
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
@@ -67,9 +68,9 @@ public class MusicController extends Controller {
             }
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
-        System.out.print(" 검색된 음악 목록");
-        System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
+        System.out.print(" 검색된 음악 목록 ");
+        System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.print("\u001B[33m ▌ ");
         System.out.print("   번호    ░   조회수   ░  아티스트명 - 음악제목                                                                           ");
         System.out.print("\u001B[33m ▌ \n");
@@ -83,14 +84,20 @@ public class MusicController extends Controller {
 
 
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
+        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
         System.out.print("  음악 듣기 가이드  ");
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print("위 검색된 음악 목록에서 듣고 싶은 음악의 번호를 입력해주세요. ");
+        System.out.print("위 검색된 음악 목록에서 듣고 싶은 음악의 번호를 입력해주세요.                                                    ");
         System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print("듣고 싶은 음악이 없으시면 '0' 을 입력해주세요");
+        System.out.print("듣고 싶은 음악이 없으시면 '0' 을 입력해주세요.                                                                   ");
+        System.out.print("\u001B[33m▌ \n");
+        System.out.print("\u001B[33m ▌ ");
+        System.out.print("반복 재생을 원하시면 '예' 를 입력해주세요.                                                                       ");
+        System.out.print("\u001B[33m▌ \n");
+        System.out.print("\u001B[33m ▌ ");
+        System.out.print("반복 재생을 원하지 않으시면 '예'를 제외하고 아무거나 입력해주세요.                                               ");
         System.out.print("\u001B[33m▌ \n");
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
@@ -112,8 +119,15 @@ public class MusicController extends Controller {
                 return;
             }
             foundTrack.increaseHit();
-
             listenNum = listenNum-1;
+            System.out.print("\u001B[38m ▌ 반복 재생 여부 : ");
+            String loopBooleanCheck = sc.nextLine();
+            if (loopBooleanCheck.equals("예")) {
+                loopBoolean = true;
+            }
+            else {
+                loopBoolean = false;
+            }
 
             selectedTrack(listenNum);
         }
@@ -125,7 +139,7 @@ public class MusicController extends Controller {
             selectedMusic.close();
         }
         // 회원은 풀버전으로 듣기
-        selectedMusic = new Music(tracks.get(nowSelected).musicTitle+".mp3", false);
+        selectedMusic = new Music(tracks.get(nowSelected).musicTitle+".mp3", loopBoolean);
         selectedMusic.start();
         System.out.print("\u001B[36m ▌ "); System.out.printf("현재 재생 음악  ▶  %s \n", tracks.get(nowSelected).musicTitle);
     }
@@ -173,10 +187,10 @@ public class MusicController extends Controller {
         String regdate = Util.getNowDateStr();
 
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
+        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
         System.out.print("  음악 추가 양식  ");
-        System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.print("\u001B[33m ▌ 음악 파일명 입력 : 음악(mp3) 파일명 (예시 : Jnathyn - Clockwork.mp3)                                                ");
+        System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+        System.out.print("\u001B[33m ▌ 음악 파일명 입력 : 음악(mp3) 파일명 (예시 : Jnathyn - Clockwork.mp3)                                           ");
         System.out.print("\u001B[33m ▌ \n");
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
