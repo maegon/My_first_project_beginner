@@ -2,7 +2,6 @@ package org.example.FirstView;
 
 import org.example.container.Container;
 import org.example.controller.ArticleController;
-import org.example.controller.MainScreenController;
 import org.example.controller.MemberController;
 import org.example.controller.MusicController;
 import org.example.dto.Track;
@@ -24,7 +23,6 @@ public class App {
         MemberController memberController = new MemberController();
         ArticleController articleController = new ArticleController();
         MusicController musicController = new MusicController();
-        MainScreenController mainScreenController = new MainScreenController();
 
         // 시작화면은 앱에서 제작해야함.
         // 메인 로고
@@ -109,11 +107,6 @@ public class App {
             else if (cmd.equals("로그아웃")) {
                 introMusic.close();
                 memberController.doLogOut();
-            }
-
-            else if (cmd.equals("메인화면")) {
-                introMusic.close();
-                mainScreenController.mainScreen();
             }
 
             // 회원, 관리자 명령어

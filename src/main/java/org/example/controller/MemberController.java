@@ -129,7 +129,6 @@ public class MemberController extends Controller {
         if(isLogined() == true) {
             loginedMember = null;
             System.out.println("\u001B[38m ▌ 로그아웃 되었습니다.");
-            MainScreenController.mainScreen();
         }
     }
 

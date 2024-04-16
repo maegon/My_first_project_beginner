@@ -127,6 +127,7 @@ public class MusicController extends Controller {
         // 회원은 풀버전으로 듣기
         selectedMusic = new Music(tracks.get(nowSelected).musicTitle+".mp3", false);
         selectedMusic.start();
+        System.out.print("\u001B[36m ▌ "); System.out.printf("현재 재생 음악  ▶  %s \n", tracks.get(nowSelected).musicTitle);
     }
 
 
