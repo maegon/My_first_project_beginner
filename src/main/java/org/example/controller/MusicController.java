@@ -102,6 +102,7 @@ public class MusicController extends Controller {
                 return;
             }
 
+
             int id = listenNum;
             Track foundTrack = getTrackById(id);
             if (foundTrack == null) {
@@ -109,6 +110,8 @@ public class MusicController extends Controller {
                 return;
             }
             foundTrack.increaseHit();
+
+            selectedTrack(id);
         }
     }
 
