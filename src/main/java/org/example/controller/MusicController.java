@@ -16,13 +16,11 @@ import java.util.Scanner;
 
 public class MusicController extends Controller {
     public static Scanner sc;
-    private static List<Track> tracks;
-    int lastTrackId;
-    private Image playMusicTitle;
-    public int nowSelected;
 
-    public Music selectedMusic;
-    public Music introMusic;
+    int lastTrackId;
+    private int nowSelected;
+    private static List<Track> tracks;
+    Music selectedMusic;
 
 
     public MusicController() {
@@ -44,13 +42,19 @@ public class MusicController extends Controller {
         System.out.print("  음악 검색 명령어 가이드  ");
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print("검색어 : 음악 제목 또는 아티스트명으로 작성하여 검색                                                              ");
+        System.out.print("검색어 : 음악 제목 또는 아티스트명으로 작성하여 검색                                                          ");
+        System.out.print("\u001B[33m▌ \n");
+        System.out.print("\u001B[33m ▌ ");
+        System.out.print("음악 제목으로 검색할 경우엔 음악 제목의 첫자는 대문자로 작성   ");
+        System.out.print("\u001B[33m▌ \n");
+        System.out.print("\u001B[33m ▌ ");
+        System.out.print("아티스트명으로 검색할 경우에도 아티스트명의 첫자는 대문자로 작성  ");
         System.out.print("\u001B[33m▌ \n");
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
         System.out.print("\u001B[38m ▌ 검색어 : ");
         String searchKeyword = sc.nextLine();
-        searchKeyword.trim();
+        searchKeyword = searchKeyword.trim();
 
         if (searchKeyword.length() > 0) {
             forListMusics = new ArrayList<>();
@@ -66,7 +70,7 @@ public class MusicController extends Controller {
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
-        System.out.print("검색된 음악 목록");
+        System.out.print(" 검색된 음악 목록");
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.print("\u001B[33m ▌ ");
         System.out.print("   번호    ░   조회수   ░  아티스트명 - 음악제목                                                                           ");
@@ -112,9 +116,7 @@ public class MusicController extends Controller {
             }
             foundTrack.increaseHit();
 
-            introMusic.close();
             selectedTrack(id);
-
         }
     }
 
@@ -124,9 +126,8 @@ public class MusicController extends Controller {
             selectedMusic.close();
         }
         // 회원은 풀버전으로 듣기
-        selectedMusic = new Music(tracks.get(nowSelected).getStartMusic(), false);
+        selectedMusic = new Music(tracks.get(nowSelected-1).getStartMusic(), false);
         selectedMusic.start();
-        System.out.printf("\u001B[36m ▌ 현재 재생 음악  ▶  %s\n", tracks.get(nowSelected).getStartMusic());
     }
 
     public void showMusicList() {
@@ -155,6 +156,8 @@ public class MusicController extends Controller {
 
 
     public void importMusic() {
+        int id = 0;
+
         if (isLogined() == false) {
             System.out.println("\u001B[31m ▌ 로그인 상태가 아닙니다.");
             return;
@@ -163,14 +166,15 @@ public class MusicController extends Controller {
             System.out.println("\u001B[31m ▌ 권한이 없습니다.");
             return;
         }
-        int id = tracks.size() + 1;
+        id = tracks.size() + 1;
+
         String regdate = Util.getNowDateStr();
 
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
         System.out.print("  음악 추가 양식  ");
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.print("\u001B[33m ▌ 음악 파일명 입력 : 음악(mp3) 파일명 (예시 : jnathyn - Clockwork.mp3)                                                 ");
+        System.out.print("\u001B[33m ▌ 음악 파일명 입력 : 음악(mp3) 파일명 (예시 : Jnathyn - Clockwork.mp3)                                                ");
         System.out.print("\u001B[33m ▌ \n");
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 

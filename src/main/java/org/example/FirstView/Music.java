@@ -1,6 +1,7 @@
 package org.example.FirstView;
 
 import javazoom.jl.player.Player;
+import org.example.dto.Track;
 import org.example.util.Main;
 
 import java.io.BufferedInputStream;
@@ -8,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+
 
 public class Music extends Thread {
     private Player player;
@@ -34,8 +36,6 @@ public class Music extends Thread {
     }
 
 
-    public Music(int i, String date, String jnathyn, String dioma, int i1, String 관리자) {
-    }
 
     public int getTime() { // getTime은 현재 실행되고 있는 음악이 어떤 위치에서 실행되는지 알려줌
         // 만약 3분짜리 음악을 실행하였고 10초 정도 흘렀다면 이 함수는 10000이라는 숫자를 반환함 => 즉 0.0001초 단위까지 알려줌

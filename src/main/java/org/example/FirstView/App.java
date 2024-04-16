@@ -11,17 +11,16 @@ import java.util.ArrayList;
 
 
 public class App {
-    public Music selectedMusic;
 //    private List<Member> members;
 
     public App() {
 //        members = new ArrayList<>();
 
-        ArrayList<Track> trackList = new ArrayList<>();
+        ArrayList<Track> tracks = new ArrayList<>();
     }
 
 
-    public void start() {
+    public void AppStart() {
         MemberController memberController = new MemberController();
         ArticleController articleController = new ArticleController();
         MusicController musicController = new MusicController();
@@ -50,11 +49,11 @@ public class App {
 
 
         // 메인 화면 배경음악 출력
-        Music introMusic = new Music("Jim Yosef & Shiah Maisel - Just Getting Started [NCS Release] - BGM.mp3", true); // 테스트를 위한 음악 재생
+        Music introMusic = new Music("Jim Yosef & Shiah Maisel - Just Getting Started.mp3", true); // 테스트를 위한 음악 재생
         introMusic.start();
         System.out.println("\u001B[36m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[36m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("  메인 화면 배경 음악  "); System.out.print("\u001B[36m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.print("\u001B[36m ▌ "); System.out.println("메인화면 음악 고정  ▶  Jim Yosef & Shiah Maisel - Just Getting Started [NCS Release] - BGM");
+        System.out.print("\u001B[36m ▌ "); System.out.println("메인화면 음악 고정  ▶  Jim Yosef & Shiah Maisel - Just Getting Started");
         System.out.println("\u001B[36m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
         // 메인 메뉴 출력(공지사항 자유게시판, 장르별 추천 표지, 검색어 입력란, 로그인 접속, 앱 종료)
@@ -113,7 +112,6 @@ public class App {
             }
 
             else if (cmd.equals("메인화면")) {
-                selectedMusic.close();
                 introMusic.close();
                 mainScreenController.mainScreen();
             }
@@ -140,6 +138,7 @@ public class App {
 
             // 공통 명령어
             else if (cmd.equals("음악검색")) {
+                introMusic.close();
                 musicController.doSearchMusic();
             }
 
@@ -164,7 +163,7 @@ public class App {
 
             // 메인 화면에서 존재하지 않는 명령어 입력시 출력
             else {
-                System.out.printf("\n\u001B[31m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
+                System.out.printf("\u001B[31m ▌ %s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
             }
 
         }
