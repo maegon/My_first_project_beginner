@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 
 public class App {
+    public Music musics;
 //    private List<Member> members;
 
     public App() {
@@ -91,7 +92,10 @@ public class App {
 
             // 공통 명령어
             if (cmd.equals("앱종료")) {
-                introMusic.close();
+                if(introMusic != null) {
+                    introMusic.close();
+                }
+                musicController.stopSelectedMusic();
                 break;
             }
 
@@ -105,7 +109,10 @@ public class App {
             }
 
             else if (cmd.equals("로그아웃")) {
-                introMusic.close();
+                if(!(introMusic != null)) {
+                    introMusic.start();
+                }
+                musicController.stopSelectedMusic();
                 memberController.doLogOut();
             }
 
@@ -143,9 +150,6 @@ public class App {
             else if (cmd.equals("음악추가")) {
                 musicController.importMusic();
             }
-            else if (cmd.equals("음악수정")) {
-                musicController.modifyMusicFile();
-            }
 
 
 
@@ -160,16 +164,10 @@ public class App {
             }
 
         }
-//
-//
-//
-//        // 앱 종료
-//        Container.getSc().close();
-//        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("       앱 종료       "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+
+        // 앱 종료
+        Container.getSc().close();
+        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("       앱 종료       "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
     }
-//
-//
-//
-//
-//
+
 }

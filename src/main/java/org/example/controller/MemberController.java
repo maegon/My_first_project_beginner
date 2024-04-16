@@ -33,6 +33,10 @@ public class MemberController extends Controller {
     }
 
     public static void doJoin() {
+        if (isLogined() == true ) {
+            System.out.println("\u001B[31m ▌ 로그아웃 상태가 아닙니다.");
+            return;
+        }
         int id = members.size() + 1;
         String loginId = null;
         while (true) {
@@ -115,7 +119,7 @@ public class MemberController extends Controller {
         System.out.print("\u001B[33m ▌ "); System.out.print("기능 관련 명령어 : [메인화면] [로그아웃] [앱종료]                                                              "); System.out.print("\u001B[33m▌ \n");
         if(member.adminId.equals("SBS12341499JW") == true) {
             System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("  관리자 전용 명령어 목록  "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-            System.out.print("\u001B[33m ▌ "); System.out.print("음악 관련 명령어 : [음악추가] [음악수정]                                                                      "); System.out.print("\u001B[33m▌ \n");
+            System.out.print("\u001B[33m ▌ "); System.out.print("음악 관련 명령어 : [음악추가]                                                                                  "); System.out.print("\u001B[33m▌ \n");
         }
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
