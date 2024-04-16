@@ -2,11 +2,9 @@ package org.example.controller;
 
 import org.example.FirstView.Music;
 import org.example.container.Container;
-import org.example.dto.Article;
 import org.example.dto.Track;
 import org.example.util.Util;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -18,14 +16,14 @@ public class MusicController extends Controller {
     public static Scanner sc;
 
     int lastTrackId;
+    ArrayList<Track> tracks = new ArrayList<>();
+    private Music selectedMusic;
     private int nowSelected;
-    private static List<Track> tracks;
-    Music selectedMusic;
-
 
     public MusicController() {
         sc = Container.getSc();
-        tracks = new ArrayList<>();
+        selectedMusic = null;
+        nowSelected = 0;
     }
 
 
@@ -77,7 +75,7 @@ public class MusicController extends Controller {
         System.out.print("\u001B[33m ▌ \n");
         for (int i = forListMusics.size() - 1; i >= 0; i--) {
             Track track = forListMusics.get(i);
-            System.out.printf("\u001B[33m ▌    %d    ░    %d    ░     %s  \n", track.id, track.hit, track.importMusicFile);
+            System.out.printf("\u001B[33m ▌    %d    ░    %d    ░     %s  \n", track.id, track.hit, track.musicTitle);
         }
 
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -108,15 +106,16 @@ public class MusicController extends Controller {
             }
 
 
-            int id = listenNum;
-            Track foundTrack = getTrackById(id);
+            Track foundTrack = getTrackById(listenNum);
             if (foundTrack == null) {
                 System.out.printf("\u001B[35m ▌ %d번 음악은 존재하지 않습니다.\n", listenNum);
                 return;
             }
             foundTrack.increaseHit();
 
-            selectedTrack(id);
+            listenNum = listenNum-1;
+
+            selectedTrack(listenNum);
         }
     }
 
@@ -126,9 +125,11 @@ public class MusicController extends Controller {
             selectedMusic.close();
         }
         // 회원은 풀버전으로 듣기
-        selectedMusic = new Music(tracks.get(nowSelected-1).getStartMusic(), false);
+        selectedMusic = new Music(tracks.get(nowSelected).musicTitle+".mp3", false);
         selectedMusic.start();
     }
+
+
 
     public void showMusicList() {
         if (isLogined() == false) {
@@ -147,9 +148,9 @@ public class MusicController extends Controller {
         System.out.print("\u001B[33m ▌ ");
         System.out.print("     번호      ░      조회수      ░      아티스트명 - 제목                                                    ");
         System.out.print("\u001B[33m ▌ \n");
-        for (int i = tracks.size() - 1; i >= 0; i--) {
+        for (int i = tracks.size()-1; i >= 0; i--) {
             Track track = tracks.get(i);
-            System.out.printf("\u001B[33m ▌     %d      ░       %d       ░      %s  \n", track.id, track.hit, track.importMusicFile);
+            System.out.printf("\u001B[33m ▌     %d      ░       %d       ░      %s  \n", track.id, track.hit, track.musicTitle);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
@@ -182,8 +183,10 @@ public class MusicController extends Controller {
 
         System.out.printf("\u001B[38m ▌ 음악 파일명 입력 : ");
         importMusicFile = sc.nextLine();
+        String[] splitMusicTitle = importMusicFile.split("\\.");
 
-        tracks.add(new Track(id, importMusicFile));
+        String musicTitle = splitMusicTitle[0];
+        tracks.add(new Track(id, importMusicFile, musicTitle));
         System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
     }
 
