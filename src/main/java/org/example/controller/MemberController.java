@@ -44,7 +44,7 @@ public class MemberController extends Controller {
             loginId = sc.nextLine();
 
             if (isJoinableLoginId(loginId)) {
-                System.out.printf("\u001B[38m ▌ %s(은)는 이미 사용중인 아이디입니다.\n", loginId);
+                System.out.printf("\u001B[35m ▌ %s(은)는 이미 사용중인 아이디입니다.\n", loginId);
                 continue;
             }
             break;
@@ -57,7 +57,7 @@ public class MemberController extends Controller {
             System.out.print("\u001B[38m ▌ 패스워드 확인 : ");
             loginPwConfirm = sc.nextLine();
             if (loginPw.equals(loginPwConfirm) == false) {
-                System.out.println("\u001B[38m ▌ 비밀번호가 일치하지 않습니다.\n재입력해주세요.");
+                System.out.println("\u001B[35m ▌ 비밀번호가 일치하지 않습니다.\n재입력해주세요.");
                 continue;
             }
             break;
@@ -69,7 +69,7 @@ public class MemberController extends Controller {
             memberName= sc.nextLine();
 
             if (isJoinableMemberName(memberName)) {
-                System.out.printf("\u001B[31m ▌ %s(은)는 이미 사용중인 활동 이름입니다.\n", memberName);
+                System.out.printf("\u001B[35m ▌ %s(은)는 이미 사용중인 활동 이름입니다.\n", memberName);
                 continue;
             }
             break;
@@ -132,7 +132,7 @@ public class MemberController extends Controller {
         }
         if(isLogined() == true) {
             loginedMember = null;
-            System.out.println("\u001B[38m ▌ 로그아웃 되었습니다.");
+            System.out.println("\u001B[35m ▌ 로그아웃 되었습니다.");
         }
     }
 

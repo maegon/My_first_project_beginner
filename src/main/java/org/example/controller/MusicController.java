@@ -124,16 +124,16 @@ public class MusicController extends Controller {
         System.out.print("   음악 듣기 가이드  ");
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print("위 검색된 음악 목록에서 듣고 싶은 음악의 번호를 입력해주세요.                                                   ");
+        System.out.print("위 검색된 음악 목록에서 듣고 싶은 음악의 번호를 입력해주세요.                                                  ");
         System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print("듣고 싶은 음악이 없으시면 '0' 을 입력해주세요.                                                                  ");
+        System.out.print("듣고 싶은 음악이 없으시면 '0' 을 입력해주세요.                                                                 ");
         System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print("반복 재생을 원하시면 '예' 를 입력해주세요.                                                                      ");
+        System.out.print("반복 재생을 원하시면 '예' 를 입력해주세요.                                                                     ");
         System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print("반복 재생을 원하지 않으시면 '예'를 제외하고 아무거나 입력해주세요.                                              ");
+        System.out.print("반복 재생을 원하지 않으시면 '예'를 제외하고 아무거나 입력해주세요.                                             ");
         System.out.print("\u001B[33m▌ \n");
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
@@ -201,7 +201,7 @@ public class MusicController extends Controller {
         System.out.print("\u001B[33m ▌ \n");
         for (int i = tracks.size()-1; i >= 0; i--) {
             Track track = tracks.get(i);
-            System.out.printf("\u001B[33m ▌ %7d       ░%9d          ░             %s  \n", track.id, track.hit, track.musicTitle);
+            System.out.printf("\u001B[33m ▌ %7d       ░%9d          ░           %s  \n", track.id, track.hit, track.musicTitle);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
