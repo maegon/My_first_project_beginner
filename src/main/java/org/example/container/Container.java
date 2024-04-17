@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.controller.Session;
 import org.example.dao.MemberDao;
+import org.example.service.ArticleService;
 import org.example.service.MemberService;
 
 import java.util.Scanner;
@@ -17,10 +18,12 @@ public class Container {
     public static Session session;
     public static MemberDao memberDao;
     public static MemberService memberService;
+    public static ArticleService articleService;
 
     static {
         memberDao = new MemberDao();
         memberService = new MemberService();
+        articleService = new ArticleService();
     }
 
     public static Scanner getSc() {

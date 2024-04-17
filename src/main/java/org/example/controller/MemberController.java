@@ -33,8 +33,6 @@ public class MemberController extends Controller {
 
     public void doAction(String cmd) {
         this.cmd = cmd;
-
-
         switch (cmd) {
             case "로그인":
                 doLogin();

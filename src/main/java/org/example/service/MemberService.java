@@ -23,8 +23,4 @@ public class MemberService {
         return  memberDao.getMemberIndexByLoginId(loginId);
     }
 
-
-//    public Member getMember(int memberId) {
-//        return memberDao.getMember(memberId);
-//    }
 }

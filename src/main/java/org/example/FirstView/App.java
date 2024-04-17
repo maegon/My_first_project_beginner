@@ -1,7 +1,7 @@
 package org.example.FirstView;
 
 import org.example.container.Container;
-//import org.example.controller.ArticleController;
+import org.example.controller.ArticleController;
 import org.example.controller.Controller;
 import org.example.controller.MemberController;
 //import org.example.controller.MusicController;
@@ -14,7 +14,7 @@ public class App {
 
     public void AppStart() {
         MemberController memberController = new MemberController();
-//        ArticleController articleController = new ArticleController();
+        ArticleController articleController = new ArticleController();
 //        MusicController musicController = new MusicController();
 
         // 메인 로고
@@ -86,7 +86,7 @@ public class App {
             }
 
             else if(cmd.indexOf("글") != -1) {
-//                controller = articleController;
+                controller = articleController;
             }
 
             else if(cmd.indexOf("음악") != -1) {

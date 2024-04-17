@@ -15,6 +15,7 @@ public class Article extends Dto {
         this.hit = hit;
     }
 
+
     public Article(int id, String regDate, String memberName, String title, String body) {
         this(id, regDate, memberName, title, body, 0);
     }
