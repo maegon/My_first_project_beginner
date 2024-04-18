@@ -2,17 +2,16 @@ DROP DATABASE IF EXISTS ljw_beginner_pj_sbs;
 CREATE DATABASE ljw_beginner_pj_sbs;
 USE ljw_beginner_pj_sbs;
 
+
 /*
 CREATE TABLE article(
-	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
 	title CHAR(100) NOT NULL,
 	`body` TEXT NOT NULL,
-	memberId INT(10) UNSIGNED NOT NULL,
-	boardId INT(10) UNSIGNED NOT NULL,
-	hit int(10) unsigned not null,
-	INDEX boardId(`boardId`)
+	memberName CHar(100) NOT NULL,
+	hit int(100) unsigned not null
 );
 
 
@@ -80,39 +79,41 @@ SELECT * FROM articleReply
 
 */
 
+
+
 CREATE TABLE `member`(
-	id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
-	loginId CHAR(100) NOT NULL UNIQUE,
+	loginId CHAR(10) NOT NULL UNIQUE,
 	loginPw CHAR(100) NOT NULL,
-	`memberName` CHAR(100) NOT NULL,
-	`memberEmail` CHAR(100) NOT NULL
+	`memberName` CHAR(10) NOT NULL UNIQUE,
+	adminId CHAR(100) DEFAULT NULL
 );
 
+
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
-`loginId` = 'admin99104sbs',
-`loginPw` = 'admin99104sbsjw',
+loginId = 'admin',
+loginPw = 'admin',
 `memberName` = '관리자',
-`memberEmail` = '99gorhs@gmail.com';
+adminId = 'SBS12341499JW';
 
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
-`loginId` = 'user1',
-`loginPw` = 'user1',
-`memberName` = 'user1',
-`memberEmail` = 'user1@gmail.com';
+loginId = 'user1',
+loginPw = 'user1',
+`memberName` = 'user1';
 
-INSERT INTO `member`
-SET regDate = NOW(),
-updateDate = NOW(),
-`loginId` = 'user2',
-`loginPw` = 'user2',
-`memberName` = 'user2',
-`memberEmail` = 'user2@gmail.com';
+
+/*
+특정 문자를 가진 애들만 출력할때 조건 서식
+(인텔리제이에서는 %%입력)
+where 'type' like concat('%%','?','%%');
+where 'type' like concat('%','?','%');
+*/
 
 SELECT * FROM `member`
 
