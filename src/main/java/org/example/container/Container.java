@@ -8,6 +8,7 @@ import org.example.dao.ArticleDao;
 import org.example.dao.Dao;
 import org.example.dao.MemberDao;
 import org.example.dao.TrackDao;
+import org.example.db.DBConnection;
 import org.example.service.ArticleService;
 import org.example.service.MemberService;
 import org.example.service.TrackService;
@@ -26,6 +27,7 @@ public class Container {
     public static ArticleService articleService;
     public static TrackService trackService;
     public static TrackDao trackDao;
+    public static DBConnection dbConnection;
 
     static {
         memberDao = new MemberDao();
@@ -50,5 +52,13 @@ public class Container {
         }
 
         return session;
+    }
+
+    public static DBConnection getDBConnection() {
+        if ( dbConnection == null ) {
+            dbConnection = new DBConnection();
+        }
+
+        return dbConnection;
     }
 }

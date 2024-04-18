@@ -1,18 +1,33 @@
 package org.example.dao;
 
+import org.example.container.Container;
+import org.example.db.DBConnection;
 import org.example.dto.Article;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ArticleDao extends Dao {
-    public List<Article> articles;
+    private DBConnection dbConnection;
     public ArticleDao() {
-        articles = new ArrayList<>();
+        dbConnection = Container.getDBConnection();
     }
     public void write(Article article) {
-        articles.add(article);
-        lastId = article.id;
+//        articles.add(article);
+//        lastId = article.id;
+        
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("INSERT INTO article "));
+        sb.append(String.format("SET regDate = NOW(), "));
+        sb.append(String.format("updateDate = NOW(), "));
+        sb.append(String.format("title = '%s', ", article.title));
+        sb.append(String.format("`body` = '%s', ", article.body));
+        sb.append(String.format("memberName = %d, ", article.memberName));
+        sb.append(String.format("hit = %d ", article.hit));
+
+        return dbConnection.insert(sb.toString());
     }
 
     public List<Article> getForPrintArticles(String searchKeyword) {
@@ -29,7 +44,32 @@ public class ArticleDao extends Dao {
         }
 
         return articles;
+
+        //        StringBuilder sb = new StringBuilder();
+//
+//        sb.append(String.format("SELECT A.* "));
+//        sb.append(String.format("FROM `article` AS A "));
+//        sb.append(String.format("INNER JOIN `board` AS B "));
+//        sb.append(String.format("ON A.boardId = B.id "));
+//        sb.append(String.format("WHERE B.`code` = '%s' ", boardCode));
+//        if ( searchKeyword.length() > 0 ) {
+//            sb.append(String.format("AND A.title LIKE '%%%s%%' ", searchKeyword));
+//        }
+//        sb.append(String.format("ORDER BY A.id DESC"));
+//
+//        List<Article> articles = new ArrayList<>();
+//        List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
+//
+//        for ( Map<String, Object> row : rows ) {
+//            articles.add(new Article((row)));
+//        }
+//
+//        return articles;
     }
+
+
+
+
 
     public List<Article> getArticles() {
         return null;
