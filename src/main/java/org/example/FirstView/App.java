@@ -4,18 +4,17 @@ import org.example.container.Container;
 import org.example.controller.ArticleController;
 import org.example.controller.Controller;
 import org.example.controller.MemberController;
-//import org.example.controller.MusicController;
+import org.example.controller.MusicController;
 
 public class App {
 
     public App() {
     }
 
-
     public void AppStart() {
         MemberController memberController = new MemberController();
         ArticleController articleController = new ArticleController();
-//        MusicController musicController = new MusicController();
+        MusicController musicController = new MusicController();
 
         // 메인 로고
         System.out.println("\u001B[38m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -58,6 +57,7 @@ public class App {
 
         memberController.makeTestData();
 
+
         //명령어 입력란(맨 마지막 줄에 출력)
         while (true) {
             System.out.println("\u001B[38m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -77,7 +77,7 @@ public class App {
                 if(introMusic != null) {
                     introMusic.close();
                 }
-//                musicController.stopSelectedMusic();
+                musicController.stopSelectedMusic();
                 break;
             }
 
@@ -90,7 +90,7 @@ public class App {
             }
 
             else if(cmd.indexOf("음악") != -1) {
-//                controller = musicController;
+                controller = musicController;
             }
 
             // db에 음악 파일을 그대로 저장하지말고 음악파일이 저장되어있는 경로와 정보들만 저장함.
@@ -103,7 +103,13 @@ public class App {
 
 
             switch ( cmd ) {
-                case "음악목록":
+                case "회원가입":
+                case "로그인":
+                    if (Container.getSession().isLogined() ) {
+                        System.out.println("\u001B[31m ▌ 로그아웃 후 이용해주세요.");
+                        continue;
+                    }
+                    break;
                 case "글작성":
                 case "글삭제":
                 case "글수정":
@@ -114,19 +120,6 @@ public class App {
                         System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
                         continue;
                     }
-                case "음악검색":
-                    if ( Container.getSession().isLogined() == false ) {
-                        System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
-                        continue;
-                    }
-                    introMusic.close();
-                case "회원가입":
-                case "로그인":
-                    if (Container.getSession().isLogined() ) {
-                        System.out.println("\u001B[31m ▌ 로그아웃 후 이용해주세요.");
-                        continue;
-                    }
-                    break;
                 case "음악추가":
                     if ( Container.getSession().isLogined() == false ) {
                         System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
@@ -134,9 +127,19 @@ public class App {
                     }
                     if (Container.getSession().isAdminId() == false) {
                         System.out.println("\u001B[31m ▌ 권한이 없습니다.");
-                        return;
+                        continue;
                     }
                     break;
+                case "음악검색":
+                    if ( introMusic != null) {
+                        introMusic.close();
+                        continue;
+                    }
+                    if ( Container.getSession().isLogined() == false ) {
+                        System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
+                        continue;
+                    }
+                    introMusic.close();
             }
             controller.doAction(cmd);
         }
@@ -146,4 +149,6 @@ public class App {
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("       앱 종료       "); System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
     }
 
+
 }
+

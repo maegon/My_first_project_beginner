@@ -1,6 +1,5 @@
 package org.example.dao;
 
-import org.example.dto.Article;
 import org.example.dto.Track;
 
 import java.util.ArrayList;
@@ -12,10 +11,9 @@ public class TrackDao extends Dao {
         tracks = new ArrayList<>();
     }
 
-    public int importMusic(Track track) {
+    public void importMusic(Track track) {
         tracks.add(track);
         lastId = track.id;
-        return 0;
     }
 
     public List<Track> getForListMusics(String searchKeyword) {

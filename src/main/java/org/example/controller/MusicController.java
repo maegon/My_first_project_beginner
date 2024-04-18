@@ -84,8 +84,6 @@ public class MusicController extends Controller {
 
     // 음악 검색 기능(대문자는 소문자로 자동 변환 되어 검색됨
     public void doSearchMusic() {
-
-
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
         System.out.print("  음악 검색 명령어 가이드  ");
@@ -165,6 +163,7 @@ public class MusicController extends Controller {
                 System.out.printf("\u001B[35m ▌ %d번 음악은 존재하지 않습니다.\n", listenNum);
                 return;
             }
+
             foundTrack.increaseHit();
             listenNum = listenNum - 1;
             System.out.print("\u001B[38m ▌ 반복 재생 여부 : ");
@@ -194,7 +193,7 @@ public class MusicController extends Controller {
 
     public void showMusicList() {
         if (tracks.size() == 0) {
-            System.out.println("\u001B[35m ▌ 음악이 없습니다.");
+            System.out.println("\u001B[35m ▌ 등록된 음악이 없습니다.");
             return;
         }
 
@@ -219,12 +218,6 @@ public class MusicController extends Controller {
         }
     }
 
-    // 타클래스에서 메인 화면 음악을 중지시킬때 호출해서 사용
-//    public void stopMainScreenMusic() {
-//        if(introMusic != null) {
-//            introMusic.close();
-//        }
-//    }
 
 
     // 음악 트랙(정보)에 검색한 id의 음악 트랙과 일치하는게 있는지 확인하는 함수

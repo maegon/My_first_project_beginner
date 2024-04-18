@@ -11,7 +11,7 @@ import org.example.dto.Member;
 // 이 안의 정보는 사용자가 프로그램을 사용 할 때 동안은 계속 유지됨.
 public class Session {
     private Member loginedMember;
-    public String adminId;
+    public String adminId = "SBS12341499JW";
 
 
 
@@ -30,6 +30,6 @@ public class Session {
 
 
     public boolean isAdminId() {
-        return adminId.equals("SBS12341499JW") != true;
+        return adminId.equals("SBS12341499JW") == true;
     }
 }

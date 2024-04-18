@@ -50,10 +50,6 @@ public class ArticleService {
         return articleDao.write(article);
     }
 
-    public void write(Article article) {
-        articleDao.write(article);
-    }
-
     public Article getArticleById(int id) {
         return articleDao.getArticleById(id);
     }

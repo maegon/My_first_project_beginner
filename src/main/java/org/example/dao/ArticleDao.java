@@ -10,10 +10,9 @@ public class ArticleDao extends Dao {
     public ArticleDao() {
         articles = new ArrayList<>();
     }
-    public int write(Article article) {
+    public void write(Article article) {
         articles.add(article);
         lastId = article.id;
-        return 0;
     }
 
     public List<Article> getForPrintArticles(String searchKeyword) {
