@@ -32,5 +32,28 @@ public class TrackDao extends Dao {
 
         return tracks;
     }
+
+    public Track getTrackById(int listenNum) {
+        int index = getTrackIndexById(listenNum);
+
+        if (index != -1) {
+            return tracks.get(index);
+        }
+
+        return null;
     }
+
+    public int getTrackIndexById(int listenNum) {
+        int i = 0;
+
+        for (Track track : tracks) {
+            if (track.id == listenNum) {
+                return i;
+            }
+            i++;
+        }
+
+        return -1;
+    }
+
 }

@@ -108,18 +108,11 @@ public class MusicController extends Controller {
 
         List<Track> forListMusics = trackService.getForListMusics(searchKeyword);
 
-        if (searchKeyword.length() > 0) {
-            forListMusics = new ArrayList<>();
-            for (Track track : tracks) {
-                if (track.importMusicFile.contains(searchKeyword)) {
-                    forListMusics.add(track);
-                }
-            }
-            if (forListMusics.size() == 0) {
-                System.out.println("\u001B[35m ▌ 검색 결과가 존재하지 않습니다.");
-                return;
-            }
+        if (forListMusics.size() == 0) {
+            System.out.println("\u001B[35m ▌ 검색 결과가 존재하지 않습니다.");
+            return;
         }
+
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
         System.out.print("  검색된 음악 목록 ");
@@ -161,24 +154,24 @@ public class MusicController extends Controller {
             int listenNum = sc.nextInt();
             sc.nextLine();
 
+            // 듣고 싶은 음악이 없을때 0번 입력
             if (listenNum == 0) {
                 return;
             }
 
+            Track foundTrack = trackService.getTrackById(listenNum);
 
-            Track foundTrack = getTrackById(listenNum);
             if (foundTrack == null) {
                 System.out.printf("\u001B[35m ▌ %d번 음악은 존재하지 않습니다.\n", listenNum);
                 return;
             }
             foundTrack.increaseHit();
-            listenNum = listenNum-1;
+            listenNum = listenNum - 1;
             System.out.print("\u001B[38m ▌ 반복 재생 여부 : ");
             String loopBooleanCheck = sc.nextLine();
             if (loopBooleanCheck.equals("예")) {
                 loopBoolean = true;
-            }
-            else {
+            } else {
                 loopBoolean = false;
             }
 
@@ -192,11 +185,11 @@ public class MusicController extends Controller {
             selectedMusic.close();
         }
         // 회원은 풀버전으로 듣기
-        selectedMusic = new Music(tracks.get(nowSelected).musicTitle+".mp3", loopBoolean);
+        selectedMusic = new Music(tracks.get(nowSelected).musicTitle + ".mp3", loopBoolean);
         selectedMusic.start();
-        System.out.print("\u001B[36m ▌ "); System.out.printf("현재 재생 음악  ▶  %s \n", tracks.get(nowSelected).musicTitle);
+        System.out.print("\u001B[36m ▌ ");
+        System.out.printf("현재 재생 음악  ▶  %s \n", tracks.get(nowSelected).musicTitle);
     }
-
 
 
     public void showMusicList() {
@@ -212,7 +205,7 @@ public class MusicController extends Controller {
         System.out.print("\u001B[33m ▌ ");
         System.out.print("     번호      ░      조회수      ░             아티스트명 - 제목                                             ");
         System.out.print("\u001B[33m ▌ \n");
-        for (int i = tracks.size()-1; i >= 0; i--) {
+        for (int i = tracks.size() - 1; i >= 0; i--) {
             Track track = tracks.get(i);
             System.out.printf("\u001B[33m ▌ %7d       ░%9d          ░           %s  \n", track.id, track.hit, track.musicTitle);
         }
@@ -221,7 +214,7 @@ public class MusicController extends Controller {
 
     // 타클래스에서 사용자가 선택한 음악을 중지시킬때 호출해서 사용
     public void stopSelectedMusic() {
-        if(selectedMusic != null) {
+        if (selectedMusic != null) {
             selectedMusic.close();
         }
     }
@@ -232,7 +225,6 @@ public class MusicController extends Controller {
 //            introMusic.close();
 //        }
 //    }
-
 
 
     // 음악 트랙(정보)에 검색한 id의 음악 트랙과 일치하는게 있는지 확인하는 함수
