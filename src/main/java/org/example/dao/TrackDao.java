@@ -1,31 +1,49 @@
 package org.example.dao;
 
+import org.example.FirstView.Music;
+import org.example.container.Container;
+import org.example.db.DBConnection;
+import org.example.dto.Article;
 import org.example.dto.Track;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class TrackDao extends Dao {
-    public List<Track> tracks;
+    private DBConnection dbConnection;
     public TrackDao() {
-        tracks = new ArrayList<>();
+        dbConnection = Container.getDBConnection();
     }
 
-    public void importMusic(Track track) {
-        tracks.add(track);
-        lastId = track.id;
+    public int importMusic(Track track) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("INSERT INTO track "));
+        sb.append(String.format("SET regDate = NOW(), "));
+        sb.append(String.format("updateDate = NOW(), "));
+        sb.append(String.format("importMusicFile = '%s', ", track.importMusicFile));
+        sb.append(String.format("musicTitle = '%s', ", track.musicTitle));;
+        sb.append(String.format("hit = %d ", track.hit));
+
+        return dbConnection.insert(sb.toString());
     }
 
-    public List<Track> getForListMusics(String searchKeyword) {
-        if (searchKeyword != null && searchKeyword.length() != 0) {
-            List<Track> forListMusics = new ArrayList<>();
-            for (Track track : tracks) {
-                if (track.musicTitle.contains(searchKeyword)) {
-                    forListMusics.add(track);
-                }
-            }
+    public List<Music> getForListMusics(String searchKeyword) {
+        StringBuilder sb = new StringBuilder();
 
-            return forListMusics;
+        sb.append(String.format("SELECT M.* "));
+        sb.append(String.format("FROM `music` AS M "));
+        if ( searchKeyword.length() > 0 ) {
+            sb.append(String.format("AND M.musicTitle LIKE '%%%s%%' ", searchKeyword));
+        }
+        sb.append(String.format("ORDER BY A.id DESC"));
+
+        List<Music> tracks = new ArrayList<>();
+        List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
+
+        for ( Map<String, Object> row : rows ) {
+            tracks.add(new Article((row)));
         }
 
         return tracks;

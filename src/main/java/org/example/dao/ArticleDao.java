@@ -13,10 +13,8 @@ public class ArticleDao extends Dao {
     public ArticleDao() {
         dbConnection = Container.getDBConnection();
     }
-    public void write(Article article) {
-//        articles.add(article);
-//        lastId = article.id;
-        
+    public int write(Article article) {
+
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("INSERT INTO article "));
@@ -31,40 +29,23 @@ public class ArticleDao extends Dao {
     }
 
     public List<Article> getForPrintArticles(String searchKeyword) {
-        if (searchKeyword != null && searchKeyword.length() != 0) {
-            List<Article> forListArticles = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
 
-            for (Article article : articles) {
-                if (article.title.contains(searchKeyword)) {
-                    forListArticles.add(article);
-                }
-            }
+        sb.append(String.format("SELECT A.* "));
+        sb.append(String.format("FROM `article` AS A "));
+        if ( searchKeyword.length() > 0 ) {
+            sb.append(String.format("AND A.title LIKE '%%%s%%' ", searchKeyword));
+        }
+        sb.append(String.format("ORDER BY A.id DESC"));
 
-            return forListArticles;
+        List<Article> articles = new ArrayList<>();
+        List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
+
+        for ( Map<String, Object> row : rows ) {
+            articles.add(new Article((row)));
         }
 
         return articles;
-
-        //        StringBuilder sb = new StringBuilder();
-//
-//        sb.append(String.format("SELECT A.* "));
-//        sb.append(String.format("FROM `article` AS A "));
-//        sb.append(String.format("INNER JOIN `board` AS B "));
-//        sb.append(String.format("ON A.boardId = B.id "));
-//        sb.append(String.format("WHERE B.`code` = '%s' ", boardCode));
-//        if ( searchKeyword.length() > 0 ) {
-//            sb.append(String.format("AND A.title LIKE '%%%s%%' ", searchKeyword));
-//        }
-//        sb.append(String.format("ORDER BY A.id DESC"));
-//
-//        List<Article> articles = new ArrayList<>();
-//        List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
-//
-//        for ( Map<String, Object> row : rows ) {
-//            articles.add(new Article((row)));
-//        }
-//
-//        return articles;
     }
 
 
@@ -102,25 +83,25 @@ public class ArticleDao extends Dao {
         return -1;
     }
 
-    public void modify(int id, String title, String body) {
-//        StringBuilder sb = new StringBuilder();
-//
-//        sb.append(String.format("UPDATE article "));
-//        sb.append(String.format("SET updateDate = NOW(), "));
-//        sb.append(String.format("title = '%s', ", title));
-//        sb.append(String.format("body = '%s' ", body));
-//        sb.append(String.format("WHERE id = %d ", id));
-//
-//        return dbConnection.update(sb.toString());
+    public int modify(int id, String title, String body) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("UPDATE article "));
+        sb.append(String.format("SET updateDate = NOW(), "));
+        sb.append(String.format("title = '%s', ", title));
+        sb.append(String.format("body = '%s' ", body));
+        sb.append(String.format("WHERE id = %d ", id));
+
+        return dbConnection.update(sb.toString());
     }
 
-    public void delete(int id) {
-//        StringBuilder sb = new StringBuilder();
-//
-//        sb.append(String.format("DELETE FROM article "));
-//        sb.append(String.format("WHERE id = %d ", id));
-//
-//        return dbConnection.delete(sb.toString());
+    public int delete(int id) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("DELETE FROM article "));
+        sb.append(String.format("WHERE id = %d ", id));
+
+        return dbConnection.delete(sb.toString());
     }
 
     public Article getArticle(int id) {
