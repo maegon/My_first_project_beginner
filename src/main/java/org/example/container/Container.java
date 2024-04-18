@@ -7,8 +7,10 @@ import org.example.controller.Session;
 import org.example.dao.ArticleDao;
 import org.example.dao.Dao;
 import org.example.dao.MemberDao;
+import org.example.dao.TrackDao;
 import org.example.service.ArticleService;
 import org.example.service.MemberService;
+import org.example.service.TrackService;
 
 import java.util.Scanner;
 
@@ -22,12 +24,16 @@ public class Container {
     public static ArticleDao articleDao;
     public static MemberService memberService;
     public static ArticleService articleService;
+    public static TrackService trackService;
+    public static TrackDao trackDao;
 
     static {
         memberDao = new MemberDao();
         memberService = new MemberService();
         articleDao = new ArticleDao();
         articleService = new ArticleService();
+        trackDao = new TrackDao();
+        trackService = new TrackService();
     }
 
     public static Scanner getSc() {

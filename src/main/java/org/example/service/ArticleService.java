@@ -3,7 +3,6 @@ package org.example.service;
 import org.example.container.Container;
 import org.example.dao.ArticleDao;
 import org.example.dto.Article;
-import org.example.dto.Board;
 
 import java.util.List;
 

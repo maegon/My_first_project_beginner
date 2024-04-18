@@ -23,6 +23,12 @@ public class Track extends Dto {
         this.musicTitle = musicTitle;
     }
 
+    public Track(int id, String musicTitle, int hit) {
+        this.id = id;
+        this.musicTitle = musicTitle;
+        this.hit = hit;
+    }
+
     public Track(int id, String regDate, String importMusicFile, int hit) {
         this.id = id;
         this.regDate = regDate;
