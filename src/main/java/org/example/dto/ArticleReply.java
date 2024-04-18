@@ -20,4 +20,5 @@ public class ArticleReply extends Dto {
         this.memberId = (int) row.get("memberId");
         this.body = (String) row.get("body");
     }
+
 }

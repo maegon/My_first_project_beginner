@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.container.Container;
+import org.example.dao.ArticleDao;
 import org.example.dto.Article;
 import org.example.dto.Board;
 
@@ -18,12 +19,12 @@ public class ArticleService {
 //        // 댓글
 //    }
 
-    public List<Article> getForPrintArticles(String boardCode, String searchKeyword) {
-        return articleDao.getForPrintArticles(boardCode, searchKeyword);
+    public List<Article> getForPrintArticles(String searchKeyword) {
+        return articleDao.getForPrintArticles(searchKeyword);
     }
 
-    public int write(int memberId, String title, String body) {
-        Article article = new Article(memberId, title, body);
+    public int write(int id, String title, String body) {
+        Article article = new Article(id, title, body);
         return articleDao.write(article);
     }
 
@@ -36,9 +37,6 @@ public class ArticleService {
     }
 
 
-    public Article getForPrintArticle(int id) {
-        return articleDao.getForPrintArticle(id);
-    }
 
     public void modify(int id, String title, String body) {
         articleDao.modify(id, title, body);
@@ -47,6 +45,22 @@ public class ArticleService {
     public void delete(int id) {
         articleDao.delete(id);
     }
+
+    public int write(int id, String regDate, String memberName, String title, String body) {
+        Article article = new Article(id, regDate, memberName, title, body);
+        return articleDao.write(article);
+    }
+
+    public void write(Article article) {
+        articleDao.write(article);
+    }
+
+    public Article getArticleById(int id) {
+        return articleDao.getArticleById(id);
+    }
+
+
+
 //
 //    // 댓글 =======================================
 //
