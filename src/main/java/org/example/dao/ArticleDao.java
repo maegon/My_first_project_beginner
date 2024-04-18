@@ -48,9 +48,21 @@ public class ArticleDao extends Dao {
         return articles;
     }
 
+    public Article getArticle(int id) {
+        StringBuilder sb = new StringBuilder();
 
+        sb.append(String.format("SELECT * "));
+        sb.append(String.format("FROM article "));
+        sb.append(String.format("WHERE id = %d ", id));
 
+        Map<String, Object> row = dbConnection.selectRow(sb.toString());
 
+        if ( row.isEmpty() ) {
+            return null;
+        }
+
+        return new Article(row);
+    }
 
     public List<Article> getArticles() {
         return null;
@@ -60,28 +72,28 @@ public class ArticleDao extends Dao {
 
 
     // 원하는 글 찾을때 번호로 찾음
-    public Article getArticleById(int id) {
-        int index = getArticleIndexById(id);
-
-        if (index != -1) {
-            return articles.get(index);
-        }
-
-        return null;
-    }
-
-    public int getArticleIndexById(int id) {
-        int i = 0;
-
-        for (Article article : articles) {
-            if (article.id == id) {
-                return i;
-            }
-            i++;
-        }
-
-        return -1;
-    }
+//    public Article getArticleById(int id) {
+//        int index = getArticleIndexById(id);
+//
+//        if (index != -1) {
+//            return articles.get(index);
+//        }
+//
+//        return null;
+//    }
+//
+//    public int getArticleIndexById(int id) {
+//        int i = 0;
+//
+//        for (Article article : articles) {
+//            if (article.id == id) {
+//                return i;
+//            }
+//            i++;
+//        }
+//
+//        return -1;
+//    }
 
     public int modify(int id, String title, String body) {
         StringBuilder sb = new StringBuilder();
@@ -104,20 +116,5 @@ public class ArticleDao extends Dao {
         return dbConnection.delete(sb.toString());
     }
 
-    public Article getArticle(int id) {
-//        StringBuilder sb = new StringBuilder();
-//
-//        sb.append(String.format("SELECT * "));
-//        sb.append(String.format("FROM article "));
-//        sb.append(String.format("WHERE id = %d ", id));
-//
-//        Map<String, Object> row = dbConnection.selectRow(sb.toString());
-//
-//        if ( row.isEmpty() ) {
-//            return null;
-//        }
-//
-//        return new Article(row);
-        return null;
-    }
+
 }
