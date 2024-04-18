@@ -121,7 +121,7 @@ public class ArticleController extends Controller {
             sc.nextLine();
             int id = watchNum;
 
-            Article foundArticle = articleService.getArticleById(id);
+            Article foundArticle = articleService.getForPrintArticle(id);
             if (foundArticle == null) {
                 System.out.printf("\u001B[35m ▌ %d번 게시물은 존재하지 않습니다.\n", id);
                 return;
@@ -201,7 +201,7 @@ public class ArticleController extends Controller {
                 return;
             }
 
-            Article foundArticle = articleService.getArticleById(id);
+            Article foundArticle = articleService.getArticle(id);
 
             if (foundArticle == null) {
                 System.out.printf("\u001B[35m ▌ %d번 게시물은 존재하지 않습니다.\n", id);

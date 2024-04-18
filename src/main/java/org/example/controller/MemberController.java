@@ -180,9 +180,18 @@ public class MemberController extends Controller {
     }
 
     private boolean isJoinableLoginId(String loginId) {
-        int index = memberService.getMemberIndexByLoginId(loginId);
+//        int index = memberService.getMemberIndexByLoginId(loginId);
+        Member member = memberService.getMemberByLoginId(loginId);
+//
+//
+//        if (index == -1) {
+//            return true;
+//        }
+//
+//        return false;
+//    }
 
-        if (index == -1) {
+        if ( member == null ) {
             return true;
         }
 

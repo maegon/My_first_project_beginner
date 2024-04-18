@@ -10,6 +10,7 @@ import org.example.dao.MemberDao;
 import org.example.dao.TrackDao;
 import org.example.db.DBConnection;
 import org.example.service.ArticleService;
+import org.example.service.ExportService;
 import org.example.service.MemberService;
 import org.example.service.TrackService;
 
@@ -23,10 +24,11 @@ public class Container {
     public static Session session;
     public static MemberDao memberDao;
     public static ArticleDao articleDao;
+    public static TrackDao trackDao;
     public static MemberService memberService;
     public static ArticleService articleService;
     public static TrackService trackService;
-    public static TrackDao trackDao;
+    public static ExportService exportService;
     public static DBConnection dbConnection;
 
     static {
@@ -36,6 +38,7 @@ public class Container {
         articleService = new ArticleService();
         trackDao = new TrackDao();
         trackService = new TrackService();
+        exportService = new ExportService();
     }
 
     public static Scanner getSc() {

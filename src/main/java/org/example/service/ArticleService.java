@@ -50,10 +50,13 @@ public class ArticleService {
         return articleDao.write(article);
     }
 
-    public Article getArticleById(int id) {
-        return articleDao.getArticleById(id);
-    }
+//    public Article getArticleById(int id) {
+//        return articleDao.getArticleById(id);
+//    }
 
+    public Article getForPrintArticle(int id) {
+        return articleDao.getForPrintArticle(id);
+    }
 
 
 //

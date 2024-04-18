@@ -26,8 +26,12 @@ public class TrackService {
         return trackDao.getForListMusics(searchKeyword);
     }
 
-    public Track getTrackById(int listenNum) {
-        return trackDao.getTrackById(listenNum);
+//    public Track getTrackById(int listenNum) {
+//        return trackDao.getTrackById(listenNum);
+//    }
+
+    public Track getTrack(int id) {
+        return trackDao.getTrack(id);
     }
 
 }
