@@ -1,9 +1,7 @@
 package org.example.dao;
 
-import org.example.FirstView.Music;
 import org.example.container.Container;
 import org.example.db.DBConnection;
-import org.example.dto.Article;
 import org.example.dto.Track;
 
 import java.util.ArrayList;
@@ -29,47 +27,47 @@ public class TrackDao extends Dao {
         return dbConnection.insert(sb.toString());
     }
 
-    public List<Music> getForListMusics(String searchKeyword) {
+    public List<Track> getForListMusics(String searchKeyword) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("SELECT M.* "));
-        sb.append(String.format("FROM `music` AS M "));
+        sb.append(String.format("FROM `Track` AS T "));
         if ( searchKeyword.length() > 0 ) {
-            sb.append(String.format("AND M.musicTitle LIKE '%%%s%%' ", searchKeyword));
+            sb.append(String.format("AND T.musicTitle LIKE '%%%s%%' ", searchKeyword));
         }
         sb.append(String.format("ORDER BY A.id DESC"));
 
-        List<Music> tracks = new ArrayList<>();
+        List<Track> tracks = new ArrayList<>();
         List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
 
         for ( Map<String, Object> row : rows ) {
-            tracks.add(new Article((row)));
+            tracks.add(new Track((row)));
         }
 
         return tracks;
     }
 
-    public Track getTrackById(int listenNum) {
-        int index = getTrackIndexById(listenNum);
+//    public Track getTrackById(int listenNum) {
+//        int index = getTrackIndexById(listenNum);
+//
+//        if (index != -1) {
+//            return tracks.get(index);
+//        }
+//
+//        return null;
+//    }
 
-        if (index != -1) {
-            return tracks.get(index);
-        }
-
-        return null;
-    }
-
-    public int getTrackIndexById(int listenNum) {
-        int i = 0;
-
-        for (Track track : tracks) {
-            if (track.id == listenNum) {
-                return i;
-            }
-            i++;
-        }
-
-        return -1;
-    }
+//    public int getTrackIndexById(int listenNum) {
+//        int i = 0;
+//
+//        for (Track track : tracks) {
+//            if (track.id == listenNum) {
+//                return i;
+//            }
+//            i++;
+//        }
+//
+//        return -1;
+//    }
 
 }

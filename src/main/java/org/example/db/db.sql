@@ -3,28 +3,23 @@ CREATE DATABASE ljw_beginner_pj_sbs;
 USE ljw_beginner_pj_sbs;
 
 
-/*
+/* article */
 CREATE TABLE article(
 	id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
 	title CHAR(100) NOT NULL,
 	`body` TEXT NOT NULL,
-	memberName CHar(100) NOT NULL,
-	hit int(100) unsigned not null
+	memberName CHAR(100) UNIQUE NOT NULL,
+	hit INT(100) UNSIGNED NOT NULL
 );
 
-
-ALTER TABLE article ADD COLUMN hit INT(10) UNSIGNED NOT NULL;
-
-
-insert into article
-set regDate = now(),
-updateDate = now(),
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
 title = '제목1',
 `body` = '내용1',
-memberId = 1,
-boardId = 1,
+memberName = '관리자',
 hit = 45;
 
 
@@ -33,61 +28,79 @@ SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목2',
 `body` = '내용2',
-memberId = 2,
-boardId = 2,
+memberName = 'user1',
 hit = 16;
 
 
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-title = '제목3',
-`body` = '내용3',
-memberId = 3,
-boardId = 2,
-hit = 453;
 
+SELECT * FROM article;
 
-select * from article;
+SELECT * FROM article WHERE 1;
+
 
 
 CREATE TABLE articleReply(
-	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
-	`body` char(100) NOT NULL,
-	memberId INT(10) UNSIGNED NOT NULL,
-	articleId INT(10) UNSIGNED NOT NULL,
+	`body` CHAR(100) NOT NULL,
+	memberName CHAR(100) UNIQUE NOT NULL,
+	articleId INT(100) UNSIGNED NOT NULL,
 	INDEX articleId(`articleId`)
 );
 
 INSERT INTO articleReply
 SET regDate = NOW(),
 updateDate = NOW(),
-`body` = '댓글1',
-memberId = 1,
+`body` = '관리자댓글1',
+memberName = '관리자',
 articleId = 2;
 
 INSERT INTO articleReply
 SET regDate = NOW(),
 updateDate = NOW(),
-`body` = '댓글2',
-memberId = 2,
+`body` = '유저댓글1',
+memberName = 'user1',
 articleId = 1;
 
 SELECT * FROM articleReply
 
-*/
 
-
-
-CREATE TABLE `member`(
-	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+/* track */
+CREATE TABLE track (
+	id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
-	loginId CHAR(10) NOT NULL UNIQUE,
+	importMusicFile CHAR(100) NOT NULL,
+	musicTitle CHAR(100) NOT NULL,
+	hit INT(100) UNSIGNED NOT NULL
+);
+
+
+INSERT INTO track
+SET regDate = NOW(),
+updateDate = NOW(),
+importMusicFile = 'Diamond Eyes - Stay.mp3',
+musicTitle = 'Diamond Eyes - Stay',
+hit = 20;
+
+INSERT INTO track
+SET regDate = NOW(),
+updateDate = NOW(),
+importMusicFile = 'Jim Yosef & Shiah Maisel - Just Getting Started.mp3',
+musicTitle = 'Jim Yosef & Shiah Maisel - Just Getting Started',
+hit = 5;
+
+SELECT * FROM track;
+
+/* member */
+CREATE TABLE `member`(
+	id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	loginId CHAR(100) NOT NULL UNIQUE,
 	loginPw CHAR(100) NOT NULL,
-	`memberName` CHAR(10) NOT NULL UNIQUE,
+	`memberName` CHAR(100) NOT NULL UNIQUE,
 	adminId CHAR(100) DEFAULT NULL
 );
 
@@ -117,31 +130,9 @@ where 'type' like concat('%','?','%');
 
 SELECT * FROM `member`
 
+SELECT * FROM `member` WHERE loginId = 'admin';
+SELECT * FROM `member` WHERE loginId = 'user1';
 
-/*
-Create table board (
-	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	regDate DATETIME NOT NULL,
-	updateDate DATETIME NOT NULL,
-	`code` char(100) not null unique, #free/notice
-	`name` char(100) not null #자유/공지
-);
 
-INSERT INTO `board`
-SET regDate = NOW(),
-updateDate = NOW(),
-`code` = 'notice',
-`name` = '공지';
 
-INSERT INTO `board`
-SET regDate = NOW(),
-updateDate = NOW(),
-`code` = 'free',
-`name` = '자유';
-
-select * from `board`;
-
-SELECT * FROM `article`;
-SELECT * FROM `articleReply`;
-*/
 

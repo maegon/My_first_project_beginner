@@ -5,6 +5,7 @@ import javazoom.jl.player.Player;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Map;
 
 public class Music extends Thread {
     private Player player;
@@ -30,6 +31,7 @@ public class Music extends Thread {
             System.out.println(e.getMessage());
         }
     }
+
 
     public void close() {
         isLoop = false;

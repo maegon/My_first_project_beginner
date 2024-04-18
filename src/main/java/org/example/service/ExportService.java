@@ -28,7 +28,7 @@ public class ExportService {
             String html = "<meta charset=\"UTF-8\">";
             html += "<div>번호 : " + article.id + "</div>";
             html += "<div>날짜 : " + article.regDate + "</div>";
-            html += "<div>작성자 : " + member.name + "</div>";
+            html += "<div>작성자 : " + member.memberName + "</div>";
             html += "<div>제목 : " + article.title + "</div>";
             html += "<div>내용 : " + article.body + "</div>";
             if ( article.id > 1 ) {
