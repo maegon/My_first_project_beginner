@@ -29,13 +29,13 @@ public class MemberDao extends Dao {
     }
 
     // 회원가입시 아이디 중복 여부 체크
-    public boolean isJoinableLoginId(String loginId) {
-        int index = getMemberIndexByLoginId(loginId);
-        if (index != -1) {
-            return true;
-        }
-        return false;
-    }
+//    public boolean isJoinableLoginId(String loginId) {
+//        int index = getMemberIndexByLoginId(loginId);
+//        if (index != -1) {
+//            return true;
+//        }
+//        return false;
+//    }
 
 
     // 로그인 일치 여부 확인

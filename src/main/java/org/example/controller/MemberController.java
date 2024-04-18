@@ -108,7 +108,7 @@ public class MemberController extends Controller {
             System.out.println("\u001B[31m ▌ 아이디가 일치하지 않습니다.");
             return;
         }
-        if (member.LoginPw.equals(loginPw) == false) {
+        if (member.loginPw.equals(loginPw) == false) {
             System.out.println("\u001B[31m ▌ 비밀번호가 일치하지 않습니다.");
             return;
         }
