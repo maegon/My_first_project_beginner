@@ -16,7 +16,8 @@ public class Member extends Dto {
     public String loginPw;
     public String memberName;
 
-    public member(String loginId, String loginPw, String memberName, String adminId) {
+    /*
+    public Member(String loginId, String loginPw, String memberName, String adminId) {
         this.loginId = loginId;
         this.loginPw = loginPw;
         this.memberName = memberName;
@@ -27,6 +28,7 @@ public class Member extends Dto {
     public Member(String loginId, String loginPw, String memberName, String adminId) {
         this(loginId, loginPw, memberName, adminId);
     }
+    */
 
     public Member(Map<String, Object> row) {
         super(row);
