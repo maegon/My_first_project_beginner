@@ -160,7 +160,7 @@ public class ArticleController extends Controller {
 
             System.out.print("\u001B[38m ▌ 댓글 입력 : ");
             String replyBody = sc.nextLine();
-            String loginedMemberName = session.getLoginedMember().getMemberName();
+            String loginedMemberName = session.getLoginedMember().memberName;
 
             articleService.replyWrite(id, loginedMemberName, replyBody);
             System.out.println("\u001B[38m ▌ 댓글이 작성되었습니다.");
@@ -210,7 +210,7 @@ public class ArticleController extends Controller {
 
             Member loginedMember = session.getLoginedMember();
 
-            if ( foundArticle.getMemmberName() != loginedMember.memberName ) {
+            if ( foundArticle.memmberName != loginedMember.memberName ) {
                 System.out.printf("\u001B[31m ▌ 권한이 없습니다.\n");
                 return;
             }
@@ -252,7 +252,7 @@ public class ArticleController extends Controller {
 
             Member loginedMember = session.getLoginedMember();
 
-            if (foundArticle.getMemmberName() != loginedMember.memberName) {
+            if (foundArticle.memmberName != loginedMember.memberName) {
                 System.out.printf("\u001B[31m ▌ 권한이 없습니다.\n");
                 return;
             }
