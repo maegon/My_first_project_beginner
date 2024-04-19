@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.container.Container;
 import org.example.dao.ArticleDao;
 import org.example.dto.Article;
+import org.example.dto.ArticleReply;
 
 import java.util.List;
 
@@ -58,16 +59,17 @@ public class ArticleService {
         return articleDao.getForPrintArticle(id);
     }
 
+    public List<ArticleReply> getForPrintArticleReplies(int articleId) {
+        return articleDao.getForPrintArticleReplies(articleId);
+    }
 
-//
-//    // 댓글 =======================================
-//
-//    public int replyWrite(int articleId, int memberId, String replyBody) {
-//        return articleDao.replyWrite(articleId, memberId, replyBody);
-//    }
-//
-//    public List<ArticleReply> getForPrintArticleReplies(int articleId) {
-//        return articleDao.getForPrintArticleReplies(articleId);
-//    }
+
+
+
+    // 댓글 =======================================
+
+    public int replyWrite(int articleId, String memberName, String replyBody) {
+        return articleDao.replyWrite(articleId, memberName, replyBody);
+    }
 
 }

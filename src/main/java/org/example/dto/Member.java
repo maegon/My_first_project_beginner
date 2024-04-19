@@ -1,6 +1,14 @@
 package org.example.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Map;
+
+@Getter
+@Setter
+@AllArgsConstructor
 
 public class Member extends Dto {
     public String adminId;
@@ -39,4 +47,5 @@ public class Member extends Dto {
         this.loginPw = (String) row.get("loginPw");
         this.memberName = (String) row.get("memberName");
     }
+
 }

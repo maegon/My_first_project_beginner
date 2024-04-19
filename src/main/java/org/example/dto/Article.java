@@ -1,7 +1,13 @@
 package org.example.dto;
 
-import java.util.Map;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Map;
+@Getter
+@Setter
+@AllArgsConstructor
 public class Article extends Dto {
     public String title;
     public String body;

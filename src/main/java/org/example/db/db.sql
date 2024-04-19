@@ -38,7 +38,7 @@ SELECT * FROM article;
 SELECT * FROM article WHERE 1;
 
 
-
+/* 댓글 */
 CREATE TABLE articleReply(
 	id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
@@ -132,7 +132,4 @@ SELECT * FROM `member`
 
 SELECT * FROM `member` WHERE loginId = 'admin';
 SELECT * FROM `member` WHERE loginId = 'user1';
-
-
-
 
