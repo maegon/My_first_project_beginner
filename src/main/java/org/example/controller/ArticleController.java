@@ -6,10 +6,8 @@ import org.example.dto.ArticleReply;
 import org.example.dto.Member;
 import org.example.service.ArticleService;
 import org.example.service.MemberService;
-import org.example.util.Util;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -56,14 +54,13 @@ public class ArticleController extends Controller {
 
     public void doWrite() {
         int id = Container.articleDao.getNewId();
-        String regDate = Util.getNowDateStr();
         System.out.printf("\u001B[38m ▌ 제목 : ");
         String title = sc.nextLine();
         System.out.printf("\u001B[38m ▌ 내용 : ");
         String body = sc.nextLine();
 
         String memberName = session.getLoginedMember().memberName;
-        int newId = articleService.write(id, regDate, memberName, title, body);
+        int newId = articleService.write(id, memberName, title, body);
 
         System.out.printf("\u001B[35m ▌ %d번 게시물이 생성되었습니다.\n", newId);
     }

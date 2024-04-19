@@ -28,10 +28,11 @@ public class Article extends Dto {
         this(id, regDate, memberName, title, body, 0);
     }
 
-    public Article(int id, String title, String body) {
+    public Article(int id, String memberName, String title, String body) {
         this.id = id;
         this.title = title;
         this.body = body;
+        this.memberName = memberName;
     }
 
     public Article(Map<String, Object> row) {
