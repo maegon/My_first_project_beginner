@@ -15,8 +15,8 @@ public class TrackService {
         trackDao = Container.trackDao;
     }
 
-    public int importMusic(int id, String importMusicFile, String musicTitle) {
-        Track track = new Track(id, importMusicFile, musicTitle);
+    public int importMusic(String importMusicFile, String musicTitle) {
+        Track track = new Track(importMusicFile, musicTitle);
         return trackDao.importMusic(track);
 
         //        tracks.add(new Track(id, importMusicFile, musicTitle));

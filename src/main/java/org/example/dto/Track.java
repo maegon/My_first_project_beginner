@@ -15,6 +15,17 @@ public class Track extends Dto {
     public int hit;
     public String startMusic;
 
+    public Track(String importMusicFile, String musicTitle, int hit) {
+        this.importMusicFile = importMusicFile;
+        this.musicTitle = musicTitle;
+        this.hit = hit;
+    }
+
+    public Track(String importMusicFile, String musicTitle) {
+        this(importMusicFile, musicTitle, 0);
+    }
+
+
     public Track(Map<String, Object> row) {
         super(row);
         this.importMusicFile = (String) row.get("importMusicFile");

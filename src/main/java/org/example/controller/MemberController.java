@@ -16,19 +16,29 @@ import java.util.Scanner;
 @Setter
 
 public class MemberController extends Controller {
+    private static List<Member> members;
     private Scanner sc;
     private String cmd;
     private String actionMethodName;
     private MemberService memberService;
     private Session session;
-    private static List<Member> members;
 
 
     public MemberController() {
         this.sc = Container.getSc();
         memberService = Container.memberService;
         session = Container.getSession();
-        members = new ArrayList<>();
+    }
+
+    private static int getMemberIndexByMemberName(String memberName) {
+        int i = 0;
+        for (Member member : members) {
+            if (member.memberName.equals(memberName)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
     }
 
     public void doAction(String cmd) {
@@ -143,14 +153,12 @@ public class MemberController extends Controller {
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
 
-
     private void doLogOut() {
         session.setLoginedMember(null);
 //        musicController.stopMainScreenMusic();
 //        musicController.stopSelectedMusic();
         System.out.println("\u001B[35m ▌ 로그아웃 되었습니다.");
     }
-
 
     // 회원가입시 활동 이름 중복 여부 체크
     private boolean isJoinableMemberName(String memberName) {
@@ -159,17 +167,6 @@ public class MemberController extends Controller {
             return true;
         }
         return false;
-    }
-
-    private static int getMemberIndexByMemberName(String memberName) {
-        int i = 0;
-        for (Member member : members) {
-            if (member.memberName.equals(memberName)) {
-                return i;
-            }
-            i++;
-        }
-        return -1;
     }
 
     private boolean isJoinableLoginId(String loginId) {
@@ -184,7 +181,7 @@ public class MemberController extends Controller {
 //        return false;
 //    }
 
-        if ( member == null ) {
+        if (member == null) {
             return true;
         }
 

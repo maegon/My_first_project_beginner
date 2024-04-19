@@ -60,7 +60,7 @@ public class ArticleController extends Controller {
         String body = sc.nextLine();
 
         String memberName = session.getLoginedMember().memberName;
-        int newId = articleService.write(id, memberName, title, body);
+        int newId = articleService.write(memberName, title, body);
 
         System.out.printf("\u001B[35m ▌ %d번 게시물이 생성되었습니다.\n", newId);
     }

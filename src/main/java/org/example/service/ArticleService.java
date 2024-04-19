@@ -23,8 +23,8 @@ public class ArticleService {
         return articleDao.getForPrintArticles(searchKeyword);
     }
 
-    public int write(int id, String memberName, String title, String body) {
-        Article article = new Article(id, memberName, title, body);
+    public int write(String memberName, String title, String body) {
+        Article article = new Article(memberName, title, body);
         return articleDao.write(article);
     }
 
