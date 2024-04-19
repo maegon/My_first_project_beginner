@@ -99,31 +99,6 @@ public class ArticleDao extends Dao {
 
 
 
-
-    // 원하는 글 찾을때 번호로 찾음
-//    public Article getArticleById(int id) {
-//        int index = getArticleIndexById(id);
-//
-//        if (index != -1) {
-//            return articles.get(index);
-//        }
-//
-//        return null;
-//    }
-//
-//    public int getArticleIndexById(int id) {
-//        int i = 0;
-//
-//        for (Article article : articles) {
-//            if (article.id == id) {
-//                return i;
-//            }
-//            i++;
-//        }
-//
-//        return -1;
-//    }
-
     public int modify(int id, String title, String body) {
         StringBuilder sb = new StringBuilder();
 
@@ -164,14 +139,14 @@ public class ArticleDao extends Dao {
         return new Article(row);
     }
 
-    public List<ArticleReply> getForPrintArticleReplies(int articleId) {
+    public List<ArticleReply> getForPrintArticleReplies(int id) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("SELECT R.* "));
         sb.append(String.format("FROM `articleReply` AS R "));
         sb.append(String.format("INNER JOIN `article` AS A "));
-        sb.append(String.format("ON R.articleId = A.id "));
-        sb.append(String.format("WHERE R.articleId = %d ", articleId));
+        sb.append(String.format("ON R.id = A.id "));
+        sb.append(String.format("WHERE R.id = %d ", id));
         sb.append(String.format("ORDER BY R.id DESC"));
 
         List<ArticleReply> articleReplies = new ArrayList<>();
@@ -185,32 +160,16 @@ public class ArticleDao extends Dao {
     }
 
 
-    /*
-    public int replyWrite(int articleId, String memberName, String replyBody) {
+    public int replyWrite(String memberName, String replyBody) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("INSERT INTO articleReply "));
         sb.append(String.format("SET regDate = NOW(), "));
         sb.append(String.format("updateDate = NOW(), "));
         sb.append(String.format("`body` = '%s', ", replyBody));
-        sb.append(String.format("memberName = %s, ", memberName));
-        sb.append(String.format("articleId = %d ", articleId));
+        sb.append(String.format("memberName = '%s'", memberName));
 
         return dbConnection.insert(sb.toString());
     }
 
-    */
-
-    public int replyWrite(int articleId, String memberName, String replyBody) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(String.format("INSERT INTO articleReply "));
-        sb.append(String.format("SET regDate = NOW(), "));
-        sb.append(String.format("updateDate = NOW(), "));
-        sb.append(String.format("`body` = '%s', ", replyBody));
-        sb.append(String.format("memberName = %s, ", memberName));
-        sb.append(String.format("articleId = %d ", articleId));
-
-        return dbConnection.insert(sb.toString());
-    }
 }

@@ -168,7 +168,7 @@ public class ArticleController extends Controller {
         String replyBody = sc.nextLine();
         String loginedMemberName = session.getLoginedMember().memberName;
 
-        articleService.replyWrite(id, loginedMemberName, replyBody);
+        articleService.replyWrite(loginedMemberName, replyBody);
         System.out.println("\u001B[35m ▌ 댓글이 작성되었습니다.");
 
         articleRepliesShowList(id);
@@ -176,18 +176,18 @@ public class ArticleController extends Controller {
     }
 
     // db연결때 댓글 기능 구현
-    private void articleRepliesShowList(int articleId) {
-        List<ArticleReply> forPrintArticleReplies = articleService.getForPrintArticleReplies(articleId);
+    private void articleRepliesShowList(int id) {
+        List<ArticleReply> forPrintArticleReplies = articleService.getForPrintArticleReplies(id);
 
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
-        System.out.printf("    %d번 글 댓글    ", articleId);
+        System.out.printf("    %d번 글 댓글    ", id);
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
 
         System.out.print(" 번호  ░  작성자  ░     제목                                                                                ");
         for (int i = forPrintArticleReplies.size() - 1; i >= 0; i--) {
             ArticleReply reply = forPrintArticleReplies.get(i);
-            Member replyMember = memberService.getMember(reply.memberId);
+            Member replyMember = memberService.getMember(reply.memberName);
             System.out.printf("\u001B[33m ▌     %d    ░    %s    ░    %s      ", reply.id, replyMember.memberName, reply.body);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");

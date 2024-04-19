@@ -61,8 +61,8 @@ public class ArticleService {
         return articleDao.getForPrintArticle(id);
     }
 
-    public List<ArticleReply> getForPrintArticleReplies(int articleId) {
-        return articleDao.getForPrintArticleReplies(articleId);
+    public List<ArticleReply> getForPrintArticleReplies(int id) {
+        return articleDao.getForPrintArticleReplies(id);
     }
 
 
@@ -70,8 +70,8 @@ public class ArticleService {
 
     // 댓글 =======================================
 
-    public int replyWrite(int articleId, String memberName, String replyBody) {
-        return articleDao.replyWrite(articleId, memberName, replyBody);
+    public int replyWrite(String memberName, String replyBody) {
+        return articleDao.replyWrite(memberName, replyBody);
     }
 
 }
