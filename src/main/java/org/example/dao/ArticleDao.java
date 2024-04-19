@@ -167,6 +167,23 @@ public class ArticleDao extends Dao {
         return articleReplies;
     }
 
+
+    /*
+    public int replyWrite(int articleId, String memberName, String replyBody) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("INSERT INTO articleReply "));
+        sb.append(String.format("SET regDate = NOW(), "));
+        sb.append(String.format("updateDate = NOW(), "));
+        sb.append(String.format("`body` = '%s', ", replyBody));
+        sb.append(String.format("memberName = %s, ", memberName));
+        sb.append(String.format("articleId = %d ", articleId));
+
+        return dbConnection.insert(sb.toString());
+    }
+
+    */
+
     public int replyWrite(int articleId, String memberName, String replyBody) {
         StringBuilder sb = new StringBuilder();
 

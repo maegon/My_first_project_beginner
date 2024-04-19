@@ -8,7 +8,6 @@ import java.util.Map;
 
 @Getter
 @Setter
-@AllArgsConstructor
 
 public class Member extends Dto {
     public String adminId;
@@ -36,6 +35,13 @@ public class Member extends Dto {
         this.loginPw = (String) row.get("loginPw");
         this.memberName = (String) row.get("memberName");
         this.adminId = (String) row.get("adminId");
+    }
+
+    public Member(String loginId, String loginPw, String memberName, String adminId) {
+        this.loginId = loginId;
+        this.loginPw = loginPw;
+        this.memberName = memberName;
+        this.adminId = adminId;
     }
 
 }

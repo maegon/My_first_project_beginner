@@ -22,7 +22,7 @@ public class ExportService {
         List<Article> articles = articleService.getArticles();
 
         for ( Article article : articles ) {
-            Member member = memberService.getMember(article.memberName);
+            Member member = memberService.getMember(article.id);
 
             String fileName = article.id + ".html";
             String html = "<meta charset=\"UTF-8\">";

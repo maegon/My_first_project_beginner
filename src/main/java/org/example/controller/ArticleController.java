@@ -85,7 +85,8 @@ public class ArticleController extends Controller {
         System.out.print("\u001B[33m ▌ \n");
         for (int i = forPrintArticles.size() - 1; i >= 0; i--) {
             Article article = forPrintArticles.get(i);
-            System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", article.id, article.getMemmberName(), article.hit, article.title);
+            Member member = memberService.getMember(article.memberId);
+            System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", article.id, member.memberName, article.hit, article.title);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
@@ -104,7 +105,8 @@ public class ArticleController extends Controller {
         System.out.print("\u001B[33m ▌ \n");
         for (int i = articles.size() - 1; i >= 0; i--) {
             Article article = articles.get(i);
-            System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", article.id, article.getMemmberName(), article.hit, article.title);
+            Member member = memberService.getMember(article.memberId);
+            System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", article.id, member.memberName, article.hit, article.title);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
@@ -124,13 +126,14 @@ public class ArticleController extends Controller {
                 return;
             }
             foundArticle.increaseHit();
+            Member member = memberService.getMember(foundArticle.memberId);
             System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
             System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
             System.out.print("    현재 글 정보    ");
             System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
             System.out.printf("\u001B[33m ▌ 번호 : %d\n", foundArticle.id);
             System.out.printf("\u001B[33m ▌ 날짜 : %s\n", foundArticle.regDate);
-            System.out.printf("\u001B[33m ▌ 작성자 : %s\n", foundArticle.getMemmberName());
+            System.out.printf("\u001B[33m ▌ 작성자 : %s\n", member.memberName);
             System.out.printf("\u001B[33m ▌ 조회수 : %d\n", foundArticle.hit);
             System.out.printf("\u001B[33m ▌ 제목 : %s\n", foundArticle.title);
             System.out.printf("\u001B[33m ▌ 내용 : %s\n", foundArticle.body);
