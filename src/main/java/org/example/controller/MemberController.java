@@ -53,49 +53,47 @@ public class MemberController extends Controller {
     }
 
     public void doJoin() {
-//        try {
-            int id = Container.memberDao.getNewId();
-            String loginId = null;
-            while (true) {
-                System.out.print("\u001B[38m ▌ 아이디 : ");
-                loginId = sc.nextLine();
+        int id = Container.memberDao.getNewId();
+        String loginId = null;
+        while (true) {
+            System.out.print("\u001B[38m ▌ 아이디 : ");
+            loginId = sc.nextLine();
 
-                if (isJoinableLoginId(loginId) == false) {
-                    System.out.printf("\u001B[35m ▌ %s(은)는 이미 사용중인 아이디입니다.\n", loginId);
-                    continue;
-                }
-                break;
+            if (isJoinableLoginId(loginId) == false) {
+                System.out.printf("\u001B[35m ▌ %s(은)는 이미 사용중인 아이디입니다.\n", loginId);
+                continue;
             }
-            String loginPw = null;
-            String loginPwConfirm = null;
-            while (true) {
-                System.out.print("\u001B[38m ▌ 패스워드 : ");
-                loginPw = sc.nextLine();
-                System.out.print("\u001B[38m ▌ 패스워드 확인 : ");
-                loginPwConfirm = sc.nextLine();
-                if (loginPw.equals(loginPwConfirm) == false) {
-                    System.out.println("\u001B[35m ▌ 비밀번호가 일치하지 않습니다.\n재입력해주세요.");
-                    continue;
-                }
-                break;
+            break;
+        }
+        String loginPw = null;
+        String loginPwConfirm = null;
+        while (true) {
+            System.out.print("\u001B[38m ▌ 패스워드 : ");
+            loginPw = sc.nextLine();
+            System.out.print("\u001B[38m ▌ 패스워드 확인 : ");
+            loginPwConfirm = sc.nextLine();
+            if (loginPw.equals(loginPwConfirm) == false) {
+                System.out.println("\u001B[35m ▌ 비밀번호가 일치하지 않습니다.\n재입력해주세요.");
+                continue;
             }
-            String memberName = null;
-            while (true) {
-                System.out.print("\u001B[38m ▌ 활동 이름 : ");
-                memberName = sc.nextLine();
+            break;
+        }
+        String memberName = null;
+        while (true) {
+            System.out.print("\u001B[38m ▌ 활동 이름 : ");
+            memberName = sc.nextLine();
 
-                if (isJoinableMemberName(memberName) == false) {
-                    System.out.printf("\u001B[35m ▌ %s(은)는 이미 사용중인 활동 이름입니다.\n", memberName);
-                    continue;
-                }
-                break;
+            if (isJoinableMemberName(memberName) == false) {
+                System.out.printf("\u001B[35m ▌ %s(은)는 이미 사용중인 활동 이름입니다.\n", memberName);
+                continue;
             }
+            break;
+        }
 
-            String adminId = null;
+        String adminId = "null";
 
-            memberService.join(loginId, loginPw, memberName, adminId);
-            System.out.printf("\u001B[35m ▌ 회원가입이 완료되었습니다.\n\u001B[35m ▌ %s님 환영합니다.\n", memberName);
-//        }
+        memberService.join(loginId, loginPw, memberName, adminId);
+        System.out.printf("\u001B[35m ▌ 회원가입이 완료되었습니다.\n\u001B[35m ▌ %s님 환영합니다.\n", memberName);
 
     }
 
