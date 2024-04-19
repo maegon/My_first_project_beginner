@@ -32,7 +32,7 @@ public class TrackDao extends Dao {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("SELECT M.* "));
-        sb.append(String.format("FROM `Track` AS T "));
+        sb.append(String.format("FROM `track` AS T "));
         if ( searchKeyword.length() > 0 ) {
             sb.append(String.format("AND T.musicTitle LIKE '%%%s%%' ", searchKeyword));
         }
