@@ -30,3 +30,4 @@ public class Dto {
         this.regDate = regDate;
     }
 }
+
