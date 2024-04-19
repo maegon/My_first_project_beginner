@@ -157,7 +157,7 @@ public class MusicController extends Controller {
                 return;
             }
 
-            Track foundTrack = trackService.getTrackById(listenNum);
+            Track foundTrack = trackService.getTrack(listenNum);
 
             if (foundTrack == null) {
                 System.out.printf("\u001B[35m ▌ %d번 음악은 존재하지 않습니다.\n", listenNum);
