@@ -11,10 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Getter
-@Setter
-@AllArgsConstructor
-
 public class DBConnection {
     private Connection connection;
     public static String DB_NAME;

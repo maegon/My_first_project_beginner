@@ -5,10 +5,17 @@ import org.example.controller.ArticleController;
 import org.example.controller.Controller;
 import org.example.controller.MemberController;
 import org.example.controller.MusicController;
+import org.example.db.DBConnection;
 
 public class App {
 
     public App() {
+        DBConnection.DB_NAME = "sbs_proj";
+        DBConnection.DB_USER = "sbsst";
+        DBConnection.DB_PASSWORD = "sbs123414";
+        DBConnection.DB_PORT = 3306;
+
+        Container.getDBConnection().connect();
     }
 
     public void AppStart() {
@@ -53,9 +60,6 @@ public class App {
         System.out.print("\u001B[33m ▌ "); System.out.print("계정이 없다면 명령어 입력 란에 [회원가입]을 입력하여 계정을 생성해주세요.                                      "); System.out.print("\u001B[33m▌ \n");
         System.out.print("\u001B[33m ▌ "); System.out.print("계정이 있으면 명령어 입력 란에 [로그인]을 입력하여 로그인을 해주세요.                                          "); System.out.print("\u001B[33m▌ \n");
         System.out.println("\u001B[33m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-
-
-        memberController.makeTestData();
 
 
         //명령어 입력란(맨 마지막 줄에 출력)
