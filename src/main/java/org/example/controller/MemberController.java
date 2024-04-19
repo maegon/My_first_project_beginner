@@ -5,10 +5,6 @@ import lombok.Setter;
 import org.example.container.Container;
 import org.example.dto.Member;
 import org.example.service.MemberService;
-import org.example.util.Util;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -16,10 +12,8 @@ import java.util.Scanner;
 @Setter
 
 public class MemberController extends Controller {
-    private static List<Member> members;
     private Scanner sc;
     private String cmd;
-    private String actionMethodName;
     private MemberService memberService;
     private Session session;
 
@@ -30,16 +24,16 @@ public class MemberController extends Controller {
         session = Container.getSession();
     }
 
-    private static int getMemberIndexByMemberName(String memberName) {
-        int i = 0;
-        for (Member member : members) {
-            if (member.memberName.equals(memberName)) {
-                return i;
-            }
-            i++;
-        }
-        return -1;
-    }
+//    private static int getMemberIndexByMemberName(String memberName) {
+//        int i = 0;
+//        for (Member member : members) {
+//            if (member.memberName.equals(memberName)) {
+//                return i;
+//            }
+//            i++;
+//        }
+//        return -1;
+//    }
 
     public void doAction(String cmd) {
         this.cmd = cmd;
@@ -82,18 +76,19 @@ public class MemberController extends Controller {
             }
             break;
         }
-        String adminId = null;
         String memberName = null;
         while (true) {
             System.out.print("\u001B[38m ▌ 활동 이름 : ");
             memberName = sc.nextLine();
 
-            if (isJoinableMemberName(memberName)) {
+            if (isJoinableMemberName(memberName) == false) {
                 System.out.printf("\u001B[35m ▌ %s(은)는 이미 사용중인 활동 이름입니다.\n", memberName);
                 continue;
             }
             break;
         }
+
+        String adminId = null;
 
         memberService.join(loginId, loginPw, memberName, adminId);
         System.out.printf("\u001B[35m ▌ 회원가입이 완료되었습니다.\n\u001B[35m ▌ %s님 환영합니다.\n", memberName);
@@ -161,30 +156,27 @@ public class MemberController extends Controller {
     }
 
     // 회원가입시 활동 이름 중복 여부 체크
-    private boolean isJoinableMemberName(String memberName) {
-        int index = getMemberIndexByMemberName(memberName);
-        if (index != -1) {
+//    private boolean isJoinableMemberName(String memberName) {
+//        int index = getMemberIndexByMemberName(memberName);
+//        if (index != -1) {
+//            return true;
+//        }
+//        return false;
+//    }
+
+    private boolean isJoinableLoginId(String loginId) {
+        Member member = memberService.getMemberByLoginId(loginId);
+        if (member == null) {
             return true;
         }
         return false;
     }
 
-    private boolean isJoinableLoginId(String loginId) {
-//        int index = memberService.getMemberIndexByLoginId(loginId);
-        Member member = memberService.getMemberByLoginId(loginId);
-//
-//
-//        if (index == -1) {
-//            return true;
-//        }
-//
-//        return false;
-//    }
-
+    private boolean isJoinableMemberName(String memberName) {
+        Member member = memberService.isJoinableMemberName(memberName);
         if (member == null) {
             return true;
         }
-
         return false;
     }
 

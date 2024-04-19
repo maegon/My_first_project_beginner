@@ -78,7 +78,7 @@ public class MusicController extends Controller {
         int newId = trackService.importMusic(importMusicFile, musicTitle);
 
 //        tracks.add(new Track(id, importMusicFile, musicTitle));
-        System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", id);
+        System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", newId);
     }
 
 

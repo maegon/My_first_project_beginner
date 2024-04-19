@@ -32,4 +32,7 @@ public class MemberService {
         return memberDao.getMember(id);
     }
 
+    public Member isJoinableMemberName(String memberName) {
+        return memberDao.isJoinableMemberName(memberName);
+    }
 }
