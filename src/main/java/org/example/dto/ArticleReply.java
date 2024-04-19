@@ -15,7 +15,7 @@ public class ArticleReply extends Dto {
     public String body;
 
     public ArticleReply(Map<String, Object> row) {
-//        super(row);
+        super(row);
         this.articleId = (int) row.get("id");
         this.memberId = (int) row.get("memberId");
         this.body = (String) row.get("body");

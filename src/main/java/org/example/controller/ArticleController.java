@@ -85,7 +85,7 @@ public class ArticleController extends Controller {
         System.out.print("\u001B[33m ▌ \n");
         for (int i = forPrintArticles.size() - 1; i >= 0; i--) {
             Article article = forPrintArticles.get(i);
-            System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", article.id, article.memberName, article.hit, article.title);
+            System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", article.id, article.getMemmberName(), article.hit, article.title);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
@@ -104,7 +104,7 @@ public class ArticleController extends Controller {
         System.out.print("\u001B[33m ▌ \n");
         for (int i = articles.size() - 1; i >= 0; i--) {
             Article article = articles.get(i);
-            System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", article.id, article.memberName, article.hit, article.title);
+            System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", article.id, article.getMemmberName(), article.hit, article.title);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
@@ -130,7 +130,7 @@ public class ArticleController extends Controller {
             System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
             System.out.printf("\u001B[33m ▌ 번호 : %d\n", foundArticle.id);
             System.out.printf("\u001B[33m ▌ 날짜 : %s\n", foundArticle.regDate);
-            System.out.printf("\u001B[33m ▌ 작성자 : %s\n", foundArticle.memberName);
+            System.out.printf("\u001B[33m ▌ 작성자 : %s\n", foundArticle.getMemmberName());
             System.out.printf("\u001B[33m ▌ 조회수 : %d\n", foundArticle.hit);
             System.out.printf("\u001B[33m ▌ 제목 : %s\n", foundArticle.title);
             System.out.printf("\u001B[33m ▌ 내용 : %s\n", foundArticle.body);
@@ -207,7 +207,7 @@ public class ArticleController extends Controller {
 
             Member loginedMember = session.getLoginedMember();
 
-            if ( foundArticle.memberName != loginedMember.memberName ) {
+            if ( foundArticle.getMemmberName() != loginedMember.memberName ) {
                 System.out.printf("\u001B[31m ▌ 권한이 없습니다.\n");
                 return;
             }
@@ -249,7 +249,7 @@ public class ArticleController extends Controller {
 
             Member loginedMember = session.getLoginedMember();
 
-            if (foundArticle.memberName != loginedMember.memberName) {
+            if (foundArticle.getMemmberName() != loginedMember.memberName) {
                 System.out.printf("\u001B[31m ▌ 권한이 없습니다.\n");
                 return;
             }

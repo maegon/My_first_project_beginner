@@ -46,11 +46,6 @@ public class MemberController extends Controller {
         }
     }
 
-
-    public void makeTestData() {
-        memberService.join(new Member(Container.memberDao.getNewId(), "admin", "admin", "관리자","SBS12341499JW"));
-    }
-
     public void doJoin() {
         int id = Container.memberDao.getNewId();
         String loginId = null;
@@ -77,7 +72,7 @@ public class MemberController extends Controller {
             }
             break;
         }
-
+        String adminId = null;
         String memberName = null;
         while (true) {
             System.out.print("\u001B[38m ▌ 활동 이름 : ");
@@ -90,9 +85,7 @@ public class MemberController extends Controller {
             break;
         }
 
-        // 회원가입 완료시 저장 및 출력
-        Member member = new Member(id, loginId, loginPw, memberName);
-        memberService.join(member);
+        memberService.join(loginId, loginPw, memberName, adminId);
         System.out.printf("\u001B[35m ▌ 회원가입이 완료되었습니다.\n\u001B[35m ▌ %s님 환영합니다.\n", memberName);
     }
 

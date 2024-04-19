@@ -28,6 +28,8 @@ public class ArticleService {
         return articleDao.write(article);
     }
 
+
+
     public List<Article> getArticles() {
         return articleDao.getArticles();
     }
@@ -46,10 +48,6 @@ public class ArticleService {
         articleDao.delete(id);
     }
 
-    public int write(int id, String regDate, String memberName, String title, String body) {
-        Article article = new Article(id, regDate, memberName, title, body);
-        return articleDao.write(article);
-    }
 
 //    public Article getArticleById(int id) {
 //        return articleDao.getArticleById(id);
