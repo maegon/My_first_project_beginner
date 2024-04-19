@@ -124,6 +124,7 @@ public class App {
                         System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
                         continue;
                     }
+                    break;
                 case "음악추가":
                     if ( Container.getSession().isLogined() == false ) {
                         System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
@@ -143,7 +144,7 @@ public class App {
                         System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
                         continue;
                     }
-                    introMusic.close();
+                    break;
             }
             controller.doAction(cmd);
         }

@@ -12,7 +12,6 @@ public class Article extends Dto {
     public String title;
     public String body;
     public int hit;
-    public int memberId;
     public String memmberName;
 
     public Article(String memmberName, String title, String body, int hit) {

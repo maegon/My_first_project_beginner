@@ -23,6 +23,10 @@ public class ArticleService {
         return articleDao.getForPrintArticles(searchKeyword);
     }
 
+    public List<Article> getForPrintArticles() {
+        return articleDao.getForPrintArticles();
+    }
+
     public int write(String memberName, String title, String body) {
         Article article = new Article(memberName, title, body);
         return articleDao.write(article);

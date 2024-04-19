@@ -34,9 +34,9 @@ public class TrackDao extends Dao {
         sb.append(String.format("SELECT T.* "));
         sb.append(String.format("FROM `track` AS T "));
         if ( searchKeyword.length() > 0 ) {
-            sb.append(String.format("AND T.musicTitle LIKE '%%%s%%' ", searchKeyword));
+            sb.append(String.format("WHERE T.musicTitle LIKE '%%%s%%' ", searchKeyword));
         }
-        sb.append(String.format("ORDER BY T.id DESC"));
+        sb.append(String.format("ORDER BY T.id DESC "));
 
         List<Track> tracks = new ArrayList<>();
         List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());

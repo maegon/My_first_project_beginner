@@ -4,6 +4,7 @@ import org.example.container.Container;
 import org.example.dto.Article;
 import org.example.dto.ArticleReply;
 import org.example.dto.Member;
+import org.example.dto.Track;
 import org.example.service.ArticleService;
 import org.example.service.MemberService;
 
@@ -23,6 +24,7 @@ public class ArticleController extends Controller {
         articles = new ArrayList<>();
         this.sc = Container.getSc();
         articleService = Container.articleService;
+        memberService = Container.memberService;
         session = Container.getSession();
     }
 
@@ -46,6 +48,9 @@ public class ArticleController extends Controller {
                 break;
             case "글검색":
                 doSearch();
+                break;
+            default:
+                System.out.println("\u001B[31m ▌ 존재하지 않는 명령어 입니다.");
                 break;
         }
     }
@@ -83,9 +88,9 @@ public class ArticleController extends Controller {
         System.out.print("\u001B[33m ▌ ");
         System.out.print(" 번호  ░  작성자  ░  조회수  ░  제목                                                                           ");
         System.out.print("\u001B[33m ▌ \n");
-        for (int i = forPrintArticles.size() - 1; i >= 0; i--) {
+        for (int i = forPrintArticles.size()-1; i >= 0; i--) {
             Article article = forPrintArticles.get(i);
-            Member member = memberService.getMember(article.memberId);
+            Member member = memberService.getMember(article.id);
             System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", article.id, member.memberName, article.hit, article.title);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -96,6 +101,8 @@ public class ArticleController extends Controller {
             System.out.println("\u001B[35m ▌ 등록된 글이 없습니다.");
             return;
         }
+        List<Article> forPrintArticles = articleService.getForPrintArticles();
+
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
         System.out.print("  글 목록  ");
@@ -103,9 +110,9 @@ public class ArticleController extends Controller {
         System.out.print("\u001B[33m ▌ ");
         System.out.print(" 번호  ░  작성자  ░  조회수  ░  제목                                                                           ");
         System.out.print("\u001B[33m ▌ \n");
-        for (int i = articles.size() - 1; i >= 0; i--) {
-            Article article = articles.get(i);
-            Member member = memberService.getMember(article.memberId);
+        for (int i = forPrintArticles.size() - 1; i >= 0; i--) {
+            Article article = forPrintArticles.get(i);
+            Member member = memberService.getMember(article.id);
             System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", article.id, member.memberName, article.hit, article.title);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -126,7 +133,7 @@ public class ArticleController extends Controller {
                 return;
             }
             foundArticle.increaseHit();
-            Member member = memberService.getMember(foundArticle.memberId);
+            Member member = memberService.getMember(foundArticle.id);
             System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
             System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
             System.out.print("    현재 글 정보    ");

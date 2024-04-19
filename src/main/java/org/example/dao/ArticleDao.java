@@ -35,8 +35,25 @@ public class ArticleDao extends Dao {
         sb.append(String.format("SELECT A.* "));
         sb.append(String.format("FROM `article` AS A "));
         if ( searchKeyword.length() > 0 ) {
-            sb.append(String.format("AND A.title LIKE '%%%s%%' ", searchKeyword));
+            sb.append(String.format("WHERE A.title LIKE '%%%s%%' ", searchKeyword));
         }
+        sb.append(String.format("ORDER BY A.id DESC"));
+
+        List<Article> articles = new ArrayList<>();
+        List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
+
+        for ( Map<String, Object> row : rows ) {
+            articles.add(new Article((row)));
+        }
+
+        return articles;
+    }
+
+    public List<Article> getForPrintArticles() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("SELECT A.* "));
+        sb.append(String.format("FROM `article` AS A "));
         sb.append(String.format("ORDER BY A.id DESC"));
 
         List<Article> articles = new ArrayList<>();

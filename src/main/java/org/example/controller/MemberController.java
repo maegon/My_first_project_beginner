@@ -49,6 +49,9 @@ public class MemberController extends Controller {
             case "회원가입":
                 doJoin();
                 break;
+            default:
+                System.out.println("\u001B[31m ▌ 존재하지 않는 명령어 입니다.");
+                break;
         }
     }
 

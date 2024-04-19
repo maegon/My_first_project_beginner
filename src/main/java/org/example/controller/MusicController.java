@@ -49,6 +49,9 @@ public class MusicController extends Controller {
             case "음악검색":
                 doSearchMusic();
                 break;
+            default:
+                System.out.println("\u001B[31m ▌ 존재하지 않는 명령어 입니다.");
+                break;
         }
     }
 
@@ -82,7 +85,7 @@ public class MusicController extends Controller {
     }
 
 
-    // 음악 검색 기능(대문자는 소문자로 자동 변환 되어 검색됨
+    // 음악 검색 기능(대문자는 소문자로 자동 변환 되어 검색되도록 db연결 다 되고 다 작동 잘되면 그때 구현)
     public void doSearchMusic() {
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
