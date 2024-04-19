@@ -10,8 +10,7 @@ CREATE TABLE article(
 	updateDate DATETIME NOT NULL,
 	title CHAR(100) NOT NULL,
 	`body` TEXT NOT NULL,
-	memberName CHAR(100) UNIQUE NOT NULL,
-	hit INT(100) UNSIGNED NOT NULL
+	memberName CHAR(100) UNIQUE NOT NULL
 );
 
 INSERT INTO article
@@ -19,8 +18,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목1',
 `body` = '내용1',
-memberName = '관리자',
-hit = 45;
+memberName = '관리자';
 
 
 INSERT INTO article
@@ -28,8 +26,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목2',
 `body` = '내용2',
-memberName = 'user1',
-hit = 16;
+memberName = 'user1';
 
 
 
@@ -44,24 +41,20 @@ CREATE TABLE articleReply(
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
 	`body` CHAR(100) NOT NULL,
-	memberName CHAR(100) UNIQUE NOT NULL,
-	articleId INT(100) UNSIGNED NOT NULL,
-	INDEX articleId(`articleId`)
+	memberName CHAR(100) UNIQUE NOT NULL
 );
 
 INSERT INTO articleReply
 SET regDate = NOW(),
 updateDate = NOW(),
 `body` = '관리자댓글1',
-memberName = '관리자',
-articleId = 2;
+memberName = '관리자';
 
 INSERT INTO articleReply
 SET regDate = NOW(),
 updateDate = NOW(),
 `body` = '유저댓글1',
-memberName = 'user1',
-articleId = 1;
+memberName = 'user1';
 
 SELECT * FROM articleReply
 
@@ -101,7 +94,7 @@ CREATE TABLE `member`(
 	loginId CHAR(100) NOT NULL UNIQUE,
 	loginPw CHAR(100) NOT NULL,
 	`memberName` CHAR(100) NOT NULL UNIQUE,
-	adminId CHAR(100) DEFAULT NULL
+	adminId CHAR(100) DEFAULT 'null'
 );
 
 

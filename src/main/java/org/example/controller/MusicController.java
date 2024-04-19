@@ -192,10 +192,14 @@ public class MusicController extends Controller {
 
 
     public void showMusicList() {
-        if (tracks.size() == 0) {
+
+        List<Track> forAllListMusic = trackService.getForAllListMusic();
+
+        if (forAllListMusic.size() == 0) {
             System.out.println("\u001B[35m ▌ 등록된 음악이 없습니다.");
             return;
         }
+
 
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
@@ -204,8 +208,8 @@ public class MusicController extends Controller {
         System.out.print("\u001B[33m ▌ ");
         System.out.print("     번호      ░      조회수      ░             아티스트명 - 제목                                             ");
         System.out.print("\u001B[33m ▌ \n");
-        for (int i = tracks.size() - 1; i >= 0; i--) {
-            Track track = tracks.get(i);
+        for (int i = forAllListMusic.size() - 1; i >= 0; i--) {
+            Track track = forAllListMusic.get(i);
             System.out.printf("\u001B[33m ▌ %7d       ░%9d          ░           %s  \n", track.id, track.hit, track.musicTitle);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");

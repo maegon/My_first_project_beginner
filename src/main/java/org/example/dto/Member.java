@@ -15,20 +15,6 @@ public class Member extends Dto {
     public String loginPw;
     public String memberName;
 
-    /*
-    public Member(String loginId, String loginPw, String memberName, String adminId) {
-        this.loginId = loginId;
-        this.loginPw = loginPw;
-        this.memberName = memberName;
-        this.adminId = adminId;
-    }
-
-
-    public Member(String loginId, String loginPw, String memberName, String adminId) {
-        this(loginId, loginPw, memberName, adminId);
-    }
-    */
-
     public Member(Map<String, Object> row) {
         super(row);
         this.loginId = (String) row.get("loginId");

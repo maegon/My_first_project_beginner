@@ -53,7 +53,7 @@ public class ArticleDao extends Dao {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("SELECT * "));
-        sb.append(String.format("FROM article "));
+        sb.append(String.format("FROM `article` "));
         sb.append(String.format("WHERE id = %d ", id));
 
         Map<String, Object> row = dbConnection.selectRow(sb.toString());
