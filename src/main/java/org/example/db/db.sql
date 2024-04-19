@@ -10,7 +10,8 @@ CREATE TABLE article(
 	updateDate DATETIME NOT NULL,
 	title CHAR(100) NOT NULL,
 	`body` TEXT NOT NULL,
-	memberName CHAR(100) UNIQUE NOT NULL
+	memberName CHAR(100) UNIQUE NOT NULL,
+	hit INT(100) UNSIGNED NOT NULL
 );
 
 INSERT INTO article
@@ -18,7 +19,8 @@ SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목1',
 `body` = '내용1',
-memberName = '관리자';
+memberName = '관리자',
+hit = 14;
 
 
 INSERT INTO article
@@ -26,7 +28,8 @@ SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목2',
 `body` = '내용2',
-memberName = 'user1';
+memberName = 'user1',
+hit = 23;
 
 
 
@@ -34,9 +37,11 @@ SELECT * FROM article;
 
 SELECT * FROM article WHERE 1;
 
+SELECT A.* FROM `article` AS A ORDER BY A.id DESC;
+
 
 /* 댓글 */
-CREATE TABLE articleReply(
+CREATE TABLE articleReply (
 	id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
@@ -56,7 +61,10 @@ updateDate = NOW(),
 `body` = '유저댓글1',
 memberName = 'user1';
 
-SELECT * FROM articleReply
+SELECT * FROM `articleReply` AS R INNER JOIN `article` AS A
+ON R.id = A.id WHERE R.id = 2 ORDER BY R.id DESC;
+
+
 
 
 /* track */
@@ -84,7 +92,7 @@ importMusicFile = 'Jim Yosef & Shiah Maisel - Just Getting Started.mp3',
 musicTitle = 'Jim Yosef & Shiah Maisel - Just Getting Started',
 hit = 5;
 
-SELECT * FROM track;
+SELECT * FROM `track` AS T WHERE T.musicTitle LIKE '%-%' ORDER BY T.id ASC;
 
 /* member */
 CREATE TABLE `member`(
