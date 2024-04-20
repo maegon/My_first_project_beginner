@@ -83,5 +83,19 @@ public class TrackDao extends Dao {
     }
 
 
+    public Track getMusicTitle(int id) {
+        StringBuilder sb = new StringBuilder();
 
+        sb.append(String.format("SELECT musicTitle "));
+        sb.append(String.format("FROM `track` "));
+        sb.append(String.format("WHERE id = %d ", id));
+
+        Map<String, Object> row = dbConnection.selectRow(sb.toString());
+
+        if ( row.isEmpty() ) {
+            return null;
+        }
+
+        return new Track(row);
+    }
 }

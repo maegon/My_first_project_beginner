@@ -103,13 +103,11 @@ public class MusicController extends Controller {
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
         System.out.print("\u001B[38m ▌ 검색어 : ");
-        String searchKeyword = sc.nextLine();
-        searchKeyword = searchKeyword.trim();
-
+        String searchKeyword = sc.nextLine().trim();
 
         List<Track> forListMusics = trackService.getForListMusics(searchKeyword);
 
-        if (forListMusics.size() == 0) {
+        if (forListMusics.isEmpty()) {
             System.out.println("\u001B[35m ▌ 검색 결과가 존재하지 않습니다.");
             return;
         }
@@ -149,45 +147,51 @@ public class MusicController extends Controller {
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
 
-        if (tracks.size() != 0) {
-            System.out.println("\u001B[35m ▌ 몇번째 음악을 들으시겠습니까?");
-            System.out.print("\u001B[38m ▌ 번호 입력 : ");
-            int listenNum = sc.nextInt();
-            sc.nextLine();
-
-            // 듣고 싶은 음악이 없을때 0번 입력
-            if (listenNum == 0) {
-                return;
-            }
-
-            Track foundTrack = trackService.getTrack(listenNum);
-
-            if (foundTrack == null) {
-                System.out.printf("\u001B[35m ▌ %d번 음악은 존재하지 않습니다.\n", listenNum);
-                return;
-            }
-
-            foundTrack.increaseHit();
-            listenNum = listenNum - 1;
-            System.out.print("\u001B[38m ▌ 반복 재생 여부 : ");
-            String loopBooleanCheck = sc.nextLine();
-            if (loopBooleanCheck.equals("예")) {
-                loopBoolean = true;
-            } else {
-                loopBoolean = false;
-            }
-
-            selectedTrack(listenNum);
+        if (forListMusics.isEmpty()) {
+            return;
         }
+
+        System.out.println("\u001B[35m ▌ 몇번째 음악을 들으시겠습니까?");
+        System.out.print("\u001B[38m ▌ 번호 입력 : ");
+        int listenNum = sc.nextInt();
+        sc.nextLine();
+
+        // 듣고 싶은 음악이 없을때 0번 입력
+        if (listenNum == 0) {
+            loopBoolean = false;
+            return;
+        }
+
+        Track foundTrack = trackService.getTrack(listenNum);
+
+        if (foundTrack == null) {
+            System.out.printf("\u001B[35m ▌ %d번 음악은 존재하지 않습니다.\n", listenNum);
+            return;
+        }
+
+        foundTrack.increaseHit();
+        listenNum = listenNum - 1;
+        System.out.print("\u001B[38m ▌ 반복 재생 여부 : ");
+        String loopBooleanCheck = sc.nextLine();
+        if (loopBooleanCheck.equals("예")) {
+            loopBoolean = true;
+        } else {
+            loopBoolean = false;
+        }
+
+        selectedTrack(listenNum);
+
     }
 
+
+    // trackService.getTrack
 
     public void selectedTrack(int nowSelected) { // 사용자가 곡을 선택했을때 해당 곡의 번호를 정수형태로 받음
         if (selectedMusic != null) { // 만약 곡을 선택했는데 이미 재생중인 곡이 있다면 재생중이던 곡을 종료시킴
             selectedMusic.close();
         }
         // 회원은 풀버전으로 듣기
-        selectedMusic = new Music(tracks.get(nowSelected).musicTitle + ".mp3", loopBoolean);
+        selectedMusic = new Music(trackService.getMusicTitle(nowSelected).musicTitle + ".mp3", loopBoolean);
         selectedMusic.start();
         System.out.print("\u001B[36m ▌ ");
         System.out.printf("현재 재생 음악  ▶  %s \n", tracks.get(nowSelected).musicTitle);
@@ -224,7 +228,6 @@ public class MusicController extends Controller {
             selectedMusic.close();
         }
     }
-
 
 
     // 음악 트랙(정보)에 검색한 id의 음악 트랙과 일치하는게 있는지 확인하는 함수
