@@ -156,16 +156,18 @@ public class ArticleController extends Controller {
             return;
         }
 
-        System.out.print("\u001B[38m ▌ 댓글 입력 : ");
-        String body = sc.nextLine();
-        String loginedMemberName = session.getLoginedMember().memberName;
+
+        if (replyCheck.equals("예")) {
+            System.out.print("\u001B[38m ▌ 댓글 입력 : ");
+            String body = sc.nextLine();
+            String  loginMemberName = session.getLoginedMember().memberName;
 
 
-        articleService.replyWrite(id, loginedMemberName, body);
-        System.out.println("\u001B[35m ▌ 댓글이 작성되었습니다.");
+            articleService.replyWrite(id, loginMemberName, body);
+            System.out.println("\u001B[35m ▌ 댓글이 작성되었습니다.");
 
-        articleRepliesShowList(id);
-
+            articleRepliesShowList(id);
+        }
     }
 
     // db연결때 댓글 기능 구현
@@ -177,11 +179,14 @@ public class ArticleController extends Controller {
         System.out.printf("    %d번 글 댓글    ", articleId);
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
 
-        System.out.print(" 번호  ░  작성자  ░     제목                                                                                \n");
+        System.out.print("\u001B[33m ▌ 번호  ░  작성자  ░     제목                                                                                \n");
         for (int i = forPrintArticleReplies.size() - 1; i >= 0; i--) {
-            ArticleReply reply = forPrintArticleReplies.get(i);
-            Member replyMember = memberService.getArticleReplyMember(reply.memberName);
-            System.out.printf("\u001B[33m ▌     %d    ░    %s    ░    %s      \n", reply.id, replyMember.memberName, reply.body);
+            ArticleReply articleReply = forPrintArticleReplies.get(i);
+            if(articleReply.articleId == articleId) {
+                Member replyMember = memberService.getArticleReplyMember(articleReply.memberName);
+                System.out.printf("\u001B[33m ▌     %d    ░    %s    ░    %s      \n", articleReply.id, replyMember.memberName, articleReply.body);
+            }
+
         }
 
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");

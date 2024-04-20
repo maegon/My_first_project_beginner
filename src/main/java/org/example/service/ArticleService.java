@@ -58,8 +58,8 @@ public class ArticleService {
 
     // 댓글 =======================================
 
-    public int replyWrite(int articleId, String loginedMemberName, String body) {
-        return articleDao.replyWrite(articleId, loginedMemberName, body);
+    public int replyWrite(int articleId, String loginMemberName, String body) {
+        return articleDao.replyWrite(articleId, loginMemberName, body);
     }
 
     public List<ArticleReply> getForPrintArticleReplies(int articleId) {

@@ -12,11 +12,14 @@ import java.util.Map;
 public class ArticleReply extends Dto {
     public String memberName;
     public String body;
+    public int articleId;
+
 
     public ArticleReply(Map<String, Object> row) {
         super(row);
         this.memberName = (String) row.get("memberName");
         this.body = (String) row.get("body");
+        this.articleId = (int) row.get("id");
     }
 
 
