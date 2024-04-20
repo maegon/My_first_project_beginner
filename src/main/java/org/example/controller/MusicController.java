@@ -75,7 +75,14 @@ public class MusicController extends Controller {
 
         System.out.printf("\u001B[38m ▌ 음악 파일명 입력 : ");
         importMusicFile = sc.nextLine();
+
+        if (!importMusicFile.endsWith(".mp3")) {
+            System.out.println("\u001B[31m ▌ 음악 파일명은 .mp3 형식이어야 합니다.");
+            return;
+        }
+
         String[] splitMusicTitle = importMusicFile.split("\\.");
+
 
         String musicTitle = splitMusicTitle[0];
 
