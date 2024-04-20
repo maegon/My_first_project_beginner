@@ -12,10 +12,10 @@ public class Article extends Dto {
     public String title;
     public String body;
     public int hit;
-    public String memmberName;
+    public String memberName;
 
     public Article(String memmberName, String title, String body, int hit) {
-        this.memmberName = memmberName;
+        this.memberName = memmberName;
         this.title = title;
         this.body = body;
         this.hit = hit;
@@ -27,7 +27,7 @@ public class Article extends Dto {
 
     public Article(Map<String, Object> row) {
         super(row);
-        this.memmberName = (String) row.get("memberName");
+        this.memberName = (String) row.get("memberName");
         this.title = (String) row.get("title");
         this.body = (String) row.get("body");
         this.hit = (int) row.get("hit");

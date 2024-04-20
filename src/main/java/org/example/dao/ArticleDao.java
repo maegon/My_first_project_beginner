@@ -23,7 +23,7 @@ public class ArticleDao extends Dao {
         sb.append(String.format("updateDate = NOW(), "));
         sb.append(String.format("title = '%s', ", article.title));
         sb.append(String.format("`body` = '%s', ", article.body));
-        sb.append(String.format("memberName = %s, ", article.memmberName));
+        sb.append(String.format("memberName = '%s', ", article.memberName));
         sb.append(String.format("hit = %d ", article.hit));
 
         return dbConnection.insert(sb.toString());
