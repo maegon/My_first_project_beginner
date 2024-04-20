@@ -10,7 +10,7 @@ CREATE TABLE article(
 	updateDate DATETIME NOT NULL,
 	title CHAR(100) NOT NULL,
 	`body` TEXT NOT NULL,
-	memberName CHAR(100) UNIQUE NOT NULL,
+	memberName CHAR(100) NOT NULL,
 	hit INT(100) UNSIGNED NOT NULL
 );
 
@@ -32,6 +32,8 @@ memberName = 'user1',
 hit = 23;
 
 
+DELETE FROM article WHERE id = 5
+
 
 SELECT * FROM article;
 
@@ -46,26 +48,37 @@ CREATE TABLE articleReply (
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
 	`body` CHAR(100) NOT NULL,
-	memberName CHAR(100) UNIQUE NOT NULL
+	memberName CHAR(100) NOT NULL,
+	articleId INT(10) UNSIGNED NOT NULL,
+	INDEX articleId(`articleId`)
 );
 
 INSERT INTO articleReply
 SET regDate = NOW(),
 updateDate = NOW(),
 `body` = '관리자댓글1',
-memberName = '관리자';
+memberName = '관리자',
+articleId = 1;
 
 INSERT INTO articleReply
 SET regDate = NOW(),
 updateDate = NOW(),
 `body` = '유저댓글1',
-memberName = 'user1';
+memberName = 'user1',
+articleId = 2;
+
+INSERT INTO articleReply
+SET regDate = NOW(),
+updateDate = NOW(),
+`body` = '유저댓글2',
+memberName = 'user1',
+articleId = 2;
 
 SELECT * FROM `articleReply` AS R INNER JOIN `article` AS A
 ON R.id = A.id WHERE R.id = 2 ORDER BY R.id DESC;
 
-
-
+SELECT R.* FROM `articleReply` AS R INNER JOIN `article` AS A
+ON R.id = A.id WHERE R.id = 1 ORDER BY R.id DESC;
 
 /* track */
 CREATE TABLE track (
@@ -92,7 +105,11 @@ importMusicFile = 'Jim Yosef & Shiah Maisel - Just Getting Started.mp3',
 musicTitle = 'Jim Yosef & Shiah Maisel - Just Getting Started',
 hit = 5;
 
-SELECT * FROM `track` AS T WHERE T.musicTitle LIKE '%-%' ORDER BY T.id ASC;
+SELECT * FROM `track` WHERE id = 2;
+
+SELECT `musicTitle` FROM `track` WHERE id = 2;
+
+SELECT T.* FROM `track` AS T WHERE T.musicTitle LIKE '%-%' ORDER BY T.id ASC;
 
 /* member */
 CREATE TABLE `member`(

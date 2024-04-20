@@ -171,7 +171,6 @@ public class MusicController extends Controller {
         }
 
         foundTrack.increaseHit();
-        listenNum = listenNum - 1;
         System.out.print("\u001B[38m ▌ 반복 재생 여부 : ");
         String loopBooleanCheck = sc.nextLine();
         if (loopBooleanCheck.equals("예")) {
