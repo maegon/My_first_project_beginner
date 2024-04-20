@@ -19,24 +19,17 @@ public class TrackService {
         Track track = new Track(importMusicFile, musicTitle);
         return trackDao.importMusic(track);
 
-        //        tracks.add(new Track(id, importMusicFile, musicTitle));
     }
 
     public List<Track> getForListMusics(String searchKeyword) {
         return trackDao.getForListMusics(searchKeyword);
     }
 
-//    public Track getTrackById(int listenNum) {
-//        return trackDao.getTrackById(listenNum);
-//    }
 
     public Track getTrack(int id) {
         return trackDao.getTrack(id);
     }
 
-    public Track getMusicTitle(int id) {
-        return trackDao.getMusicTitle(id);
-    }
 
 
     public List<Track> getForAllListMusic() {

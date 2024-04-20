@@ -2,7 +2,6 @@ package org.example.dao;
 
 import org.example.container.Container;
 import org.example.db.DBConnection;
-import org.example.dto.Article;
 import org.example.dto.Track;
 
 import java.util.ArrayList;
@@ -83,19 +82,4 @@ public class TrackDao extends Dao {
     }
 
 
-    public Track getMusicTitle(int id) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(String.format("SELECT musicTitle "));
-        sb.append(String.format("FROM `track` "));
-        sb.append(String.format("WHERE id = %d", id));
-
-        Map<String, Object> row = dbConnection.selectRow(sb.toString());
-
-        if ( row.isEmpty() ) {
-            return null;
-        }
-
-        return new Track(row);
-    }
 }

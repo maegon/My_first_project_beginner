@@ -9,8 +9,6 @@ import org.example.db.DBConnection;
 
 public class App {
 
-    public static Music introMusic;
-
     public App() {
         DBConnection.DB_NAME = "ljw_beginner_pj_sbs";
         DBConnection.DB_USER = "sbsst";
@@ -49,6 +47,9 @@ public class App {
         // 메인 화면 배경음악 출력
         Music introMusic = new Music("Jim Yosef & Shiah Maisel - Just Getting Started.mp3", true); // 테스트를 위한 음악 재생
         introMusic.start();
+
+
+
         System.out.println("\u001B[36m"+" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[36m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█"); System.out.print("  메인 화면 배경 음악  "); System.out.print("\u001B[36m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.print("\u001B[36m ▌ "); System.out.print("메인화면 음악 고정  ▶  Jim Yosef & Shiah Maisel - Just Getting Started                                        ");System.out.print("\u001B[36m ▌ \n");
@@ -138,6 +139,9 @@ public class App {
                     }
                     break;
                 case "음악검색":
+                    if (introMusic != null) {
+                        introMusic.close();
+                    }
                     if ( Container.getSession().isLogined() == false ) {
                         System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
                         continue;
@@ -145,6 +149,7 @@ public class App {
             }
             controller.doAction(cmd);
         }
+
 
         // 앱 종료
         Container.getSc().close();
