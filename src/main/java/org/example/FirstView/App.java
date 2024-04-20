@@ -138,13 +138,11 @@ public class App {
                 case "음악검색":
                     if ( introMusic != null) {
                         introMusic.close();
-                        continue;
                     }
                     if ( Container.getSession().isLogined() == false ) {
                         System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
                         continue;
                     }
-                    break;
             }
             controller.doAction(cmd);
         }

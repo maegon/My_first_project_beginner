@@ -55,7 +55,6 @@ public class ArticleController extends Controller {
 
 
     public void doWrite() {
-        int id = Container.articleDao.getNewId();
         System.out.printf("\u001B[38m ▌ 제목 : ");
         String title = sc.nextLine();
         System.out.printf("\u001B[38m ▌ 내용 : ");
