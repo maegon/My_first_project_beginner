@@ -87,8 +87,7 @@ public class ArticleController extends Controller {
         System.out.print("\u001B[33m ▌ \n");
         for (int i = forPrintArticles.size() - 1; i >= 0; i--) {
             Article article = forPrintArticles.get(i);
-            Member member = memberService.getMember(article.id);
-            System.out.printf("\u001B[33m ▌    %d   ░%6s  ░    %d     ░  %s  \n", article.id, member.memberName, article.hit, article.title);
+            System.out.printf("\u001B[33m ▌    %d   ░%6s  ░    %d     ░  %s  \n", article.id, article.memberName, article.hit, article.title);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
@@ -111,11 +110,12 @@ public class ArticleController extends Controller {
         System.out.print("\u001B[33m ▌ \n");
         for (int i = forPrintArticles.size() - 1; i >= 0; i--) {
             Article article = forPrintArticles.get(i);
-            Member member = memberService.getMember(article.id);
             System.out.printf("\u001B[33m ▌    %d   ░  %s  ░    %d     ░  %s  \n", article.id, article.memberName, article.hit, article.title);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
+
+
 
 
     public void showDetail() {
@@ -126,7 +126,8 @@ public class ArticleController extends Controller {
         sc.nextLine();
         int id = watchNum;
 
-        Article foundArticle = articleService.getForPrintArticle(id);
+
+        Article foundArticle = articleService.getArticle(id);
 
         if (foundArticle == null) {
             System.out.printf("\u001B[35m ▌ %d번 게시물은 존재하지 않습니다.\n", id);
@@ -140,7 +141,7 @@ public class ArticleController extends Controller {
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.printf("\u001B[33m ▌ 번호 : %d\n", foundArticle.id);
         System.out.printf("\u001B[33m ▌ 날짜 : %s\n", foundArticle.regDate);
-        System.out.printf("\u001B[33m ▌ 작성자 : %s\n", member.memberName);
+        System.out.printf("\u001B[33m ▌ 작성자 : %s\n", foundArticle.memberName);
         System.out.printf("\u001B[33m ▌ 조회수 : %d\n", foundArticle.hit);
         System.out.printf("\u001B[33m ▌ 제목 : %s\n", foundArticle.title);
         System.out.printf("\u001B[33m ▌ 내용 : %s\n", foundArticle.body);
@@ -249,7 +250,7 @@ public class ArticleController extends Controller {
             System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
             return;
         }
-
+        
         Member loginedMember = session.getLoginedMember();
 
         if (foundArticle.id != loginedMember.id) {
@@ -258,6 +259,7 @@ public class ArticleController extends Controller {
         }
 
         articleService.delete(foundArticle.id);
+
         System.out.printf("\u001B[35m ▌ %d번 게시물이 삭제되었습니다.\n", foundArticle.id);
 
     }
