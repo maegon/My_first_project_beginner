@@ -3,6 +3,7 @@ package org.example.controller;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.dto.Member;
+import org.example.dto.Track;
 
 @Getter
 @Setter
@@ -18,6 +19,7 @@ public class Session {
     public Member getLoginedMember() {
         return loginedMember;
     }
+
 
     public void setLoginedMember(Member loginedMember) {
         this.loginedMember = loginedMember;

@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.FirstView.App;
 import org.example.FirstView.Music;
 import org.example.container.Container;
 import org.example.dto.Article;
@@ -183,18 +184,29 @@ public class MusicController extends Controller {
 
     }
 
-
+    // 사용자가 임의로 선택하여 재생중인 곡이 없다면 메인화면 음악 재생/그렇지 않다면 중지
+    public boolean selectedPlayTrack() {
+        if(selectedMusic != null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     // trackService.getTrack
 
     public void selectedTrack(int nowSelected) { // 사용자가 곡을 선택했을때 해당 곡의 번호를 정수형태로 받음
         if (selectedMusic != null) { // 만약 곡을 선택했는데 이미 재생중인 곡이 있다면 재생중이던 곡을 종료시킴
             selectedMusic.close();
         }
+        if ( selectedPlayTrack() == true) {
+            App.introMusic.close();
+        }
         // 회원은 풀버전으로 듣기
-        selectedMusic = new Music(trackService.getMusicTitle(nowSelected).musicTitle + ".mp3", loopBoolean);
+        selectedMusic = new Music(trackService.getMusicTitle(nowSelected) + ".mp3", loopBoolean);
         selectedMusic.start();
         System.out.print("\u001B[36m ▌ ");
-        System.out.printf("현재 재생 음악  ▶  %s \n", tracks.get(nowSelected).musicTitle);
+        System.out.printf("현재 재생 음악  ▶  %s \n", trackService.getMusicTitle(nowSelected));
     }
 
 
@@ -227,27 +239,6 @@ public class MusicController extends Controller {
         if (selectedMusic != null) {
             selectedMusic.close();
         }
-    }
-
-
-    // 음악 트랙(정보)에 검색한 id의 음악 트랙과 일치하는게 있는지 확인하는 함수
-    private int getTrackIndexById(int id) {
-        int i = 0;
-        for (Track track : tracks) {
-            if (track.id == id) {
-                return i;
-            }
-            i++;
-        }
-        return -1;
-    }
-
-    private Track getTrackById(int id) {
-        int index = getTrackIndexById(id);
-        if (index != -1) {
-            return tracks.get(index);
-        }
-        return null;
     }
 
 

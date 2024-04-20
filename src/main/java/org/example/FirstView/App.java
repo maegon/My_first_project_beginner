@@ -9,6 +9,8 @@ import org.example.db.DBConnection;
 
 public class App {
 
+    public static Music introMusic;
+
     public App() {
         DBConnection.DB_NAME = "ljw_beginner_pj_sbs";
         DBConnection.DB_USER = "sbsst";
@@ -136,9 +138,6 @@ public class App {
                     }
                     break;
                 case "음악검색":
-                    if ( introMusic != null) {
-                        introMusic.close();
-                    }
                     if ( Container.getSession().isLogined() == false ) {
                         System.out.println("\u001B[31m ▌ 로그인 후 이용해주세요.");
                         continue;

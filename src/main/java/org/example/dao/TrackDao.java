@@ -88,7 +88,7 @@ public class TrackDao extends Dao {
 
         sb.append(String.format("SELECT musicTitle "));
         sb.append(String.format("FROM `track` "));
-        sb.append(String.format("WHERE id = %d ", id));
+        sb.append(String.format("WHERE id = %d", id));
 
         Map<String, Object> row = dbConnection.selectRow(sb.toString());
 
