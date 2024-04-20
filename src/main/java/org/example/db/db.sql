@@ -74,11 +74,13 @@ updateDate = NOW(),
 memberName = 'user1',
 articleId = 2;
 
+SELECT * FROM `articleReply` WHERE articleId = 2 ORDER BY articleReply.id ASC;
+
 SELECT * FROM `articleReply` AS R INNER JOIN `article` AS A
 ON R.id = A.id WHERE R.id = 2 ORDER BY R.id DESC;
 
 SELECT R.* FROM `articleReply` AS R INNER JOIN `article` AS A
-ON R.id = A.id WHERE R.id = 1 ORDER BY R.id DESC;
+ON R.id = A.id WHERE R.id = 4 ORDER BY R.id DESC;
 
 /* track */
 CREATE TABLE track (
@@ -106,6 +108,8 @@ musicTitle = 'Jim Yosef & Shiah Maisel - Just Getting Started',
 hit = 5;
 
 SELECT * FROM `track` WHERE id = 2;
+
+SELECT * FROM `track`;
 
 SELECT `musicTitle` FROM `track` WHERE id = 2;
 

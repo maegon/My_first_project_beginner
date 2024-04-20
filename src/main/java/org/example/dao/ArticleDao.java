@@ -142,12 +142,10 @@ public class ArticleDao extends Dao {
     public List<ArticleReply> getForPrintArticleReplies(int articleId) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(String.format("SELECT R.* "));
-        sb.append(String.format("FROM `articleReply` AS R "));
-        sb.append(String.format("INNER JOIN `article` AS A "));
-        sb.append(String.format("ON R.id = A.id "));
-        sb.append(String.format("WHERE R.id = %d ", articleId));
-        sb.append(String.format("ORDER BY R.id DESC "));
+        sb.append(String.format("SELECT * "));
+        sb.append(String.format("FROM `articleReply` "));
+        sb.append(String.format("WHERE articleId = %d ", articleId));
+        sb.append(String.format("ORDER BY articleReply.id ASC ", articleId));
 
         List<ArticleReply> articleReplies = new ArrayList<>();
         List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());

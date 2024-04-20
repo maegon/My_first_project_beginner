@@ -182,10 +182,8 @@ public class ArticleController extends Controller {
         System.out.print("\u001B[33m ▌ 번호  ░  작성자  ░     제목                                                                                \n");
         for (int i = forPrintArticleReplies.size() - 1; i >= 0; i--) {
             ArticleReply articleReply = forPrintArticleReplies.get(i);
-            if(articleReply.articleId == articleId) {
-                Member replyMember = memberService.getArticleReplyMember(articleReply.memberName);
-                System.out.printf("\u001B[33m ▌     %d    ░    %s    ░    %s      \n", articleReply.id, replyMember.memberName, articleReply.body);
-            }
+            Member replyMember = memberService.getArticleReplyMember(articleReply.memberName);
+            System.out.printf("\u001B[33m ▌     %d    ░    %s    ░    %s      \n", articleReply.id, replyMember.memberName, articleReply.body);
 
         }
 
