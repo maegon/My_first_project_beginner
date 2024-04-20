@@ -186,10 +186,9 @@ public class MusicController extends Controller {
 
     // 사용자가 임의로 선택하여 재생중인 곡이 없다면 메인화면 음악 재생/그렇지 않다면 중지
     public boolean selectedPlayTrack() {
-        if(selectedMusic != null) {
+        if (selectedMusic != null) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -199,14 +198,22 @@ public class MusicController extends Controller {
         if (selectedMusic != null) { // 만약 곡을 선택했는데 이미 재생중인 곡이 있다면 재생중이던 곡을 종료시킴
             selectedMusic.close();
         }
-        if ( selectedPlayTrack() == true) {
+        if (selectedPlayTrack() == true) {
             App.introMusic.close();
         }
-        // 회원은 풀버전으로 듣기
-        selectedMusic = new Music(trackService.getMusicTitle(nowSelected) + ".mp3", loopBoolean);
+//        Track trackTitle = trackService.getMusicTitle(nowSelected);
+//        // 회원은 풀버전으로 듣기
+//        selectedMusic = new Music(trackTitle + ".mp3", loopBoolean);
+//        selectedMusic.start();
+//        System.out.print("\u001B[36m ▌ ");
+//        System.out.printf("현재 재생 음악  ▶  %s \n", trackTitle);
+
+        Track track = trackService.getMusicTitle(nowSelected);
+
+        selectedMusic = new Music(track + ".mp3", loopBoolean);
         selectedMusic.start();
         System.out.print("\u001B[36m ▌ ");
-        System.out.printf("현재 재생 음악  ▶  %s \n", trackService.getMusicTitle(nowSelected));
+        System.out.printf("현재 재생 음악  ▶  %s \n", track);
     }
 
 
