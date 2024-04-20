@@ -82,12 +82,12 @@ public class MemberDao extends Dao {
         return new Member(row);
     }
 
-    public Member getMember(String memberName) {
+    public Member getArticleReplyMember(String memberName) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("SELECT * "));
         sb.append(String.format("FROM `member` "));
-        sb.append(String.format("WHERE memberName = %s ", memberName));
+        sb.append(String.format("WHERE memberName = '%s' ", memberName));
 
         Map<String, Object> row = dbConnection.selectRow((sb.toString()));
 

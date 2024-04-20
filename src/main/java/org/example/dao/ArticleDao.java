@@ -139,14 +139,14 @@ public class ArticleDao extends Dao {
         return new Article(row);
     }
 
-    public List<ArticleReply> getForPrintArticleReplies(int id) {
+    public List<ArticleReply> getForPrintArticleReplies(int articleId) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("SELECT R.* "));
         sb.append(String.format("FROM `articleReply` AS R "));
         sb.append(String.format("INNER JOIN `article` AS A "));
         sb.append(String.format("ON R.id = A.id "));
-        sb.append(String.format("WHERE R.id = %d ", id));
+        sb.append(String.format("WHERE R.id = %d ", articleId));
         sb.append(String.format("ORDER BY R.id DESC"));
 
         List<ArticleReply> articleReplies = new ArrayList<>();
@@ -160,16 +160,17 @@ public class ArticleDao extends Dao {
     }
 
 
-    public int replyWrite(String memberName, String replyBody) {
+
+    public int replyWrite(int articleId, String loginedMemberName, String body) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("INSERT INTO articleReply "));
         sb.append(String.format("SET regDate = NOW(), "));
         sb.append(String.format("updateDate = NOW(), "));
-        sb.append(String.format("`body` = '%s', ", replyBody));
-        sb.append(String.format("memberName = '%s'", memberName));
+        sb.append(String.format("`body` = '%s', ", body));
+        sb.append(String.format("memberName = '%s', ", loginedMemberName));
+        sb.append(String.format("articleId = %d ", articleId));
 
         return dbConnection.insert(sb.toString());
     }
-
 }

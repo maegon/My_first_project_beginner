@@ -12,7 +12,7 @@ public class ArticleService {
 
     public ArticleService() {
         articleDao = Container.articleDao;
-    }
+}
 
 //    public int replyWrite(int articleId, String memberName, String replyBody) {
 //        return articleDao.replyWrite(articleId, memberName, replyBody);
@@ -52,26 +52,18 @@ public class ArticleService {
         articleDao.delete(id);
     }
 
-
-//    public Article getArticleById(int id) {
-//        return articleDao.getArticleById(id);
-//    }
-
     public Article getForPrintArticle(int id) {
         return articleDao.getForPrintArticle(id);
     }
 
-    public List<ArticleReply> getForPrintArticleReplies(int id) {
-        return articleDao.getForPrintArticleReplies(id);
-    }
-
-
-
-
     // 댓글 =======================================
 
-    public int replyWrite(String memberName, String replyBody) {
-        return articleDao.replyWrite(memberName, replyBody);
+    public int replyWrite(int articleId, String loginedMemberName, String body) {
+        return articleDao.replyWrite(articleId, loginedMemberName, body);
+    }
+
+    public List<ArticleReply> getForPrintArticleReplies(int articleId) {
+        return articleDao.getForPrintArticleReplies(articleId);
     }
 
 }

@@ -134,7 +134,6 @@ public class ArticleController extends Controller {
             return;
         }
         foundArticle.increaseHit();
-        Member member = memberService.getMember(foundArticle.id);
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
         System.out.print("    현재 글 정보    ");
@@ -148,28 +147,22 @@ public class ArticleController extends Controller {
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
         // db연결때 댓글 기능 구현
-        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
-        System.out.printf("  %d번 게시물 댓글 ", id);
-        System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         articleRepliesShowList(id);
 
         System.out.println("\u001B[35m ▌ 댓글을 작성하시겠습니까? (예/아니오)");
         System.out.printf("\u001B[38m ▌ 입력 : ");
         String replyCheck = sc.nextLine();
 
-        if (replyCheck.equals("네")) {
-            if (session.isLogined() == false) {
-                System.out.println("\u001B[31m ▌ 로그인 후 이용 가능합니다.");
-                return;
-            }
+        if (!replyCheck.equals("예")) {
+            return;
         }
 
-
         System.out.print("\u001B[38m ▌ 댓글 입력 : ");
-        String replyBody = sc.nextLine();
+        String body = sc.nextLine();
         String loginedMemberName = session.getLoginedMember().memberName;
 
-        articleService.replyWrite(loginedMemberName, replyBody);
+
+        articleService.replyWrite(id, loginedMemberName, body);
         System.out.println("\u001B[35m ▌ 댓글이 작성되었습니다.");
 
         articleRepliesShowList(id);
@@ -177,20 +170,21 @@ public class ArticleController extends Controller {
     }
 
     // db연결때 댓글 기능 구현
-    private void articleRepliesShowList(int id) {
-        List<ArticleReply> forPrintArticleReplies = articleService.getForPrintArticleReplies(id);
+    private void articleRepliesShowList(int articleId) {
+        List<ArticleReply> forPrintArticleReplies = articleService.getForPrintArticleReplies(articleId);
 
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
-        System.out.printf("    %d번 글 댓글    ", id);
+        System.out.printf("    %d번 글 댓글    ", articleId);
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
 
-        System.out.print(" 번호  ░  작성자  ░     제목                                                                                ");
+        System.out.print(" 번호  ░  작성자  ░     제목                                                                                \n");
         for (int i = forPrintArticleReplies.size() - 1; i >= 0; i--) {
             ArticleReply reply = forPrintArticleReplies.get(i);
-            Member replyMember = memberService.getMember(reply.memberName);
-            System.out.printf("\u001B[33m ▌     %d    ░    %s    ░    %s      ", reply.id, replyMember.memberName, reply.body);
+            Member replyMember = memberService.getArticleReplyMember(reply.memberName);
+            System.out.printf("\u001B[33m ▌     %d    ░    %s    ░    %s      \n", reply.id, replyMember.memberName, reply.body);
         }
+
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
 
@@ -250,7 +244,7 @@ public class ArticleController extends Controller {
             System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
             return;
         }
-        
+
         Member loginedMember = session.getLoginedMember();
 
         if (foundArticle.id != loginedMember.id) {
