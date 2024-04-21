@@ -74,6 +74,8 @@ public class ArticleController extends Controller {
 
         List<Article> forPrintArticles = articleService.getForPrintArticles(searchKeyword);
 
+
+
         if (forPrintArticles.size() == 0) {
             System.out.println("\u001B[35m ▌ 검색 결과가 존재하지 않습니다.");
             return;
@@ -83,11 +85,11 @@ public class ArticleController extends Controller {
         System.out.print("  검색된 글 목록 ");
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print(" 번호  ░  작성자  ░  조회수  ░  제목                                                                          ");
+        System.out.print(" 번호  ░    작성자    ░   조회수   ░  제목                                                                          ");
         System.out.print("\u001B[33m ▌ \n");
         for (int i = forPrintArticles.size() - 1; i >= 0; i--) {
             Article article = forPrintArticles.get(i);
-            System.out.printf("\u001B[33m ▌    %d   ░%6s  ░    %d     ░  %s  \n", article.id, article.memberName, article.hit, article.title);
+            System.out.printf("\u001B[33m ▌    %d   ░%8s  ░    %d     ░  %s  \n", article.id, article.memberName, article.hit, article.title);
         }
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
     }
@@ -106,7 +108,7 @@ public class ArticleController extends Controller {
         System.out.print("  글 목록  ");
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print(" 번호  ░  작성자  ░  조회수  ░  제목                                                                           ");
+        System.out.print(" 번호  ░    작성자    ░   조회수   ░  제목                                                                           ");
         System.out.print("\u001B[33m ▌ \n");
         for (int i = forPrintArticles.size() - 1; i >= 0; i--) {
             Article article = forPrintArticles.get(i);
@@ -131,7 +133,10 @@ public class ArticleController extends Controller {
                 System.out.printf("\u001B[35m ▌ %d번 게시물은 존재하지 않습니다.\n", id);
                 return;
             }
+
             foundArticle.increaseHit();
+
+
             System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
             System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
             System.out.print("    현재 글 정보    ");

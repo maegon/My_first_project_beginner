@@ -14,11 +14,6 @@ public class ArticleService {
         articleDao = Container.articleDao;
 }
 
-//    public int replyWrite(int articleId, String memberName, String replyBody) {
-//        return articleDao.replyWrite(articleId, memberName, replyBody);
-//        // 댓글
-//    }
-
     public List<Article> getForPrintArticles(String searchKeyword) {
         return articleDao.getForPrintArticles(searchKeyword);
     }
