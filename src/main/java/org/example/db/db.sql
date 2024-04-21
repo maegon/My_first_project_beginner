@@ -82,38 +82,6 @@ ON R.id = A.id WHERE R.id = 2 ORDER BY R.id DESC;
 SELECT R.* FROM `articleReply` AS R INNER JOIN `article` AS A
 ON R.id = A.id WHERE R.id = 4 ORDER BY R.id DESC;
 
-/* track */
-CREATE TABLE track (
-	id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	regDate DATETIME NOT NULL,
-	updateDate DATETIME NOT NULL,
-	importMusicFile CHAR(100) NOT NULL,
-	musicTitle CHAR(100) NOT NULL,
-	hit INT(100) UNSIGNED NOT NULL
-);
-
-
-INSERT INTO track
-SET regDate = NOW(),
-updateDate = NOW(),
-importMusicFile = 'Diamond Eyes - Stay.mp3',
-musicTitle = 'Diamond Eyes - Stay',
-hit = 20;
-
-INSERT INTO track
-SET regDate = NOW(),
-updateDate = NOW(),
-importMusicFile = 'Jim Yosef & Shiah Maisel - Just Getting Started.mp3',
-musicTitle = 'Jim Yosef & Shiah Maisel - Just Getting Started',
-hit = 5;
-
-SELECT * FROM `track` WHERE id = 2;
-
-SELECT * FROM `track`;
-
-SELECT `musicTitle` FROM `track` WHERE id = 2;
-
-SELECT T.* FROM `track` AS T WHERE T.musicTitle LIKE '%-%' ORDER BY T.id ASC;
 
 /* member */
 CREATE TABLE `member`(
@@ -155,3 +123,52 @@ SELECT * FROM `member`
 SELECT * FROM `member` WHERE loginId = 'admin';
 SELECT * FROM `member` WHERE loginId = 'user1';
 
+
+/* track */
+CREATE TABLE track (
+	id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	importMusicFile CHAR(100) NOT NULL,
+	musicTitle CHAR(100) NOT NULL,
+	hit INT(100) UNSIGNED NOT NULL
+);
+
+INSERT INTO track
+SET regDate = NOW(),
+updateDate = NOW(),
+importMusicFile = 'Diamond Eyes - Stay.mp3',
+musicTitle = 'Diamond Eyes - Stay',
+hit = 20;
+
+INSERT INTO track
+SET regDate = NOW(),
+updateDate = NOW(),
+importMusicFile = 'Jim Yosef & Shiah Maisel - Just Getting Started.mp3',
+musicTitle = 'Jim Yosef & Shiah Maisel - Just Getting Started',
+hit = 5;
+
+INSERT INTO track
+SET regDate = NOW(),
+updateDate = NOW(),
+importMusicFile = 'Jnathyn - Dioma.mp3',
+musicTitle = 'Jnathyn - Dioma',
+hit = 16;
+
+INSERT INTO track
+SET regDate = NOW(),
+updateDate = NOW(),
+importMusicFile = 'Jnathyn - Rise.mp3',
+musicTitle = 'Jnathyn - Rise',
+hit = 0;
+
+
+
+
+SELECT * FROM `track` WHERE id = 2;
+
+SELECT * FROM `track`;
+
+SELECT `musicTitle` FROM `track` WHERE id = 2;
+
+SELECT T.* FROM `track` AS T WHERE T.musicTitle LIKE '%-%' ORDER BY T.id ASC;
