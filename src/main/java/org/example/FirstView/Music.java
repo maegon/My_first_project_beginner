@@ -19,10 +19,10 @@ public class Music extends Thread {
             this.isLoop = isLoop;
 
             // 내 노트북 기준(음악 저장 경로)
-//            file = new File("C:/Users/user/IdeaProjects/My_first_project_beginner/src/main/java/org/example/music/" + name);
+            file = new File("C:/Users/user/IdeaProjects/My_first_project_beginner/src/main/java/org/example/music/" + name);
 
             // 내 집컴 기준(음악 저장 경로)
-            file = new File("C:/Users/huc99/IdeaProjects/My_first_project_beginner/src/main/java/org/example/music/" + name);
+//            file = new File("C:/Users/huc99/IdeaProjects/My_first_project_beginner/src/main/java/org/example/music/" + name);
 
             // 학원 기준(음악 저장 경로)
 //            file = new File("C:/work/My_first_project_beginner/src/main/java/org/example/music/" + name);

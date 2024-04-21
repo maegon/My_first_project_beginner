@@ -218,7 +218,7 @@ public class ArticleController extends Controller {
 
             Member loginedMember = session.getLoginedMember();
 
-            if (foundArticle.id != loginedMember.id) {
+            if (!foundArticle.memberName.equals(loginedMember.memberName)) {
                 System.out.printf("\u001B[31m ▌ 권한이 없습니다.\n");
                 return;
             }
@@ -263,7 +263,7 @@ public class ArticleController extends Controller {
 
             Member loginedMember = session.getLoginedMember();
 
-            if (foundArticle.id != loginedMember.id) {
+            if (!foundArticle.memberName.equals(loginedMember.memberName)) {
                 System.out.printf("\u001B[31m ▌ 권한이 없습니다.\n");
                 return;
             }
