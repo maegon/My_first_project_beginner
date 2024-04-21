@@ -4,8 +4,6 @@ import org.example.container.Container;
 import org.example.db.DBConnection;
 import org.example.dto.Member;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class MemberDao extends Dao {
@@ -28,14 +26,6 @@ public class MemberDao extends Dao {
         return dbConnection.insert(sb.toString());
     }
 
-    // 회원가입시 아이디 중복 여부 체크
-//    public boolean isJoinableLoginId(String loginId) {
-//        int index = getMemberIndexByLoginId(loginId);
-//        if (index != -1) {
-//            return true;
-//        }
-//        return false;
-//    }
 
 
     // 로그인 일치 여부 확인
@@ -54,17 +44,6 @@ public class MemberDao extends Dao {
 
         return new Member(row);
     }
-
-//    public int getMemberIndexByLoginId(String loginId) {
-//        int i = 0;
-//        for ( Member member : members ) {
-//            if ( member.loginId.equals(loginId)) {
-//                return i;
-//            }
-//            i++;
-//        }
-//        return -1;
-//    }
 
     public Member getMember(int id) {
         StringBuilder sb = new StringBuilder();

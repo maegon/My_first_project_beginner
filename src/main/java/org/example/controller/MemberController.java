@@ -6,7 +6,6 @@ import org.example.container.Container;
 import org.example.dto.Member;
 import org.example.service.MemberService;
 
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 import java.util.Scanner;
 
 
@@ -25,17 +24,6 @@ public class MemberController extends Controller {
         memberService = Container.memberService;
         session = Container.getSession();
     }
-
-//    private static int getMemberIndexByMemberName(String memberName) {
-//        int i = 0;
-//        for (Member member : members) {
-//            if (member.memberName.equals(memberName)) {
-//                return i;
-//            }
-//            i++;
-//        }
-//        return -1;
-//    }
 
     public void doAction(String cmd) {
         this.cmd = cmd;
@@ -161,19 +149,9 @@ public class MemberController extends Controller {
 
     private void doLogOut() {
         session.setLoginedMember(null);
-//        musicController.stopMainScreenMusic();
-//        musicController.stopSelectedMusic();
         System.out.println("\u001B[35m ▌ 로그아웃 되었습니다.");
     }
 
-    // 회원가입시 활동 이름 중복 여부 체크
-//    private boolean isJoinableMemberName(String memberName) {
-//        int index = getMemberIndexByMemberName(memberName);
-//        if (index != -1) {
-//            return true;
-//        }
-//        return false;
-//    }
 
     private boolean isJoinableLoginId(String loginId) {
         Member member = memberService.getMemberByLoginId(loginId);

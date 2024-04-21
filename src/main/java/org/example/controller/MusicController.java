@@ -1,14 +1,9 @@
 package org.example.controller;
 
-import org.example.FirstView.App;
 import org.example.FirstView.Music;
 import org.example.container.Container;
-import org.example.dto.Article;
 import org.example.dto.Track;
-import org.example.service.ArticleService;
-import org.example.service.MemberService;
 import org.example.service.TrackService;
-import org.example.util.Util;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -95,98 +90,104 @@ public class MusicController extends Controller {
 
     // 음악 검색 기능(대문자는 소문자로 자동 변환 되어 검색되도록 db연결 다 되고 다 작동 잘되면 그때 구현)
     public void doSearchMusic() {
-        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
-        System.out.print("  음악 검색 명령어 가이드  ");
-        System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.print("\u001B[33m ▌ ");
-        System.out.print("검색어 : 음악 제목 또는 아티스트명으로 작성하여 검색                                                           ");
-        System.out.print("\u001B[33m▌ \n");
-        System.out.print("\u001B[33m ▌ ");
-        System.out.print("음악 제목으로 검색할 경우엔 음악 제목의 첫자는 대문자로 작성                                                   ");
-        System.out.print("\u001B[33m▌ \n");
-        System.out.print("\u001B[33m ▌ ");
-        System.out.print("아티스트명으로 검색할 경우에도 아티스트명의 첫자는 대문자로 작성                                               ");
-        System.out.print("\u001B[33m▌ \n");
-        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+        try {
+            System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
+            System.out.print("  음악 검색 명령어 가이드  ");
+            System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+            System.out.print("\u001B[33m ▌ ");
+            System.out.print("검색어 : 음악 제목 또는 아티스트명으로 작성하여 검색                                                           ");
+            System.out.print("\u001B[33m▌ \n");
+            System.out.print("\u001B[33m ▌ ");
+            System.out.print("음악 제목으로 검색할 경우엔 음악 제목의 첫자는 대문자로 작성                                                   ");
+            System.out.print("\u001B[33m▌ \n");
+            System.out.print("\u001B[33m ▌ ");
+            System.out.print("아티스트명으로 검색할 경우에도 아티스트명의 첫자는 대문자로 작성                                               ");
+            System.out.print("\u001B[33m▌ \n");
+            System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 
-        System.out.print("\u001B[38m ▌ 검색어 : ");
-        String searchKeyword = sc.nextLine().trim();
+            System.out.print("\u001B[38m ▌ 검색어 : ");
+            String searchKeyword = sc.nextLine().trim();
 
-        List<Track> forListMusics = trackService.getForListMusics(searchKeyword);
+            List<Track> forListMusics = trackService.getForListMusics(searchKeyword);
 
-        if (forListMusics.isEmpty()) {
-            System.out.println("\u001B[35m ▌ 검색 결과가 존재하지 않습니다.");
-            return;
+            if (forListMusics.isEmpty()) {
+                System.out.println("\u001B[35m ▌ 검색 결과가 존재하지 않습니다.");
+                return;
+            }
+
+            System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
+            System.out.print("  검색된 음악 목록 ");
+            System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+            System.out.print("\u001B[33m ▌ ");
+            System.out.print("     번호      ░      조회수      ░             아티스트명 - 제목                                             ");
+            System.out.print("\u001B[33m ▌ \n");
+            for (int i = forListMusics.size() - 1; i >= 0; i--) {
+                Track track = forListMusics.get(i);
+                System.out.printf("\u001B[33m ▌ %7d       ░%9d          ░             %s  \n", track.id, track.hit, track.musicTitle);
+            }
+
+            System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            System.out.println();
+
+
+            System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
+            System.out.print("   음악 듣기 가이드  ");
+            System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+            System.out.print("\u001B[33m ▌ ");
+            System.out.print("위 검색된 음악 목록에서 듣고 싶은 음악의 번호를 입력해주세요.                                                  ");
+            System.out.print("\u001B[33m▌ \n");
+            System.out.print("\u001B[33m ▌ ");
+            System.out.print("듣고 싶은 음악이 없으시면 '0' 을 입력해주세요.                                                                 ");
+            System.out.print("\u001B[33m▌ \n");
+            System.out.print("\u001B[33m ▌ ");
+            System.out.print("반복 재생을 원하시면 '예' 를 입력해주세요.                                                                     ");
+            System.out.print("\u001B[33m▌ \n");
+            System.out.print("\u001B[33m ▌ ");
+            System.out.print("반복 재생을 원하지 않으시면 '예'를 제외하고 아무거나 입력해주세요.                                             ");
+            System.out.print("\u001B[33m▌ \n");
+            System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+
+
+            if (forListMusics.isEmpty()) {
+                return;
+            }
+
+            System.out.println("\u001B[35m ▌ 몇번째 음악을 들으시겠습니까?");
+            System.out.print("\u001B[38m ▌ 번호 입력 : ");
+            int listenNum = sc.nextInt();
+            sc.nextLine();
+
+            // 듣고 싶은 음악이 없을때 0번 입력
+            if (listenNum == 0) {
+                loopBoolean = false;
+                return;
+            }
+
+            Track foundTrack = trackService.getTrack(listenNum);
+
+            if (foundTrack == null) {
+                System.out.printf("\u001B[35m ▌ %d번 음악은 존재하지 않습니다.\n", listenNum);
+                return;
+            }
+
+            foundTrack.increaseHit();
+            System.out.print("\u001B[38m ▌ 반복 재생 여부 : ");
+            String loopBooleanCheck = sc.nextLine();
+            if (loopBooleanCheck.equals("예")) {
+                loopBoolean = true;
+            } else {
+                loopBoolean = false;
+            }
+
+            selectedTrack(listenNum);
         }
-
-        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
-        System.out.print("  검색된 음악 목록 ");
-        System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.print("\u001B[33m ▌ ");
-        System.out.print("     번호      ░      조회수      ░             아티스트명 - 제목                                             ");
-        System.out.print("\u001B[33m ▌ \n");
-        for (int i = forListMusics.size() - 1; i >= 0; i--) {
-            Track track = forListMusics.get(i);
-            System.out.printf("\u001B[33m ▌ %7d       ░%9d          ░             %s  \n", track.id, track.hit, track.musicTitle);
+        catch (InputMismatchException e) {
+            System.out.println("\u001B[31m ▌ 숫자 형식이 아닌 값이 입력되었습니다.");
+            sc.nextLine();
         }
-
-        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-        System.out.println();
-
-
-        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-        System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
-        System.out.print("   음악 듣기 가이드  ");
-        System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.print("\u001B[33m ▌ ");
-        System.out.print("위 검색된 음악 목록에서 듣고 싶은 음악의 번호를 입력해주세요.                                                  ");
-        System.out.print("\u001B[33m▌ \n");
-        System.out.print("\u001B[33m ▌ ");
-        System.out.print("듣고 싶은 음악이 없으시면 '0' 을 입력해주세요.                                                                 ");
-        System.out.print("\u001B[33m▌ \n");
-        System.out.print("\u001B[33m ▌ ");
-        System.out.print("반복 재생을 원하시면 '예' 를 입력해주세요.                                                                     ");
-        System.out.print("\u001B[33m▌ \n");
-        System.out.print("\u001B[33m ▌ ");
-        System.out.print("반복 재생을 원하지 않으시면 '예'를 제외하고 아무거나 입력해주세요.                                             ");
-        System.out.print("\u001B[33m▌ \n");
-        System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-
-
-        if (forListMusics.isEmpty()) {
-            return;
-        }
-
-        System.out.println("\u001B[35m ▌ 몇번째 음악을 들으시겠습니까?");
-        System.out.print("\u001B[38m ▌ 번호 입력 : ");
-        int listenNum = sc.nextInt();
-        sc.nextLine();
-
-        // 듣고 싶은 음악이 없을때 0번 입력
-        if (listenNum == 0) {
-            loopBoolean = false;
-            return;
-        }
-
-        Track foundTrack = trackService.getTrack(listenNum);
-
-        if (foundTrack == null) {
-            System.out.printf("\u001B[35m ▌ %d번 음악은 존재하지 않습니다.\n", listenNum);
-            return;
-        }
-
-        foundTrack.increaseHit();
-        System.out.print("\u001B[38m ▌ 반복 재생 여부 : ");
-        String loopBooleanCheck = sc.nextLine();
-        if (loopBooleanCheck.equals("예")) {
-            loopBoolean = true;
-        } else {
-            loopBoolean = false;
-        }
-
-        selectedTrack(listenNum);
 
     }
 
