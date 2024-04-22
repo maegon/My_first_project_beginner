@@ -205,6 +205,23 @@ public class MusicController extends Controller {
 
     }
 
+     /*
+    // 선택된 음악들의 번호 순서대로 재생(발표 이후 구현, 형태만 땀)
+    public void selectedTrackList(SelectedTracks nowSelectedTracks) { // 사용자가 곡을 선택했을때 해당 곡의 번호를 정수형태로 받음
+        if (selectedMusic != null) { // 만약 곡을 선택했는데 이미 재생중인 곡이 있다면 재생중이던 곡을 종료시킴
+            selectedMusic.close();
+        }
+
+        // 선택된 음악들의 번호를 하나씩 재생하며 음악의 제목을 Music클래스에 넘겨줌
+        for (int i = 0; i<nowSelectedTracks.length ; i++) {
+            selectedMusic = new Music(trackService.getTrack(nowSelected).musicTitle + ".mp3", loopBoolean);
+            selectedMusic.start();
+            System.out.print("\u001B[36m ▌ ");
+            System.out.printf("현재 재생 음악  ▶  %s \n", trackService.getTrack(nowSelected).musicTitle);
+        }
+    }
+     */
+
 
     public void showMusicList() {
 
