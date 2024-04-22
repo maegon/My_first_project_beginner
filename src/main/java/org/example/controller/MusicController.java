@@ -212,6 +212,7 @@ public class MusicController extends Controller {
 
      /*
     // 선택된 음악들의 번호 순서대로 재생(발표 이후 구현, 형태만 땀)
+    // 재생 대기 목록
     public void selectedTrackList(SelectedTracks nowSelectedTracks) { // 사용자가 곡을 선택했을때 해당 곡의 번호를 정수형태로 받음
         if (selectedMusic != null) { // 만약 곡을 선택했는데 이미 재생중인 곡이 있다면 재생중이던 곡을 종료시킴
             selectedMusic.close();
