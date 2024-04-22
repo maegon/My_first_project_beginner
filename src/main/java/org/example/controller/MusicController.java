@@ -74,7 +74,7 @@ public class MusicController extends Controller {
             return;
         }
 
-        String[] splitMusicTitle = importMusicFile.split("\\.");
+        String[] splitMusicTitle = importMusicFile.split("\\.mp3");
 
 
         String musicTitle = splitMusicTitle[0];
