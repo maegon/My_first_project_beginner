@@ -56,8 +56,6 @@ public class MusicController extends Controller {
 
         int id = Container.trackDao.getNewId();
 
-//        id = tracks.size() + 1;
-
         System.out.println("\u001B[33m" + " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
         System.out.print("\u001B[33m ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█");
         System.out.print("  음악 추가 양식  ");
@@ -83,9 +81,16 @@ public class MusicController extends Controller {
 
         int newId = trackService.importMusic(importMusicFile, musicTitle);
 
-//        tracks.add(new Track(id, importMusicFile, musicTitle));
         System.out.printf("\u001B[35m ▌ %d번 음악이 추가되었습니다.\n", newId);
     }
+
+     /*
+    // 추가할 음악들 중 이미 들어가있는 음악파일명을 제외하고 신규로 들어갈 파일명들만 자동으로 채워주는 함수 (발표 이후 구현, 형태만 땀)
+    // for문을 통해 반복 실행, 파일들이 다 들어가면 break
+    public void importMusics() {
+
+    }
+    */
 
 
     // 음악 검색 기능(대문자는 소문자로 자동 변환 되어 검색되도록 db연결 다 되고 다 작동 잘되면 그때 구현)

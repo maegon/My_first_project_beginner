@@ -9,6 +9,15 @@ import org.example.db.DBConnection;
 
 public class App {
 
+    /*
+    // 발표 이후 구현해볼 것
+    - 업데이트 정보를 보여주는 공지
+    - 회원 전용 스튜디오(신입 아티스트 창출을 위한 기능)
+      ㄴ 스튜디오에서 제작된 음악파일은 '커스텀 음악 목록'에 추가
+    - 관리자 전용 기능으로 회원 정보나 글 정보 관리
+    - 관리자 전용 기능으로 커스텀 음악 관리감독, 음악 삭제 기능 추가
+     */
+
     public App() {
         DBConnection.DB_NAME = "ljw_beginner_pj_sbs";
         DBConnection.DB_USER = "sbsst";
