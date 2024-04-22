@@ -82,4 +82,25 @@ public class TrackDao extends Dao {
     }
 
 
+//    public Track getTracks(String[] listenNumbers) {
+//        StringBuilder sb = new StringBuilder();
+//
+//        sb.append(String.format("SELECT * "));
+//        sb.append(String.format("FROM `track` "));
+//        sb.append(String.format("WHERE id "));
+//        sb.append(String.format("IN (%d"));
+//
+//
+//        for (int i = 0; i < listenNumbers.length; i++) {
+//            String s = "'" + listenNumbers[i].trim() + "'";
+//        }
+//
+//        Map<String, Object> row = dbConnection.selectRow(sb.toString());
+//
+//        if ( row.isEmpty() ) {
+//            return null;
+//        }
+//
+//        return new Track(row);
+//    }
 }

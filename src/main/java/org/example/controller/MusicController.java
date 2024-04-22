@@ -188,6 +188,46 @@ public class MusicController extends Controller {
             }
 
             selectedTrack(listenNum);
+
+            /*
+            // 여러 음악 재생
+            System.out.println("\u001B[35m ▌ 들을 음악의 번호 입력 : ");
+            String inputListenNumbers = sc.nextLine();
+
+            // 공백을 기준으로 문자열을 분리하여 배열에 저장
+            String[] listenNumbers = inputListenNumbers.split(" ");
+
+            // 입력받은 숫자중에 0이 있으면 return
+            if (inputListenNumbers.equals("0")) {
+                loopBoolean = false;
+                return;
+            }
+            Track foundTrack = trackService.getTracks(listenNumbers);
+
+            // 입력된 번호들 모두 표출 및 존재하지 않은 음악의 번호 있을 시 '존재하지 않음' 출력
+            System.out.println("\u001B[35m ▌ 입력된 번호:");
+            for (int i = 0; i < listenNumbers.length; i++) {
+                System.out.printf("%d, ",listenNumbers[i]);
+                foundTrack = trackService.getTracks(new String[]{listenNumbers[i]});
+                if (foundTrack == null) {
+                    System.out.printf("\u001B[31m ▌ %d번 음악은 존재하지 않습니다.\n", foundTrack);
+                    return;
+                }
+            }
+            System.out.println();
+
+            foundTrack.increaseHit();
+            System.out.print("\u001B[38m ▌ 반복 재생 여부 : ");
+            String loopBooleanCheck = sc.nextLine();
+            if (loopBooleanCheck.equals("예")) {
+                loopBoolean = true;
+            } else {
+                loopBoolean = false;
+            }
+
+            selectedTrack(listenNum);
+             */
+
         }
         catch (InputMismatchException e) {
             System.out.println("\u001B[31m ▌ 숫자 형식이 아닌 값이 입력되었습니다.");
