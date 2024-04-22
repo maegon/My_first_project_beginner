@@ -108,7 +108,7 @@ public class ArticleController extends Controller {
         System.out.print("  글 목록  ");
         System.out.print("\u001B[33m █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         System.out.print("\u001B[33m ▌ ");
-        System.out.print(" 번호  ░    작성자    ░   조회수   ░  제목                                                                           ");
+        System.out.print(" 번호  ░    작성자    ░   조회수   ░  제목                                                                     ");
         System.out.print("\u001B[33m ▌ \n");
         for (int i = forPrintArticles.size() - 1; i >= 0; i--) {
             Article article = forPrintArticles.get(i);

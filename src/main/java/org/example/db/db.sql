@@ -163,6 +163,13 @@ musicTitle = 'Jnathyn - Rise',
 hit = 0;
 
 
+INSERT INTO track
+SET regDate = NOW(),
+updateDate = NOW(),
+importMusicFile = 'Tokyo Machine - EPIC.mp3',
+musicTitle = 'Tokyo Machine - EPIC',
+hit = 0;
+
 
 
 SELECT * FROM `track` WHERE id = 2;

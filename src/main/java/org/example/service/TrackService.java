@@ -35,5 +35,4 @@ public class TrackService {
     public List<Track> getForAllListMusic() {
         return trackDao.getForAllListMusic();
     }
-
 }
